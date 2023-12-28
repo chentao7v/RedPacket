@@ -17,9 +17,22 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  signingConfigs {
+    create("config") {
+      keyAlias = "red"
+      keyPassword = "leochan"
+      storeFile = file("../red.jks")
+      storePassword = "leochan"
+    }
+  }
+
   buildTypes {
+
+    val config = signingConfigs.getByName("config")
+
     release {
-      isMinifyEnabled = false
+      signingConfig = config
+      isMinifyEnabled = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
