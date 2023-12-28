@@ -43,6 +43,18 @@ android {
   kotlinOptions {
     jvmTarget = "1.8"
   }
+
+  val appName = "抢红包啦"
+  applicationVariants.all {
+    val variant = this
+    variant.outputs
+      .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+      .forEach { output ->
+        val outputFileName = "$appName-${variant.versionName}.apk"
+        output.outputFileName = outputFileName
+      }
+  }
+
 }
 
 dependencies {
