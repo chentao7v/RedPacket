@@ -30,6 +30,11 @@ android {
 
     val config = signingConfigs.getByName("config")
 
+    debug {
+      signingConfig = config
+      isMinifyEnabled = false
+    }
+
     release {
       signingConfig = config
       isMinifyEnabled = true
