@@ -14,7 +14,7 @@ import java.util.Date
 class RedPacketService : AccessibilityService() {
 
   companion object {
-    const val FORMATTER = "yyyy-MM-dd hh:mm:ss"
+    const val FORMATTER = "yyyy-MM-dd hh:mm:ss.SSS"
     val dateFormatter = SimpleDateFormat(FORMATTER)
     private const val TAG = "PacketRed"
   }
@@ -46,15 +46,15 @@ class RedPacketService : AccessibilityService() {
     val backListGet = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/nnc")
     if (backListGet?.isNotEmpty() == true) {
       backListGet[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
-      logWithTime("当前红包已经抢到了，关闭抢红包页面")
+      logWithTime("当前红包已经抢到了，关闭抢红包结果页面")
     }
 
     // 未抢到红包的关闭 --> 这里可能是红包未打开的，所以未打开的红包不能关闭
     val backListNoGet = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/j6f")
-    // 要看是否有开的按钮
-    val openNodeList = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/j6g")
-    if (openNodeList.isNullOrEmpty() && backListNoGet?.isNotEmpty() == true) {
-      // 没有开的按钮，就说明红包抢完了
+    // 要看是否有 看看大家的手气
+    val seeOthersNodes = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/j6d")
+    if (!seeOthersNodes.isNullOrEmpty() && backListNoGet?.isNotEmpty() == true) {
+      // 有开看大家的手气，就说明红包抢完了
       backListNoGet[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
       logWithTime("很遗憾，当前红包没抢到，关闭抢红包页面")
     }
@@ -75,7 +75,7 @@ class RedPacketService : AccessibilityService() {
     }
     // 开红包
     openNodeList[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
-    logWithTime("打开红包啦~~~~")
+    logWithTime("打开红包，点击开按钮，开开开~~~~")
   }
 
   /**
@@ -99,7 +99,7 @@ class RedPacketService : AccessibilityService() {
       val nodesOfGet = redPackageRoot.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/a3m")
       // 不包含 已领取/已被领完 -> 未领取
       if (nodesOfGet.isNullOrEmpty()) {
-        logWithTime("当前红包未领取，去领取红包")
+        logWithTime("当前红包未领取，点开红包，准备领取")
         redPackageRoot.performAction(AccessibilityNodeInfo.ACTION_CLICK)
       }
     }
