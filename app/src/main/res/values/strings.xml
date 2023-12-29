@@ -21,4 +21,5 @@
     <string name="confirm">确定</string>
     <string name="input_keyword">请输入关键字</string>
     <string name="keyword_hint">关键字不要「重复添加」，关键字中不能包含「中文逗号」，如果有则会被移除</string>
+    <string name="cancel">取消</string>
 </resources>

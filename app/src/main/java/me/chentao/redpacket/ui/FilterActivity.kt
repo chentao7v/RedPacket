@@ -65,6 +65,7 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
 
         KVStore.filterWords = realKeywords.joinToString(",")
       }
+      .setNegativeButton(getString(R.string.cancel), null)
       .create()
       .show()
   }
