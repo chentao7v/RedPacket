@@ -14,12 +14,12 @@
     <string name="setting_notification_detail">通知栏提示有新红包时，自动打开微信抢红包</string>
     <string name="setting_filter_title">过滤器</string>
     <string name="setting_filter_detail">过滤掉指定用户或群的红包</string>
-    <string name="filter_description">如下名称的「微信好友」、「微信群」的红包将不会被小助手识别。\n
-    「长按标签」可以删除对应的「关键字」，点击页面右下角的「添加」按钮可以添加想过滤掉的「群」、「微信好友」</string>
+    <string name="filter_description">过滤器是包含无数个「标签」的列表！\n「标签列表」中的每一个「标签」都对应着一个「微信好友」或「微信群」名称，其发来的微信红包不会被小助手识别。\n
+    「长按」可以删除对应的「标签」，点击页面右下角的「添加」按钮可以添加想过滤掉的「标签」</string>
     <string name="add">添加</string>
-    <string name="add_keyword">添加想要过滤的名称</string>
+    <string name="add_keyword">添加标签</string>
     <string name="confirm">确定</string>
     <string name="input_keyword">请输入群或微信好友名称</string>
-    <string name="keyword_hint">相同的名称不能「重复添加」。名称中不能包含「中文逗号」，如果有则会被移除。</string>
+    <string name="keyword_hint">不能添加「重复」的标签。标签中不能包含「中文逗号」，如果有则会被移除。</string>
     <string name="cancel">取消</string>
 </resources>
