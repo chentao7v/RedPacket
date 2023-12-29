@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">红包小助手</string>
-    <string name="accessibility_service_label">自动抢红包</string>
-    <string name="accessibility_service_description">自动抢红包：\n
+    <string name="accessibility_service_label">红包小助手</string>
+    <string name="accessibility_service_description">红包小助手：\n
     1.进入群聊后，停留在群聊页面，在收到新红包消息时，会自动抢红包；</string>
     <string name="app_description">抢红包，我是认真的！小助手，祝你一臂之力！</string>
     <string name="robot">打开小助手</string>
