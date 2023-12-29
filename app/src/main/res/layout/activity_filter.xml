@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.2"
                 android:layout_margin="10dp"
-                android:textColor="@color/black_3"
+                android:textColor="@color/black_2"
                 android:text="@string/filter_description" />
 
             <com.google.android.flexbox.FlexboxLayout
