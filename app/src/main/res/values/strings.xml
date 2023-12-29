@@ -11,4 +11,6 @@
     <string name="alert_default_title">温馨提示</string>
     <string name="i_know">我知道了</string>
     <string name="notification_hint">该功能需要先「打开」微信的「通知权限」，而后进入微信的「设置」-「新消息通知」，开启「通知显示消息详情」功能，否则将无法生效！</string>
+    <string name="setting_notification">收到通知时，自动抢红包</string>
+    <string name="setting_filter">添加过滤器，不抢指定用户/群的红包</string>
 </resources>

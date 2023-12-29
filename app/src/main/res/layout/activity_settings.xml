@@ -51,12 +51,29 @@
 
                 <TextView
                     style="@style/SettingItem.Text"
-                    android:text="收到通知时，自动抢红包" />
+                    android:text="@string/setting_notification" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_notification"
                     style="@style/SettingItem.CheckBox"
                     tools:checked="true" />
+
+            </LinearLayout>
+
+            <View style="@style/SettingItem.Line" />
+
+            <LinearLayout
+                android:id="@+id/filter"
+                style="@style/SettingItem">
+
+                <ImageView
+                    style="@style/SettingItem.Icon"
+                    app:srcCompat="@drawable/ic_filter_24dp" />
+
+                <TextView
+                    style="@style/SettingItem.Text"
+                    android:text="@string/setting_filter" />
+
 
             </LinearLayout>
 

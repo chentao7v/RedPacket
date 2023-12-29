@@ -43,7 +43,6 @@ class NotificationInterceptor : Interceptor {
       return true
     }
 
-
     notification.contentIntent?.send()
     return true
   }
