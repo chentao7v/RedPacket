@@ -18,7 +18,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   private fun refreshSwitchStatus() {
     val isOpen = AccessibilityTools.isOpen(this, RedPacketService::class.java.name)
-    binding.tvText.text = "服务状态：" + if (isOpen) "开" else "关"
+    val status = if (isOpen) getString(R.string.robot_open) else getString(R.string.robot_close)
+    binding.tvStatus.text = getString(R.string.robot_status, status)
   }
 
   override fun onResume() {
