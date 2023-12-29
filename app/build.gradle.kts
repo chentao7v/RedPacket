@@ -24,6 +24,12 @@ android {
     }
   }
 
+  buildFeatures {
+    viewBinding {
+      enable = true
+    }
+  }
+
   buildTypes {
 
     val config = signingConfigs.getByName("config")

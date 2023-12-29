@@ -1,32 +1,24 @@
 package me.chentao.redpacket
 
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import me.chentao.redpacket.base.BaseActivity
+import me.chentao.redpacket.databinding.ActivityMainBinding
 import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-  private lateinit var text: TextView
+  override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
 
-    text = findViewById(R.id.tv_text)
-
-    refreshSwitchStatus()
+    binding.service.setOnClickListener { AccessibilityTools.gotoSettingsUI(this) }
   }
 
   private fun refreshSwitchStatus() {
     val isOpen = AccessibilityTools.isOpen(this, RedPacketService::class.java.name)
-    text.text = "服务状态：" + if (isOpen) "开" else "关"
-  }
-
-  fun openRedPacketService(view: View) {
-    AccessibilityTools.gotoSettingsUI(this)
+    binding.tvText.text = "服务状态：" + if (isOpen) "开" else "关"
   }
 
   override fun onResume() {
