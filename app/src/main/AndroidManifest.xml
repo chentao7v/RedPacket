@@ -6,8 +6,6 @@
         android:theme="@style/Theme.RedPacket"
         android:allowBackup="true"
         android:name=".App"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/icon_logo"
         android:label="@string/app_name"
         tools:targetApi="31">
