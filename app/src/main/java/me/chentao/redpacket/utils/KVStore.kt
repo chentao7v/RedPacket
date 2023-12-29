@@ -15,4 +15,5 @@ object KVStore {
       return SP.getBool(NOTIFICATION)
     }
 
+  var notificationHint: Boolean = false
 }

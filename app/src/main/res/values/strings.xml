@@ -8,4 +8,7 @@
     <string name="settings">设置</string>
     <string name="robot_open">小助手「已开启」。万事俱备，只等收红包🧧</string>
     <string name="robot_close">小助手「还未开启」，请点击「打开小助手」，找到「让红包飞」，并「开启服务」</string>
+    <string name="alert_default_title">温馨提示</string>
+    <string name="i_know">我知道了</string>
+    <string name="notification_hint">该功能需要先「开启」微信「通知权限」，并打开微信「设置」-「新消息通知」-「通知显示消息详情」功能，否则将无法生效！</string>
 </resources>
