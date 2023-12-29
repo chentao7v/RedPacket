@@ -60,6 +60,7 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
           return@setPositiveButton
         }
 
+        // 添加关键字
         realKeywords.add(keyword)
         addTag(keyword)
 
@@ -103,7 +104,11 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
     textView.setTextColor(ContextCompat.getColorStateList(this, R.color.filter_tag_clor))
 
     textView.setOnLongClickListener {
+      // 删除关键字
+      realKeywords.remove(text)
       binding.flexBoxLayout.removeView(textView)
+      KVStore.filterWords = realKeywords.joinToString(",")
+
       true
     }
 
