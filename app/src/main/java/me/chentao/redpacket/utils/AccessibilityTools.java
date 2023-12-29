@@ -17,7 +17,7 @@ public class AccessibilityTools {
    *
    * @param context 设备上下文
    */
-  public static void launchSettings(Context context) {
+  public static void gotoSettingsUI(Context context) {
     Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(intent);
@@ -28,7 +28,7 @@ public class AccessibilityTools {
    *
    * @return true 已开启；false 未开启
    */
-  public static boolean isAccessibilityOpen(Context context, String className) {
+  public static boolean isOpen(Context context, String className) {
     if (context == null) {
       return false;
     }

@@ -21,12 +21,12 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun refreshSwitchStatus() {
-    val isOpen = AccessibilityTools.isAccessibilityOpen(this, RedPacketService::class.java.name)
+    val isOpen = AccessibilityTools.isOpen(this, RedPacketService::class.java.name)
     text.text = "服务状态：" + if (isOpen) "开" else "关"
   }
 
   fun openRedPacketService(view: View) {
-    AccessibilityTools.launchSettings(this)
+    AccessibilityTools.gotoSettingsUI(this)
   }
 
   override fun onResume() {

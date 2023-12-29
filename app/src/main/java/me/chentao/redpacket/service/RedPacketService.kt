@@ -3,6 +3,7 @@ package me.chentao.redpacket.service
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import me.chentao.redpacket.utils.getCurrentActivityName
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -30,12 +31,13 @@ class RedPacketService : AccessibilityService() {
 
     if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       // 页面切换时
+      val currentActivityName = event.getCurrentActivityName(this)
 
     } else if (event.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       // 页面内容变化时
-      findNonGetRedPacket(event)
-      openRedPackage(event)
-      closeRedPackageUI(event)
+//      findNonGetRedPacket(event)
+//      openRedPackage(event)
+//      closeRedPackageUI(event)
     }
   }
 
