@@ -32,8 +32,19 @@ class NotificationInterceptor : Interceptor {
     }
 
     val parcelable = event.parcelableData
-    val notification = (parcelable as? Notification)
-    notification?.contentIntent?.send()
+    val notification = (parcelable as? Notification) ?: return true
+
+    // 通知标题：用户昵称/群组名
+    val notificationTitle = notification.extras.getString("android.title") ?: ""
+    Timber.d("通知标题：$notificationTitle")
+
+    // 过滤掉不需要的群或者用户消息
+    if (!Filter.filter(notificationTitle)) {
+      return true
+    }
+
+
+    notification.contentIntent?.send()
     return true
   }
 
