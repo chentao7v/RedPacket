@@ -1,6 +1,7 @@
-package me.chentao.redpacket
+package me.chentao.redpacket.ui
 
 import android.os.Bundle
+import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.databinding.ActivityMainBinding
 import me.chentao.redpacket.service.RedPacketService
@@ -14,6 +15,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     super.onCreate(savedInstanceState)
 
     binding.service.setOnClickListener { AccessibilityTools.gotoSettingsUI(this) }
+    binding.settings.setOnClickListener { SettingsActivity.launch(this) }
   }
 
   private fun refreshSwitchStatus() {
