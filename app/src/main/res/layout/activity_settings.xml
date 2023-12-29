@@ -48,9 +48,17 @@
                     style="@style/SettingItem.Icon"
                     app:srcCompat="@drawable/icon_notification_24dp" />
 
-                <TextView
-                    style="@style/SettingItem.Text"
-                    android:text="@string/setting_notification" />
+                <LinearLayout style="@style/SettingItem.TextLayout">
+
+                    <TextView
+                        style="@style/SettingItem.Title"
+                        android:text="@string/setting_notification_title" />
+
+                    <TextView
+                        style="@style/SettingItem.Detail"
+                        android:text="@string/setting_notification_detail" />
+
+                </LinearLayout>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_notification"
@@ -59,7 +67,7 @@
 
             </LinearLayout>
 
-            <View style="@style/SettingItem.Line" />
+            <View style="@style/Line.Horizontal" />
 
             <LinearLayout
                 android:id="@+id/filter"
@@ -70,7 +78,7 @@
                     app:srcCompat="@drawable/ic_filter_24dp" />
 
                 <TextView
-                    style="@style/SettingItem.Text"
+                    style="@style/SettingItem.Title"
                     android:text="@string/setting_filter" />
 
             </LinearLayout>

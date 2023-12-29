@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.databinding.ActivitySettingsBinding
@@ -51,7 +52,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
   }
 
   private fun showAlert(msg: CharSequence) {
-    val dialog = AlertDialog.Builder(this)
+    val dialog = MaterialAlertDialogBuilder(this)
       .setTitle(getString(R.string.alert_default_title))
       .setMessage(msg)
       .setCancelable(false)

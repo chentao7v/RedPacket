@@ -31,9 +31,7 @@
     <style name="SettingItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">58dp</item>
-        <item name="android:paddingLeft">15dp</item>
         <item name="android:clickable">true</item>
-        <item name="android:paddingRight">15dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
@@ -42,15 +40,21 @@
         <item name="android:layout_width">20dp</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
     </style>
 
-    <style name="SettingItem.Text" parent="Empty">
+    <style name="SettingItem.Title" parent="Empty">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:includeFontPadding">false</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SettingItem.Detail" parent="Empty">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black_2</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="SettingItem.CheckBox" parent="Empty">
@@ -77,6 +81,15 @@
     <style name="SettingItem.Line" parent="Line.Horizontal">
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_marginRight">15dp</item>
+    </style>
+
+    <style name="SettingItem.TextLayout" parent="Empty">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
 </resources>

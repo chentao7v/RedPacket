@@ -50,7 +50,7 @@
         app:cardCornerRadius="15dp"
         app:cardBackgroundColor="@color/white"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="-30dp">
+        android:layout_marginTop="-35dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,10 +99,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="15dp"
         android:lineSpacingMultiplier="1.2"
         android:textColor="@color/black_1"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         tools:text="助手还未开启，助手还未开启，助手还未开启，助手还未开启，助手还未开启" />
 
 </LinearLayout>
