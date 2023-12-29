@@ -29,15 +29,20 @@ class RedPacketService : AccessibilityService() {
     Timber.d("事件更新： -> $event")
 
 
+    val currentActivityName = event.getCurrentActivityName(this)
     if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       // 页面切换时
-      val currentActivityName = event.getCurrentActivityName(this)
+      event.getCurrentActivityName(this)
 
     } else if (event.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       // 页面内容变化时
 //      findNonGetRedPacket(event)
 //      openRedPackage(event)
 //      closeRedPackageUI(event)
+    } else if (event.eventType == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
+      // 收到通知
+
+
     }
   }
 
