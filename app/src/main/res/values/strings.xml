@@ -17,4 +17,7 @@
     <string name="filter_description">带有如下「关键字」的「微信好友」/「微信群」的红包将不会被小助手识别。\n
     「长按」可以删除关键字，点击右下角的「添加」按钮可以添加过滤器</string>
     <string name="add">添加</string>
+    <string name="add_keyword">添加关键字</string>
+    <string name="confirm">确定</string>
+    <string name="input_keyword">不要输入重复的关键字，与英文的逗号</string>
 </resources>

@@ -33,6 +33,12 @@ object SP {
       .commit()
   }
 
+  fun putApply(key: String, value: String) {
+    core.edit()
+      .putString(key, value)
+      .apply()
+  }
+
   fun put(key: String, value: Float) {
     core.edit()
       .putFloat(key, value)
