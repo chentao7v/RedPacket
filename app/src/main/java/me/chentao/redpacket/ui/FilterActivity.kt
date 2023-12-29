@@ -2,6 +2,7 @@ package me.chentao.redpacket.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.databinding.ActivityFilterBinding
 
@@ -20,4 +21,10 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
   }
 
   override fun getViewBinding() = ActivityFilterBinding.inflate(layoutInflater)
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    binding.ivBack.setOnClickListener { finish() }
+  }
 }
