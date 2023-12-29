@@ -3,6 +3,9 @@ package me.chentao.redpacket.service
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import me.chentao.redpacket.processor.Interceptor
+import me.chentao.redpacket.processor.NotificationInterceptor
+import me.chentao.redpacket.processor.RealChain
 import me.chentao.redpacket.utils.getCurrentActivityName
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -17,11 +20,14 @@ class RedPacketService : AccessibilityService() {
   companion object {
     private const val formatter = "yyyy-MM-dd hh:mm:ss.SSS"
     val dateFormatter = SimpleDateFormat(formatter)
-    private const val TAG = "PacketRed"
+    private const val TAG = "PRD"
   }
 
-  override fun onServiceConnected() {
+  private lateinit var chain: Interceptor.Chain
 
+  override fun onServiceConnected() {
+    chain = RealChain()
+    chain.addInterceptor(NotificationInterceptor())
   }
 
   override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -29,7 +35,6 @@ class RedPacketService : AccessibilityService() {
     Timber.d("事件更新： -> $event")
 
 
-    val currentActivityName = event.getCurrentActivityName(this)
     if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       // 页面切换时
       event.getCurrentActivityName(this)
@@ -39,11 +44,10 @@ class RedPacketService : AccessibilityService() {
 //      findNonGetRedPacket(event)
 //      openRedPackage(event)
 //      closeRedPackageUI(event)
-    } else if (event.eventType == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
-      // 收到通知
-
-
     }
+
+    chain.proceed(event)
+
   }
 
   /**
