@@ -2,8 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -28,5 +30,36 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/SettingItem">
+
+                <ImageView
+                    style="@style/SettingItem.Icon"
+                    app:srcCompat="@drawable/icon_notification_24dp" />
+
+                <TextView
+                    style="@style/SettingItem.Text"
+                    android:text="收到通知时，自动收红包" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    style="@style/SettingItem.CheckBox"
+                    tools:checked="true" />
+
+            </LinearLayout>
+
+            <View style="@style/SettingItem.Line" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

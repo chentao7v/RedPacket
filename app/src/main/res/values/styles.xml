@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Empty" />
+
     <style name="HomeItem">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -12,16 +14,62 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="HomeIcon">
+    <style name="HomeItem.Icon" parent="Empty">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
     </style>
 
-    <style name="HomeIconText">
+    <style name="HomeItem.Text" parent="Empty">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/black_1</item>
     </style>
+
+    <style name="SettingItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="SettingItem.Icon" parent="Empty">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">20dp</item>
+    </style>
+
+    <style name="SettingItem.Text" parent="Empty">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+
+    <style name="SettingItem.CheckBox" parent="Empty">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:enabled">false</item>
+        <item name="android:layout_gravity">end|center_vertical</item>
+    </style>
+
+    <style name="Line" />
+
+    <style name="Line.Vertical" parent="Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/black_3</item>
+    </style>
+
+    <style name="SettingItem.Line" parent="Line.Vertical">
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+    </style>
+
 </resources>
