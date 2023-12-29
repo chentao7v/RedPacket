@@ -30,6 +30,7 @@ class RedPacketService : AccessibilityService() {
 
     if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       // 页面切换时
+
     } else if (event.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       // 页面内容变化时
       findNonGetRedPacket(event)

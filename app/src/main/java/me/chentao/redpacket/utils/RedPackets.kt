@@ -11,7 +11,7 @@ import java.util.Date
 /**
  * create by chentao on 2023-12-28.
  */
-object PacketUtils {
+object RedPackets {
 
   private const val TAG = "PacketUtils"
 

@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import me.chentao.redpacket.service.RedPacketService
-import me.chentao.redpacket.utils.OpenAccessibilitySettingHelper
+import me.chentao.redpacket.utils.AccessibilityUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,12 +21,12 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun refreshSwitchStatus() {
-    val isOpen = OpenAccessibilitySettingHelper.isAccessibilitySettingsOn(this, RedPacketService::class.java.name)
+    val isOpen = AccessibilityUtils.isAccessibilitySettingsOn(this, RedPacketService::class.java.name)
     text.text = "服务状态：" + if (isOpen) "开" else "关"
   }
 
   fun openRedPacketService(view: View) {
-    OpenAccessibilitySettingHelper.jumpToSettingPage(this)
+    AccessibilityUtils.jumpToSettingPage(this)
   }
 
   override fun onResume() {

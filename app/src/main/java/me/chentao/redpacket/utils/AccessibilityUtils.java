@@ -13,9 +13,8 @@ import java.util.List;
 
 /**
  * 开启无障碍服务帮助类
- * Created by mazaiting on 2017/8/18.
  */
-public class OpenAccessibilitySettingHelper {
+public class AccessibilityUtils {
 
   /**
    * 跳转到无障碍服务设置页面
