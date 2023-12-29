@@ -30,6 +30,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
     binding.notification.setOnClickListener { switchNotification() }
     binding.ivBack.setOnClickListener { finish() }
+    binding.filter.setOnClickListener { FilterActivity.launch(this) }
 
     refreshNotificationUI()
   }
