@@ -23,14 +23,14 @@ fun AccessibilityEvent?.getCurrentActivityName(context: Context): String {
   val event = this ?: return ""
 
   val component = ComponentName(event.packageName.toString(), event.className.toString())
-  try {
+  return try {
     var activityName = context.packageManager.getActivityInfo(component, 0).toString()
     activityName = activityName.substring(activityName.indexOf(" "), activityName.indexOf("}"))
     logWithTime("当前窗口activity:$activityName")
-    return activityName
+    activityName
   } catch (e: PackageManager.NameNotFoundException) {
     logWithTime("getActivityName 异常：${e.message}")
-    return ""
+    ""
   }
 }
 
