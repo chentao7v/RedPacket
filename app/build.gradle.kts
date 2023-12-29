@@ -53,7 +53,7 @@ android {
     jvmTarget = "1.8"
   }
 
-  val appName = "抢红包啦"
+  val appName = "让红包飞"
   applicationVariants.all {
     val variant = this
     variant.outputs
