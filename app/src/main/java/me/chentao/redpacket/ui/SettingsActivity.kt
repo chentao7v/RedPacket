@@ -2,6 +2,9 @@ package me.chentao.redpacket.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.ActionBar
+import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.databinding.ActivitySettingsBinding
 
@@ -20,4 +23,9 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
   }
 
   override fun getViewBinding() = ActivitySettingsBinding.inflate(layoutInflater)
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+  }
+
 }

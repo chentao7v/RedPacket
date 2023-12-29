@@ -58,7 +58,7 @@
 
         <ImageView
             style="@style/HomeIcon"
-            android:src="@mipmap/icon_robot" />
+            app:srcCompat="@drawable/ic_robot_24dp" />
 
         <TextView
             style="@style/HomeIconText"
@@ -75,7 +75,7 @@
 
         <ImageView
             style="@style/HomeIcon"
-            android:src="@mipmap/icon_settings" />
+            app:srcCompat="@drawable/ic_settings_24dp" />
 
         <TextView
             style="@style/HomeIconText"
