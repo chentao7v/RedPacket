@@ -33,7 +33,7 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
 
     binding.ivBack.setOnClickListener { finish() }
 
-    for (i in 0..30) {
+    for (i in 0..130) {
       val tag = genTag("哈哈哈~${i}")
       binding.flexBoxLayout.addView(tag, genLayoutParams())
     }

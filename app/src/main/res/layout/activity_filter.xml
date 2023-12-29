@@ -49,9 +49,9 @@
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/flex_box_layout"
-                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
                 android:layout_marginHorizontal="5dp"
                 app:flexWrap="wrap" />
 
@@ -67,6 +67,7 @@
         android:backgroundTint="@color/red_1"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
         android:layout_gravity="end|bottom"
-        android:layout_margin="15dp" />
+        android:layout_margin="15dp"
+        android:contentDescription="@string/add" />
 
 </FrameLayout>
