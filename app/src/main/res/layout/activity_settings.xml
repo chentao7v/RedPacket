@@ -77,13 +77,20 @@
                     style="@style/SettingItem.Icon"
                     app:srcCompat="@drawable/ic_filter_24dp" />
 
-                <TextView
-                    style="@style/SettingItem.Title"
-                    android:text="@string/setting_filter" />
+                <LinearLayout style="@style/SettingItem.TextLayout">
+
+                    <TextView
+                        style="@style/SettingItem.Title"
+                        android:text="@string/setting_filter_title" />
+
+                    <TextView
+                        style="@style/SettingItem.Detail"
+                        android:text="@string/setting_filter_detail" />
+                </LinearLayout>
 
             </LinearLayout>
 
-            <View style="@style/SettingItem.Line" />
+            <View style="@style/Line.Horizontal" />
 
         </LinearLayout>
 
