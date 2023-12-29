@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">让红包飞</string>
     <string name="accessibility_service_label">让红包飞</string>
-    <string name="accessibility_service_description">让红包飞：\n
-    开启该助手后，可以在聊天页面，收到新的红包消息时，自动抢红包</string>
+    <string name="accessibility_service_description">开启该助手后，可以在收到新的红包消息时，自动抢红包</string>
     <string name="app_description">抢红包，我是认真的！让红包飞一会儿~</string>
     <string name="robot">打开小助手</string>
     <string name="settings">设置</string>
