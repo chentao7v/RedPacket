@@ -14,10 +14,11 @@
     <string name="setting_notification_detail">通知栏提示有新红包时，自动打开微信抢红包</string>
     <string name="setting_filter_title">过滤器</string>
     <string name="setting_filter_detail">过滤掉指定用户或群的红包</string>
-    <string name="filter_description">带有如下「关键字」的「微信好友」/「微信群」的红包将不会被小助手识别。\n
+    <string name="filter_description">带有如下「关键字」的「微信好友」「微信群」的红包将不会被小助手识别。\n
     「长按」可以删除关键字，点击右下角的「添加」按钮可以添加过滤器</string>
     <string name="add">添加</string>
     <string name="add_keyword">添加关键字</string>
     <string name="confirm">确定</string>
-    <string name="input_keyword">不要输入重复的关键字，与英文的逗号</string>
+    <string name="input_keyword">请输入关键字</string>
+    <string name="keyword_hint">关键字不要「重复添加」，关键字中不能包含「中文逗号」，如果有则会被移除</string>
 </resources>

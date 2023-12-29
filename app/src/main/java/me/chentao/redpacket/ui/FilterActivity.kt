@@ -50,6 +50,7 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
     val inflate = DialogEditableBinding.inflate(layoutInflater)
     MaterialAlertDialogBuilder(this)
       .setTitle(getString(R.string.add_keyword))
+      .setMessage(getString(R.string.keyword_hint))
       .setView(inflate.root)
       .setPositiveButton(getString(R.string.confirm)) { _, _ ->
         val keyword = inflate.editText.text.toString().trim().replace(",", "")
