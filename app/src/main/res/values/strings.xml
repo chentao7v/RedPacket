@@ -2,7 +2,7 @@
     <string name="app_name">让红包飞</string>
     <string name="accessibility_service_label">让红包飞</string>
     <string name="accessibility_service_description">让红包飞：\n
-    1.进入群聊后，停留在群聊页面，在收到新红包消息时，会自动抢红包；</string>
+    开启该助手后，可以在聊天页面，收到新的红包消息时，自动抢红包</string>
     <string name="app_description">抢红包，我是认真的！让红包飞一会儿~</string>
     <string name="robot">打开小助手</string>
     <string name="settings">设置</string>
@@ -11,7 +11,7 @@
     <string name="alert_default_title">温馨提示</string>
     <string name="i_know">我知道了</string>
     <string name="notification_hint">该功能需要先「打开」微信的「通知权限」，而后进入微信的「设置」-「新消息通知」，开启「通知显示消息详情」功能，否则将无法生效！</string>
-    <string name="setting_notification">收到通知时，自动抢红包</string>
+    <string name="setting_notification">收到信息新的「红包消息」时，自动抢红包</string>
     <string name="setting_filter">添加过滤器，不抢指定用户/群的红包</string>
     <string name="filter">过滤器</string>
 </resources>
