@@ -6,6 +6,6 @@
     <string name="app_description">抢红包，我是认真的！小助手，祝你一臂之力！</string>
     <string name="robot">打开小助手</string>
     <string name="settings">设置</string>
-    <string name="robot_open">小助手已开启，尽情抢红包吧</string>
-    <string name="robot_close">小助手未开启，请点击「打开小助手」，找到「让红包飞」，并「开启服务」</string>
+    <string name="robot_open">小助手「已开启」。万事俱备，只等收红包🧧</string>
+    <string name="robot_close">小助手「还未开启」，请点击「打开小助手」，找到「让红包飞」，并「开启服务」</string>
 </resources>

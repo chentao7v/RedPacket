@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <View
         android:id="@+id/background"
@@ -85,9 +86,9 @@
 
     <TextView
         android:id="@+id/tv_status"
-        android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginHorizontal="30dp"
         android:lineSpacingMultiplier="1.2"
         app:layout_constraintLeft_toLeftOf="parent"
