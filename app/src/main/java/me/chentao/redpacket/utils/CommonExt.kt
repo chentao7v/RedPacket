@@ -17,3 +17,8 @@ fun postDelay(delay: Long, block: () -> Unit) {
   }, delay)
 }
 
+val Number.dp: Int
+  get() {
+    val dp = this.toInt()
+    return (dp * appContext.resources.displayMetrics.density).toInt()
+  }
