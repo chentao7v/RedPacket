@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">抢红包啦</string>
-    <string name="accessibility_service_label">💰自动抢红包</string>
+    <string name="accessibility_service_label">自动抢红包</string>
     <string name="accessibility_service_description">自动抢红包：\n
     1.进入群聊后，停留在群聊页面，在收到新红包消息时，会自动抢红包；</string>
 </resources>

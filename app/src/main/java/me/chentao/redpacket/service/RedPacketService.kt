@@ -14,8 +14,8 @@ import java.util.Date
 class RedPacketService : AccessibilityService() {
 
   companion object {
-    const val FORMATTER = "yyyy-MM-dd hh:mm:ss.SSS"
-    val dateFormatter = SimpleDateFormat(FORMATTER)
+    private const val formatter = "yyyy-MM-dd hh:mm:ss.SSS"
+    val dateFormatter = SimpleDateFormat(formatter)
     private const val TAG = "PacketRed"
   }
 

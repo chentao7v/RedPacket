@@ -1,9 +1,5 @@
 package me.chentao.redpacket.utils;
 
-/**
- * create by chentao on 2023-12-27.
- */
-
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -14,14 +10,14 @@ import java.util.List;
 /**
  * 开启无障碍服务帮助类
  */
-public class AccessibilityUtils {
+public class AccessibilityTools {
 
   /**
    * 跳转到无障碍服务设置页面
    *
    * @param context 设备上下文
    */
-  public static void jumpToSettingPage(Context context) {
+  public static void launchSettings(Context context) {
     Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(intent);
@@ -30,17 +26,16 @@ public class AccessibilityUtils {
   /**
    * 判断是否有辅助功能权限
    *
-   * @return true 已开启
-   * false 未开启
+   * @return true 已开启；false 未开启
    */
-  public static boolean isAccessibilitySettingsOn(Context context, String className) {
+  public static boolean isAccessibilityOpen(Context context, String className) {
     if (context == null) {
       return false;
     }
     ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
     List<ActivityManager.RunningServiceInfo> runningServices =
       activityManager.getRunningServices(100);// 获取正在运行的服务列表
-    if (runningServices.size() < 0) {
+    if (runningServices.size() == 0) {
       return false;
     }
     for (int i = 0; i < runningServices.size(); i++) {
