@@ -2,6 +2,7 @@ package me.chentao.redpacket.processor
 
 import android.app.Notification
 import android.view.accessibility.AccessibilityEvent
+import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.processor.Interceptor.Companion.PLACEHOLDER
 import me.chentao.redpacket.utils.KVStore
 import timber.log.Timber
@@ -11,7 +12,7 @@ import timber.log.Timber
  */
 class NotificationInterceptor : Interceptor {
 
-  override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
+  override fun intercept(uiPage: UIPage, event: AccessibilityEvent, rootNode: AccessibilityNodeInfo): Boolean {
     if (event.eventType != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
       return false
     }

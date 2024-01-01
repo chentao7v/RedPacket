@@ -1,6 +1,7 @@
 package me.chentao.redpacket.processor
 
 import android.view.accessibility.AccessibilityEvent
+import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.parser.NodeParser
 import me.chentao.redpacket.parser.performClick
 import me.chentao.redpacket.utils.KVStore
@@ -19,7 +20,7 @@ class ConversationListInterceptor : Interceptor {
 
   }
 
-  override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
+  override fun intercept(uiPage: UIPage, event: AccessibilityEvent, rootNode: AccessibilityNodeInfo): Boolean {
     if (!KVStore.conversationList || event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       return false
     }

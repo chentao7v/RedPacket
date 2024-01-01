@@ -26,13 +26,14 @@ class ConversationDetailInterceptor : Interceptor {
     private const val CHAT_GROUP_MSG_TARGET_ID = "com.tencent.mm:id/brc"
   }
 
-  override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
+  override fun intercept(uiPage: UIPage, event: AccessibilityEvent, rootNode: AccessibilityNodeInfo): Boolean {
     if (event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       return false
     }
 
-    val targetNode = NodeParser.findNodeById(event, CHAT_TARGET_ID)
+    val targetNode = NodeParser.findChildNodeById(rootNode, CHAT_TARGET_ID)
     val targetName = targetNode?.text?.toString()
+    Timber.d("target 目标会话：$targetName")
 
     if (Filter.filter(targetName)) {
       Timber.d("过滤掉与 [$targetName] 的会话，不处理内部红包")

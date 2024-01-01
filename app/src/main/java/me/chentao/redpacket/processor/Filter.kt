@@ -19,7 +19,13 @@ object Filter {
 
     val words = KVStore.filterWordsList()
     Timber.d("过滤器入参：$text，当前过滤器：$words")
-    return words.contains(text)
+    for (word in words) {
+      if (word.contains(text)) {
+        return true
+      }
+    }
+
+    return false
   }
 
 }

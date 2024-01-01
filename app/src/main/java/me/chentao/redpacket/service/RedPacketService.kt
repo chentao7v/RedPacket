@@ -42,8 +42,10 @@ class RedPacketService : AccessibilityService() {
       return
     }
 
+    val rootNode = rootInActiveWindow
+
     Timber.d("事件更新： -> $event")
-    chain.proceed(event)
+    chain.proceed(event, rootNode)
   }
 
 
