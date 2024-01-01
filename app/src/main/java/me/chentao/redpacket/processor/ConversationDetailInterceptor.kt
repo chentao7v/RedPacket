@@ -45,12 +45,19 @@ class ConversationDetailInterceptor : Interceptor {
       return true
     }
 
+    // 1.找到未拆封的红包
     val redPackets = findUnOpenRedPackets(uiPage, event)
+    // 2.点击红包
     clickRedPackets(redPackets)
-
+    // 3.拆开红包
     unboxRedPackets(uiPage, event)
-
+    // 4.关闭拆红包页面
+    finishRedPacketUI(uiPage, event)
     return true
+  }
+
+  private fun finishRedPacketUI(uiPage: UIPage, event: AccessibilityEvent) {
+
   }
 
   /**
