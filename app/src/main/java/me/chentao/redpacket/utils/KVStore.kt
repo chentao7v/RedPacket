@@ -1,5 +1,7 @@
 package me.chentao.redpacket.utils
 
+import java.util.Collections
+
 /**
  * create by chentao on 2023-12-29.
  */
@@ -34,7 +36,15 @@ object KVStore {
     get() {
       return SP.getString(FILTER_WORDS)
     }
-
   var notificationHint: Boolean = false
   var conversationHint: Boolean = false
+}
+
+fun KVStore.filterWordsList(): List<String> {
+  val words = filterWords
+  if (words.isEmpty()) {
+    return Collections.emptyList()
+  }
+
+  return words.split(",")
 }

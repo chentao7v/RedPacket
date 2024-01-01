@@ -1,6 +1,7 @@
 package me.chentao.redpacket.processor
 
 import me.chentao.redpacket.utils.KVStore
+import me.chentao.redpacket.utils.filterWordsList
 import timber.log.Timber
 
 /**
@@ -8,14 +9,17 @@ import timber.log.Timber
  */
 object Filter {
 
-  private val items: List<String>
-    get() {
-      return KVStore.filterWords.split(",")
+  /**
+   * 过滤器是否包含 [text] 文本，包含则返回 true，否则返回 false
+   */
+  fun filter(text: String?): Boolean {
+    if (text == null) {
+      return false
     }
 
-  fun filter(text: String): Boolean {
-    Timber.d("过滤器入参：$text")
-    return !items.contains(text)
+    val words = KVStore.filterWordsList()
+    Timber.d("过滤器入参：$text，当前过滤器：$words")
+    return words.contains(text)
   }
 
 }

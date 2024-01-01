@@ -14,6 +14,7 @@ import me.chentao.redpacket.databinding.ActivityFilterBinding
 import me.chentao.redpacket.databinding.DialogEditableBinding
 import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.dp
+import me.chentao.redpacket.utils.filterWordsList
 import timber.log.Timber
 
 /**
@@ -72,12 +73,7 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
   }
 
   private fun parseFilterWords() {
-    val filterWords = KVStore.filterWords
-    realKeywords = filterWords.split(",").toMutableList()
-    if (realKeywords.isEmpty()) {
-      return
-    }
-
+    realKeywords = KVStore.filterWordsList().toMutableList()
     for (keyword in realKeywords) {
       addTag(keyword)
     }

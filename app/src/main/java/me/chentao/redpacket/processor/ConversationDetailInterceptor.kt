@@ -5,7 +5,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.bean.ChatRedPacketMsg
 import me.chentao.redpacket.parser.NodeParser
-import me.chentao.redpacket.utils.KVStore
+import me.chentao.redpacket.parser.performClick
 import timber.log.Timber
 import java.util.Collections
 
@@ -31,7 +31,11 @@ class ConversationDetailInterceptor : Interceptor {
       return false
     }
 
-    if (filter(event, CHAT_TARGET_ID)) {
+    val targetNode = NodeParser.findNodeById(event, CHAT_TARGET_ID)
+    val targetName = targetNode?.text?.toString()
+
+    if (Filter.filter(targetName)) {
+      Timber.d("过滤掉与 [$targetName] 的会话，不处理内部红包")
       return true
     }
 
@@ -43,7 +47,19 @@ class ConversationDetailInterceptor : Interceptor {
 
   private fun openReadPackets(redPackets: List<ChatRedPacketMsg>) {
     for (redPacketMsg in redPackets) {
-      redPacketMsg.node
+      // 是否拆开我的红包
+
+      // 考虑过滤红包
+      // 针对的是不过滤群红包，但是过滤指定用户发的红包
+      val target = redPacketMsg.target
+      if (Filter.filter(target)) {
+        Timber.d("过滤掉红包，不点击。$redPacketMsg")
+        continue
+      }
+
+      // 拆开红包
+      Timber.d("点击红包 -> $redPacketMsg")
+      redPacketMsg.node.performClick()
     }
   }
 
@@ -85,30 +101,6 @@ class ConversationDetailInterceptor : Interceptor {
     }
 
     return redPacketMsgList
-  }
-
-  /**
-   * 过滤掉不需要开红包的 微信好友/微信群
-   */
-  private fun filter(event: AccessibilityEvent, targetId: String): Boolean {
-    // 过滤器
-    val filterWords = KVStore.filterWords
-    val words = filterWords.split(",").toMutableList()
-    // 过滤器未空，不过滤
-    if (words.isEmpty()) {
-      return false
-    }
-
-    val targetNode = NodeParser.findNodeById(event, targetId) ?: return false
-    val targetName = targetNode.text.toString()
-
-    for (word in words) {
-      // 目标名字中包含 过滤词 -> 过滤
-      if (targetName.contains(word)) {
-        return true
-      }
-    }
-    return false
   }
 
   /**

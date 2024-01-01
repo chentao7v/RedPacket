@@ -39,7 +39,7 @@ class NotificationInterceptor : Interceptor {
     Timber.d("通知标题：$notificationTitle")
 
     // 过滤掉不需要的群或者用户消息
-    if (!Filter.filter(notificationTitle)) {
+    if (Filter.filter(notificationTitle)) {
       return true
     }
 
