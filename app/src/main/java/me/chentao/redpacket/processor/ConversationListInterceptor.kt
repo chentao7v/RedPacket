@@ -20,6 +20,9 @@ class ConversationListInterceptor : Interceptor {
   }
 
   override fun intercept(event: AccessibilityEvent): Boolean {
+    if (!KVStore.conversationList || event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
+      return false
+    }
 
     val nodeList = NodeParser.findNodesById(event, CONVERSATION_ROOT_ID) ?: return false
     Timber.d("会话列表节点数量：${nodeList.size}")

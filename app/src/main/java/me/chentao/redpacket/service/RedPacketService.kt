@@ -36,11 +36,11 @@ class RedPacketService : AccessibilityService() {
 
   override fun onAccessibilityEvent(event: AccessibilityEvent?) {
     event ?: return
-    Timber.d("事件更新： -> $event")
-
     if (!event.packageName.equals(WECHAT_PACKAGE)) {
       return
     }
+
+    Timber.d("事件更新： -> $event")
 
     if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       // 页面切换时
