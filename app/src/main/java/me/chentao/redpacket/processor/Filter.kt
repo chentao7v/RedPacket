@@ -10,17 +10,17 @@ import timber.log.Timber
 object Filter {
 
   /**
-   * 过滤器是否包含 [text] 文本，包含则返回 true，否则返回 false
+   * 过滤器是否包含 [target] 文本，包含则返回 true，否则返回 false
    */
-  fun filter(text: String?): Boolean {
-    if (text == null) {
+  fun filter(target: String?): Boolean {
+    if (target == null) {
       return false
     }
 
     val words = KVStore.filterWordsList()
-    Timber.d("过滤器入参：$text，当前过滤器：$words")
+    Timber.d("过滤器想要过滤：$target，当前过滤器：$words")
     for (word in words) {
-      if (word.contains(text)) {
+      if (target.contains(word)) {
         return true
       }
     }
