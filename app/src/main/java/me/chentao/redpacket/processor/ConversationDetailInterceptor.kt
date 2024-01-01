@@ -32,7 +32,7 @@ class ConversationDetailInterceptor : Interceptor {
       return false
     }
 
-    val targetName = getTaretName(root, event)
+    val targetName = getTargetName(root, event)
     Timber.d("target 目标会话：$targetName")
 
     if (Filter.filter(targetName)) {
@@ -46,7 +46,7 @@ class ConversationDetailInterceptor : Interceptor {
     return true
   }
 
-  private fun getTaretName(root: AccessibilityNodeInfo?, event: AccessibilityEvent): String? {
+  private fun getTargetName(root: AccessibilityNodeInfo?, event: AccessibilityEvent): String? {
     val targetNode = if (root == null) {
       NodeParser.findNodeById(event, CHAT_TARGET_ID)
     } else {
