@@ -63,7 +63,7 @@
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/icon_add_24dp"
+        app:srcCompat="@drawable/ic_add_24dp"
         app:tint="@color/white"
         android:backgroundTint="@color/red_1"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
