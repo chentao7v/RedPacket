@@ -15,7 +15,7 @@ class ConversationListInterceptor : Interceptor {
 
   companion object {
     private const val CONVERSATION_ROOT_ID = "com.tencent.mm:id/cj1"
-    private const val CONVERSATION_UNREAD_COUNT = "com.tencent.mm:id/o_u"
+    private const val CONVERSATION_UNREAD_COUNT_ID = "com.tencent.mm:id/o_u"
 
   }
 
@@ -24,10 +24,13 @@ class ConversationListInterceptor : Interceptor {
       return false
     }
 
-    val nodeList = NodeParser.findNodesById(event, CONVERSATION_ROOT_ID) ?: return false
+    val nodeList = NodeParser.findNodesById(event, CONVERSATION_ROOT_ID)
+    if (nodeList.isNullOrEmpty()) {
+      return false
+    }
     Timber.d("会话列表节点数量：${nodeList.size}")
     nodeList.forEach { node ->
-      val unreadNode = NodeParser.findChildNodeById(node, CONVERSATION_UNREAD_COUNT)
+      val unreadNode = NodeParser.findChildNodeById(node, CONVERSATION_UNREAD_COUNT_ID)
       if (unreadNode != null) {
         val unreadCount = unreadNode.text?.toString()?.toIntOrNull()
         Timber.d("unreadCount -> $unreadCount")

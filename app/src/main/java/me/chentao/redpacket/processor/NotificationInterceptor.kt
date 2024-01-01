@@ -17,7 +17,7 @@ class NotificationInterceptor : Interceptor {
     }
 
     val flag = KVStore.notification
-    Timber.d("收到了微信消息通知，当前通知是否打开：$flag")
+    Timber.d("收到了微信消息通知，当前红包通知监听是否打开：$flag")
 
     if (!flag) {
       return false
