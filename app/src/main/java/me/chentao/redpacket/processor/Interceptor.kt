@@ -1,7 +1,6 @@
 package me.chentao.redpacket.processor
 
 import android.view.accessibility.AccessibilityEvent
-import android.view.accessibility.AccessibilityNodeInfo
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -24,12 +23,12 @@ interface Interceptor {
 
   }
 
-  fun intercept(uiPage: UIPage, event: AccessibilityEvent, rootNode: AccessibilityNodeInfo): Boolean
+  fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean
 
 
   interface Chain {
 
-    fun proceed(event: AccessibilityEvent, rootNode: AccessibilityNodeInfo)
+    fun proceed(event: AccessibilityEvent)
 
     fun addInterceptor(interceptor: Interceptor)
 

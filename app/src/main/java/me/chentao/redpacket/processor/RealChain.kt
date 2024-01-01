@@ -1,7 +1,6 @@
 package me.chentao.redpacket.processor
 
 import android.view.accessibility.AccessibilityEvent
-import android.view.accessibility.AccessibilityNodeInfo
 
 /**
  * create by chentao on 2023-12-29.
@@ -14,10 +13,10 @@ class RealChain(private val uiPage: UIPage) : Interceptor.Chain {
     interceptors.add(interceptor)
   }
 
-  override fun proceed(event: AccessibilityEvent, rootNode: AccessibilityNodeInfo) {
+  override fun proceed(event: AccessibilityEvent) {
     // 从前往后执行，如果前面的返回 false，则后面的也不执行
     for (interceptor in interceptors) {
-      if (interceptor.intercept(uiPage, event, rootNode)) {
+      if (interceptor.intercept(uiPage, event)) {
         return
       }
     }

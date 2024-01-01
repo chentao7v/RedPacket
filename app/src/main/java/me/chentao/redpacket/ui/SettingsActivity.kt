@@ -33,8 +33,15 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.filter.setOnClickListener { FilterActivity.launch(this) }
 
     binding.conversations.setOnClickListener { switchConversationList() }
+    binding.myself.setOnClickListener { switchMySelf() }
 
     refreshNotificationUI()
+  }
+
+  private fun switchMySelf() {
+    val isChecked = binding.cbMyself.isChecked
+    KVStore.openMySelf = !isChecked
+    binding.cbMyself.isChecked = KVStore.openMySelf
   }
 
   private fun switchConversationList() {

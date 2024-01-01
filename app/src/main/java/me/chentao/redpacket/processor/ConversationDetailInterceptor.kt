@@ -6,6 +6,7 @@ import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.bean.ChatRedPacketMsg
 import me.chentao.redpacket.parser.NodeParser
 import me.chentao.redpacket.parser.performClick
+import me.chentao.redpacket.utils.KVStore
 import timber.log.Timber
 import java.util.Collections
 
@@ -26,12 +27,12 @@ class ConversationDetailInterceptor : Interceptor {
     private const val CHAT_GROUP_MSG_TARGET_ID = "com.tencent.mm:id/brc"
   }
 
-  override fun intercept(uiPage: UIPage, event: AccessibilityEvent, rootNode: AccessibilityNodeInfo): Boolean {
+  override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
     if (event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       return false
     }
 
-    val targetNode = NodeParser.findChildNodeById(rootNode, CHAT_TARGET_ID)
+    val targetNode = NodeParser.findNodeById(event, CHAT_TARGET_ID)
     val targetName = targetNode?.text?.toString()
     Timber.d("target 目标会话：$targetName")
 
@@ -49,6 +50,10 @@ class ConversationDetailInterceptor : Interceptor {
   private fun openReadPackets(redPackets: List<ChatRedPacketMsg>) {
     for (redPacketMsg in redPackets) {
       // 是否拆开我的红包
+      if (redPacketMsg.mine && !KVStore.openMySelf) {
+        Timber.d("配置的不拆开我自己的红包")
+        continue
+      }
 
       // 考虑过滤红包
       // 针对的是不过滤群红包，但是过滤指定用户发的红包

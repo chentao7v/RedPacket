@@ -13,12 +13,22 @@ object KVStore {
 
   private const val CONVERSATION_LIST = "conversation_list_switch"
 
+  private const val OPEN_MYSELF = "open_myself"
+
   var notification: Boolean
     set(value) {
       SP.put(NOTIFICATION, value)
     }
     get() {
       return SP.getBool(NOTIFICATION)
+    }
+
+  var openMySelf: Boolean
+    set(value) {
+      SP.put(OPEN_MYSELF, value)
+    }
+    get() {
+      return SP.getBool(OPEN_MYSELF)
     }
 
   var conversationList: Boolean
