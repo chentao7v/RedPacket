@@ -12,22 +12,7 @@ import timber.log.Timber
  */
 class UIPageInterceptor : Interceptor, UIPage {
 
-  companion object {
-
-    const val DEFAULT_PAGE = "com.tencent.mm.ui.LauncherUI"
-
-    /** 新红包，未拆开，红包展示页面，可以点击开；红包已被他人领取 */
-    const val PACKET_SHOW_NOT_OPEN = "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyNotHookReceiveUI"
-
-    /** 进入红包详情页前的 UI */
-    const val PACKET_OPENED_BEFORE_DETAIL = "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyBeforeDetailUI"
-
-    /** 红包详情页 UI */
-    const val PACKET_OPENED_DETAIL = "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyDetailUI"
-
-  }
-
-  private var currentUI = DEFAULT_PAGE
+  private var currentUI = UIPage.DEFAULT_PAGE
 
   private val realScreenWidth = screenWidth
 
@@ -36,7 +21,7 @@ class UIPageInterceptor : Interceptor, UIPage {
       return false
     }
 
-    val activityUI = event.getCurrentActivityName(appContext) ?: DEFAULT_PAGE
+    val activityUI = event.getCurrentActivityName(appContext) ?: UIPage.DEFAULT_PAGE
     currentUI = activityUI
     Timber.d("当前 UIPage -> $activityUI")
 

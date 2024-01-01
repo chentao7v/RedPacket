@@ -18,6 +18,8 @@ import java.util.Collections
 class ConversationDetailInterceptor : Interceptor {
 
   private companion object {
+
+    /// 消息列表
     private const val CHAT_TARGET_ID = "com.tencent.mm:id/obn"
     private const val CHAT_MSG_ROOT_ID = "com.tencent.mm:id/bn1"
     private const val CHAT_RED_PACKET_DESC_ID = "com.tencent.mm:id/a3y"
@@ -25,6 +27,9 @@ class ConversationDetailInterceptor : Interceptor {
     private const val CHAT_AVATAR_ID = "com.tencent.mm:id/bk1"
     private const val CHAT_RED_PACKET_STATUS_ID = "com.tencent.mm:id/a3m"
     private const val CHAT_GROUP_MSG_TARGET_ID = "com.tencent.mm:id/brc"
+
+    /// 红包相关
+    private const val RED_PACKET_OPEN_ID = "com.tencent.mm:id/j6g"
   }
 
   override fun intercept(uiPage: UIPage, event: AccessibilityEvent, root: AccessibilityNodeInfo?): Boolean {
@@ -41,9 +46,27 @@ class ConversationDetailInterceptor : Interceptor {
     }
 
     val redPackets = findUnOpenRedPackets(uiPage, event)
-    openReadPackets(redPackets)
+    clickRedPackets(redPackets)
+
+    unboxRedPackets(uiPage, event)
 
     return true
+  }
+
+  /**
+   * 拆开红包
+   */
+  private fun unboxRedPackets(uiPage: UIPage, event: AccessibilityEvent) {
+    Timber.d("准备拆红包，当前页面：${uiPage.currentUI()}")
+    if (!uiPage.currentUI().contains(UIPage.PACKET_SHOW_NOT_OPEN)) {
+      return
+    }
+
+    Timber.d("当前到了开红包页面啦")
+    val node = NodeParser.findNodeById(event, RED_PACKET_OPEN_ID) ?: return
+
+    node.performClick()
+    Timber.d("开开开、开红包咯~~~~")
   }
 
   private fun getTargetName(root: AccessibilityNodeInfo?, event: AccessibilityEvent): String? {
@@ -56,7 +79,7 @@ class ConversationDetailInterceptor : Interceptor {
     return targetNode?.text?.toString()
   }
 
-  private fun openReadPackets(redPackets: List<ChatRedPacketMsg>) {
+  private fun clickRedPackets(redPackets: List<ChatRedPacketMsg>) {
     for (redPacketMsg in redPackets) {
       // 是否拆开我的红包
       if (redPacketMsg.mine && !KVStore.openMySelf) {
@@ -65,7 +88,7 @@ class ConversationDetailInterceptor : Interceptor {
       }
 
       // 考虑过滤红包
-      // 针对的是不过滤群红包，但是过滤指定用户发的红包
+      // 针对的是 不过滤群红包，但是过滤指定用户发的红包
       val target = redPacketMsg.target
       if (Filter.filter(target)) {
         Timber.d("过滤掉红包，不点击。$redPacketMsg")
