@@ -3,7 +3,6 @@ package me.chentao.redpacket.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
@@ -33,7 +32,25 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.ivBack.setOnClickListener { finish() }
     binding.filter.setOnClickListener { FilterActivity.launch(this) }
 
+    binding.conversations.setOnClickListener { switchConversationList() }
+
     refreshNotificationUI()
+  }
+
+  private fun switchConversationList() {
+    val isChecked = binding.cbConversationList.isChecked
+    if (!isChecked && !KVStore.conversationHint) {
+      showAlert(getString(R.string.conversation_list_hint))
+      KVStore.conversationHint = true
+    }
+
+    KVStore.conversationList = !isChecked
+    refreshConversationListUI()
+
+  }
+
+  private fun refreshConversationListUI() {
+    binding.cbConversationList.isChecked = KVStore.conversationList
   }
 
   private fun switchNotification() {

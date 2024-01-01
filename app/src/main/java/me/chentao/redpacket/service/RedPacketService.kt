@@ -3,7 +3,9 @@ package me.chentao.redpacket.service
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import me.chentao.redpacket.processor.ConversationListInterceptor
 import me.chentao.redpacket.processor.Interceptor
+import me.chentao.redpacket.processor.Interceptor.Companion.WECHAT_PACKAGE
 import me.chentao.redpacket.processor.NotificationInterceptor
 import me.chentao.redpacket.processor.RealChain
 import me.chentao.redpacket.utils.getCurrentActivityName
@@ -28,17 +30,21 @@ class RedPacketService : AccessibilityService() {
   override fun onServiceConnected() {
     chain = RealChain()
     chain.addInterceptor(NotificationInterceptor())
+    chain.addInterceptor(ConversationListInterceptor())
+
   }
 
   override fun onAccessibilityEvent(event: AccessibilityEvent?) {
     event ?: return
     Timber.d("事件更新： -> $event")
 
+    if (!event.packageName.equals(WECHAT_PACKAGE)) {
+      return
+    }
 
     if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       // 页面切换时
       event.getCurrentActivityName(this)
-
     } else if (event.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       // 页面内容变化时
 //      findNonGetRedPacket(event)

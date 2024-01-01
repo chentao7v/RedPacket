@@ -11,6 +11,7 @@ interface Interceptor {
 
   companion object {
     const val PLACEHOLDER = "[微信红包]"
+    const val WECHAT_PACKAGE = "com.tencent.mm"
 
     private const val FORMATTER = "yyyy-MM-dd hh:mm:ss.SSS"
     private val dateFormatter = SimpleDateFormat(FORMATTER)

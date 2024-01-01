@@ -9,12 +9,22 @@ object KVStore {
 
   private const val FILTER_WORDS = "filter_words"
 
+  private const val CONVERSATION_LIST = "conversation_list_switch"
+
   var notification: Boolean
     set(value) {
       SP.put(NOTIFICATION, value)
     }
     get() {
       return SP.getBool(NOTIFICATION)
+    }
+
+  var conversationList: Boolean
+    set(value) {
+      SP.put(CONVERSATION_LIST, value)
+    }
+    get() {
+      return SP.getBool(CONVERSATION_LIST)
     }
 
   var filterWords: String
@@ -26,4 +36,5 @@ object KVStore {
     }
 
   var notificationHint: Boolean = false
+  var conversationHint: Boolean = false
 }

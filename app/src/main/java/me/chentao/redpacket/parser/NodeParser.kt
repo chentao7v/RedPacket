@@ -24,9 +24,29 @@ object NodeParser {
     return list[0]
   }
 
+  fun findChildNodesById(node: AccessibilityNodeInfo, viewId: String): List<AccessibilityNodeInfo>? {
+    return node.findAccessibilityNodeInfosByViewId(viewId)
+  }
+
+  fun findChildNodeById(node: AccessibilityNodeInfo, viewId: String): AccessibilityNodeInfo? {
+    val nodes = findChildNodesById(node, viewId)
+    return if (nodes.isNullOrEmpty()) {
+      null
+    } else {
+      nodes[0]
+    }
+  }
+
   fun getNodeText(event: AccessibilityEvent, viewId: String): String? {
     val node = findNodeById(event, viewId) ?: return null
     return node.text.toString()
   }
+}
 
+fun AccessibilityNodeInfo.performClick() {
+  this.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+}
+
+fun AccessibilityNodeInfo.performLongClick() {
+  this.performAction(AccessibilityNodeInfo.ACTION_LONG_CLICK)
 }
