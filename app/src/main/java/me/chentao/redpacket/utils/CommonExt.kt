@@ -22,3 +22,9 @@ val Number.dp: Int
     val dp = this.toInt()
     return (dp * appContext.resources.displayMetrics.density).toInt()
   }
+
+val screenWidth: Int
+  get() = appContext.resources.displayMetrics.widthPixels
+
+val screenHeight: Int
+  get() = appContext.resources.displayMetrics.heightPixels

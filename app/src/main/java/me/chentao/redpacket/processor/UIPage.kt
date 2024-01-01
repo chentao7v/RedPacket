@@ -7,4 +7,6 @@ interface UIPage {
 
   fun currentUI(): String
 
+  fun realScreenWidth(): Int
+
 }

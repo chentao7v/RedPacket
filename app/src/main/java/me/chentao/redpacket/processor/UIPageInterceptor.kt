@@ -3,6 +3,7 @@ package me.chentao.redpacket.processor
 import android.view.accessibility.AccessibilityEvent
 import me.chentao.redpacket.utils.appContext
 import me.chentao.redpacket.utils.getCurrentActivityName
+import me.chentao.redpacket.utils.screenWidth
 import timber.log.Timber
 
 /**
@@ -27,6 +28,8 @@ class UIPageInterceptor : Interceptor, UIPage {
 
   private var currentUI = DEFAULT_PAGE
 
+  private val realScreenWidth = screenWidth
+
   override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
     if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       return false
@@ -41,6 +44,10 @@ class UIPageInterceptor : Interceptor, UIPage {
 
   override fun currentUI(): String {
     return currentUI
+  }
+
+  override fun realScreenWidth(): Int {
+    return this.realScreenWidth
   }
 
 }

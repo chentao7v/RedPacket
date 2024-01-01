@@ -1,10 +1,13 @@
 package me.chentao.redpacket.processor
 
+import android.graphics.Rect
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import me.chentao.redpacket.bean.ChatRedPacketMsg
 import me.chentao.redpacket.parser.NodeParser
 import me.chentao.redpacket.utils.KVStore
 import timber.log.Timber
+import java.util.Collections
 
 /**
  * 会话详情
@@ -14,8 +17,13 @@ import timber.log.Timber
 class ConversationDetailInterceptor : Interceptor {
 
   private companion object {
-    private const val CHAR_TARGET_ID = "com.tencent.mm:id/obn"
-
+    private const val CHAT_TARGET_ID = "com.tencent.mm:id/obn"
+    private const val CHAT_MSG_ROOT_ID = "com.tencent.mm:id/bn1"
+    private const val CHAT_RED_PACKET_DESC_ID = "com.tencent.mm:id/a3y"
+    private const val CHAT_RED_PACKET_ROOT = "com.tencent.mm:id/bkg"
+    private const val CHAT_AVATAR_ID = "com.tencent.mm:id/bk1"
+    private const val CHAT_RED_PACKET_STATUS_ID = "com.tencent.mm:id/a3m"
+    private const val CHAT_GROUP_MSG_TARGET_ID = "com.tencent.mm:id/brc"
   }
 
   override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
@@ -23,16 +31,66 @@ class ConversationDetailInterceptor : Interceptor {
       return false
     }
 
-    if (filterTargetUser(event)) {
+    if (filter(event, CHAT_TARGET_ID)) {
       return true
     }
 
-
+    val redPackets = findUnOpenRedPackets(uiPage, event)
+    openReadPackets(redPackets)
 
     return true
   }
 
-  private fun filterTargetUser(event: AccessibilityEvent): Boolean {
+  private fun openReadPackets(redPackets: List<ChatRedPacketMsg>) {
+    for (redPacketMsg in redPackets) {
+      redPacketMsg.node
+    }
+  }
+
+  /**
+   * 找到未拆开的红包
+   */
+  private fun findUnOpenRedPackets(uiPage: UIPage, event: AccessibilityEvent): List<ChatRedPacketMsg> {
+    val nodes = NodeParser.findNodesById(event, CHAT_MSG_ROOT_ID)
+    if (nodes.isNullOrEmpty()) {
+      return Collections.emptyList()
+    }
+
+    // 有聊天消息
+
+    val redPacketMsgList = ArrayList<ChatRedPacketMsg>()
+
+    nodes.forEach { chatNode ->
+      val redPacketDescNode = NodeParser.findChildNodeById(chatNode, CHAT_RED_PACKET_DESC_ID)
+      val avatarNode = NodeParser.findChildNodeById(chatNode, CHAT_AVATAR_ID)
+      val redPacketStatusNode = NodeParser.findChildNodeById(chatNode, CHAT_RED_PACKET_STATUS_ID)
+      val redPacketRootNode = NodeParser.findChildNodeById(chatNode, CHAT_RED_PACKET_ROOT)
+      val groupMsgTargetNode = NodeParser.findChildNodeById(chatNode, CHAT_GROUP_MSG_TARGET_ID)
+
+      if (redPacketDescNode != null && redPacketStatusNode == null && avatarNode != null && redPacketRootNode != null) {
+        // 有红包，且红包未领，并且有头像节点
+        // 判定红包是谁发的
+        val rect = Rect()
+        avatarNode.getBoundsInScreen(rect)
+        val width = uiPage.realScreenWidth()
+        // 如果头像的左边小于 1/2 的宽处
+        // 判定是别人发的红包
+        val others = rect.left < width / 2f
+
+        val target = groupMsgTargetNode?.text?.toString()
+        val msg = ChatRedPacketMsg(!others, target, redPacketRootNode)
+        Timber.d("新增未领取红包消息 $msg")
+        redPacketMsgList.add(msg)
+      }
+    }
+
+    return redPacketMsgList
+  }
+
+  /**
+   * 过滤掉不需要开红包的 微信好友/微信群
+   */
+  private fun filter(event: AccessibilityEvent, targetId: String): Boolean {
     // 过滤器
     val filterWords = KVStore.filterWords
     val words = filterWords.split(",").toMutableList()
@@ -41,7 +99,7 @@ class ConversationDetailInterceptor : Interceptor {
       return false
     }
 
-    val targetNode = NodeParser.findNodeById(event, CHAR_TARGET_ID) ?: return false
+    val targetNode = NodeParser.findNodeById(event, targetId) ?: return false
     val targetName = targetNode.text.toString()
 
     for (word in words) {
