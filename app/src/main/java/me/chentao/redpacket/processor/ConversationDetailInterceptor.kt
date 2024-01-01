@@ -27,13 +27,12 @@ class ConversationDetailInterceptor : Interceptor {
     private const val CHAT_GROUP_MSG_TARGET_ID = "com.tencent.mm:id/brc"
   }
 
-  override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
+  override fun intercept(uiPage: UIPage, event: AccessibilityEvent, root: AccessibilityNodeInfo?): Boolean {
     if (event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       return false
     }
 
-    val targetNode = NodeParser.findNodeById(event, CHAT_TARGET_ID)
-    val targetName = targetNode?.text?.toString()
+    val targetName = getTaretName(root, event)
     Timber.d("target 目标会话：$targetName")
 
     if (Filter.filter(targetName)) {
@@ -45,6 +44,16 @@ class ConversationDetailInterceptor : Interceptor {
     openReadPackets(redPackets)
 
     return true
+  }
+
+  private fun getTaretName(root: AccessibilityNodeInfo?, event: AccessibilityEvent): String? {
+    val targetNode = if (root == null) {
+      NodeParser.findNodeById(event, CHAT_TARGET_ID)
+    } else {
+      NodeParser.findChildNodeById(root, CHAT_TARGET_ID)
+    }
+
+    return targetNode?.text?.toString()
   }
 
   private fun openReadPackets(redPackets: List<ChatRedPacketMsg>) {

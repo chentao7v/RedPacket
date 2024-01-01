@@ -2,6 +2,7 @@ package me.chentao.redpacket.service
 
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent
+import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.processor.ConversationDetailInterceptor
 import me.chentao.redpacket.processor.ConversationListInterceptor
 import me.chentao.redpacket.processor.Interceptor
@@ -43,7 +44,9 @@ class RedPacketService : AccessibilityService() {
     }
 
     Timber.d("事件更新： -> $event")
-    chain.proceed(event)
+    val root: AccessibilityNodeInfo? = rootInActiveWindow
+    Timber.d("root : $root")
+    chain.proceed(event, root)
   }
 
 
