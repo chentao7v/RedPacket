@@ -19,7 +19,7 @@ import java.util.Date
  */
 private const val TAG = "XXX"
 
-fun AccessibilityEvent?.getCurrentActivityName(context: Context): String {
+fun AccessibilityEvent?.getCurrentActivityName(context: Context): String? {
   val event = this ?: return ""
 
   val component = ComponentName(event.packageName.toString(), event.className.toString())
@@ -30,7 +30,7 @@ fun AccessibilityEvent?.getCurrentActivityName(context: Context): String {
     activityName
   } catch (e: PackageManager.NameNotFoundException) {
     logWithTime("getActivityName 异常：${e.message}")
-    ""
+    null
   }
 }
 

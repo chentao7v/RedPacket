@@ -8,6 +8,7 @@ import me.chentao.redpacket.processor.Interceptor
 import me.chentao.redpacket.processor.Interceptor.Companion.WECHAT_PACKAGE
 import me.chentao.redpacket.processor.NotificationInterceptor
 import me.chentao.redpacket.processor.RealChain
+import me.chentao.redpacket.processor.UIPageInterceptor
 import me.chentao.redpacket.utils.getCurrentActivityName
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -28,7 +29,10 @@ class RedPacketService : AccessibilityService() {
   private lateinit var chain: Interceptor.Chain
 
   override fun onServiceConnected() {
-    chain = RealChain()
+    val uiPage = UIPageInterceptor()
+
+    chain = RealChain(uiPage)
+    chain.addInterceptor(uiPage)
     chain.addInterceptor(NotificationInterceptor())
     chain.addInterceptor(ConversationListInterceptor())
 

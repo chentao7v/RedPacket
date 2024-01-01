@@ -23,7 +23,7 @@ interface Interceptor {
 
   }
 
-  fun intercept(event: AccessibilityEvent): Boolean
+  fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean
 
 
   interface Chain {

@@ -19,7 +19,7 @@ class ConversationListInterceptor : Interceptor {
 
   }
 
-  override fun intercept(event: AccessibilityEvent): Boolean {
+  override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
     if (!KVStore.conversationList || event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
       return false
     }

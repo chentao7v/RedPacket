@@ -11,7 +11,7 @@ import timber.log.Timber
  */
 class NotificationInterceptor : Interceptor {
 
-  override fun intercept(event: AccessibilityEvent): Boolean {
+  override fun intercept(uiPage: UIPage, event: AccessibilityEvent): Boolean {
     if (event.eventType != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
       return false
     }
