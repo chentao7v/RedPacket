@@ -59,9 +59,12 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="SettingItem.CheckBox" parent="Empty">
+    <style name="SettingItem.Right">
         <item name="android:layout_width">50dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
+    <style name="SettingItem.CheckBox" parent="SettingItem.Right">
         <item name="android:clickable">false</item>
         <item name="android:layout_gravity">end|center_vertical</item>
         <item name="android:background">@android:color/transparent</item>
