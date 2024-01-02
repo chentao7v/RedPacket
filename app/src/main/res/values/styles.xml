@@ -58,7 +58,7 @@
     </style>
 
     <style name="SettingItem.CheckBox" parent="Empty">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:clickable">false</item>
         <item name="android:layout_gravity">end|center_vertical</item>

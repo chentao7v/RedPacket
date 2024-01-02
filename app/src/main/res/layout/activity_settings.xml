@@ -77,6 +77,11 @@
                         android:text="@string/setting_filter_detail" />
                 </LinearLayout>
 
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_arrow_right_24dp" />
+
             </LinearLayout>
 
             <LinearLayout
