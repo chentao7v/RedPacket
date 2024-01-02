@@ -21,12 +21,8 @@
             app:srcCompat="@drawable/ic_back_white_24dp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/white"
-            android:text="@string/setting_filter_title"
-            android:textSize="18sp" />
+            style="@style/Title"
+            android:text="@string/setting_filter_title" />
 
     </RelativeLayout>
 
@@ -64,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_add_24dp"
-        app:tint="@color/white"
+        app:tint="@color/keep_white"
         android:backgroundTint="@color/red_1"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
         android:layout_gravity="end|bottom"

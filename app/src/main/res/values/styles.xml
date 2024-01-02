@@ -93,4 +93,12 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@color/title</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>
