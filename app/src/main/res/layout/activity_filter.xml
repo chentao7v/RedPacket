@@ -8,16 +8,11 @@
 
     <RelativeLayout
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/red_1"
-        android:minHeight="?attr/actionBarSize">
+        style="@style/Title.Root">
 
         <ImageButton
             android:id="@+id/iv_back"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?android:attr/selectableItemBackground"
+            style="@style/Back"
             app:srcCompat="@drawable/ic_back_white_24dp" />
 
         <TextView

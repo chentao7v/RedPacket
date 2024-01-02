@@ -97,8 +97,21 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:textColor">@color/title</item>
+        <item name="android:textColor">@color/keep_white</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Back">
+        <item name="android:layout_width">?attr/actionBarSize</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Title.Root" parent="Empty">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/red_1</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
     </style>
 
 </resources>
