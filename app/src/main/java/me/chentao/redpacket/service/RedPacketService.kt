@@ -11,7 +11,6 @@ import me.chentao.redpacket.processor.NotificationInterceptor
 import me.chentao.redpacket.processor.RealChain
 import me.chentao.redpacket.processor.UIPageInterceptor
 import timber.log.Timber
-import java.text.SimpleDateFormat
 
 
 /**
@@ -34,7 +33,8 @@ class RedPacketService : AccessibilityService() {
 
   override fun onAccessibilityEvent(event: AccessibilityEvent?) {
     event ?: return
-    if (!event.packageName.equals(WECHAT_PACKAGE)) {
+    val packageName = event.packageName ?: return
+    if (packageName != WECHAT_PACKAGE) {
       return
     }
 

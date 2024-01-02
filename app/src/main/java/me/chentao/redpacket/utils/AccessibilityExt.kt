@@ -2,6 +2,7 @@ package me.chentao.redpacket.utils
 
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.view.accessibility.AccessibilityEvent
 import timber.log.Timber
@@ -16,17 +17,16 @@ import timber.log.Timber
  * 日志 TAG
  */
 
+/**
+ * 解析 Activity
+ */
 fun AccessibilityEvent?.getCurrentActivityName(context: Context): String? {
   val event = this ?: return ""
 
   val component = ComponentName(event.packageName.toString(), event.className.toString())
-  return try {
-    var activityName = context.packageManager.getActivityInfo(component, 0).toString()
-    activityName = activityName.substring(activityName.indexOf(" "), activityName.indexOf("}"))
-    Timber.d("当前窗口activity:$activityName")
-    activityName
-  } catch (e: PackageManager.NameNotFoundException) {
-    Timber.d("getActivityName 异常：${e.message}")
-    null
-  }
+  val intent = Intent()
+  intent.setComponent(component)
+  val resolveInfo = context.packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+  Timber.d("getActivityName resolved result -> $resolveInfo")
+  return resolveInfo?.activityInfo?.name
 }
