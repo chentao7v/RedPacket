@@ -6,4 +6,4 @@
     android:canRetrieveWindowContent="true"
     android:description="@string/accessibility_service_description"
     android:settingsActivity="me.chentao.redpacket.ui.SettingsActivity"
-    android:notificationTimeout="300" />
+    android:notificationTimeout="50" />
