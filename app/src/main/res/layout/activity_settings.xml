@@ -140,8 +140,6 @@
 
             </LinearLayout>
 
-            <View style="@style/Line.Horizontal" />
-
         </LinearLayout>
 
     </ScrollView>
