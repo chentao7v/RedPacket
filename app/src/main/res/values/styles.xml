@@ -62,6 +62,7 @@
     <style name="SettingItem.Right">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="SettingItem.CheckBox" parent="SettingItem.Right">
@@ -92,7 +93,6 @@
     <style name="SettingItem.TextLayout" parent="Empty">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">50dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:gravity">center_vertical|start</item>
