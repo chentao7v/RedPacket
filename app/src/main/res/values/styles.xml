@@ -31,8 +31,8 @@
     <style name="SettingItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:clickable">true</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
@@ -59,14 +59,18 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="SettingItem.Right">
+    <style name="SettingItem.Right" parent="Empty">
         <item name="android:layout_width">50dp</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="SettingItem.CheckBox" parent="SettingItem.Right">
+    <style name="SettingItem.CheckBox" parent="Empty">
         <item name="android:clickable">false</item>
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_height">30dp</item>
         <item name="android:layout_gravity">end|center_vertical</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
