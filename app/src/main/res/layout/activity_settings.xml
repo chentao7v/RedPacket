@@ -120,7 +120,7 @@
 
                 <ImageView
                     style="@style/SettingItem.Icon"
-                    app:srcCompat="@drawable/ic_conversation_list_24dp" />
+                    app:srcCompat="@drawable/ic_touch_24dp" />
 
                 <LinearLayout style="@style/SettingItem.TextLayout">
 

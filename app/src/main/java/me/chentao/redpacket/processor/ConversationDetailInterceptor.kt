@@ -30,6 +30,7 @@ class ConversationDetailInterceptor : Interceptor {
 
     /// 红包相关
     private const val RED_PACKET_OPEN_ID = "com.tencent.mm:id/j6g"
+    private const val RED_PACKET_DETAIL_BACK_ID = "com.tencent.mm:id/nnc"
   }
 
   override fun intercept(uiPage: UIPage, event: AccessibilityEvent, root: AccessibilityNodeInfo?): Boolean {
@@ -57,7 +58,14 @@ class ConversationDetailInterceptor : Interceptor {
   }
 
   private fun finishRedPacketUI(uiPage: UIPage, event: AccessibilityEvent) {
+    val currentUI = uiPage.currentUI()
+    val detailBackNode = NodeParser.findNodeById(event, RED_PACKET_DETAIL_BACK_ID)
 
+    if (currentUI.contains(UIPage.PACKET_OPENED_DETAIL) && detailBackNode != null) {
+      Timber.d("当前页面是红包详情页，执行关闭操作")
+      // 红包详情页
+      detailBackNode.performClick()
+    }
   }
 
   /**
