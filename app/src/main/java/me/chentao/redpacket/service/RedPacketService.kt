@@ -19,11 +19,6 @@ import java.text.SimpleDateFormat
  */
 class RedPacketService : AccessibilityService() {
 
-  companion object {
-    private const val formatter = "yyyy-MM-dd hh:mm:ss.SSS"
-    val dateFormatter = SimpleDateFormat(formatter)
-    private const val TAG = "PRD"
-  }
 
   private lateinit var chain: Interceptor.Chain
 
