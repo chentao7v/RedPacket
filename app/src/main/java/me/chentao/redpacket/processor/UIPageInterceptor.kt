@@ -12,7 +12,7 @@ import timber.log.Timber
  */
 class UIPageInterceptor : Interceptor, UIPage {
 
-  private var currentUI = UIPage.DEFAULT_PAGE
+  private var currentUI: String? = null
 
   private val realScreenWidth = screenWidth
 
@@ -21,15 +21,19 @@ class UIPageInterceptor : Interceptor, UIPage {
       return false
     }
 
-    val activityUI = event.getCurrentActivityName(appContext) ?: UIPage.DEFAULT_PAGE
-    currentUI = activityUI
+    val activityUI = event.getCurrentActivityName(appContext)
+    if (currentUI == null) {
+      currentUI = activityUI
+    } else if (activityUI != null) {
+      currentUI = activityUI
+    }
     Timber.d("当前 UIPage -> $activityUI")
 
     return true
   }
 
   override fun currentUI(): String {
-    return currentUI
+    return currentUI ?: UIPage.DEFAULT_PAGE
   }
 
   override fun realScreenWidth(): Int {

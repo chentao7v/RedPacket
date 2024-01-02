@@ -24,9 +24,10 @@ fun AccessibilityEvent?.getCurrentActivityName(context: Context): String? {
   val event = this ?: return ""
 
   val component = ComponentName(event.packageName.toString(), event.className.toString())
+  Timber.d("component -> $component")
   val intent = Intent()
   intent.setComponent(component)
   val resolveInfo = context.packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
-  Timber.d("getActivityName resolved result -> $resolveInfo")
+  Timber.d("resolve UIPage result -> $resolveInfo")
   return resolveInfo?.activityInfo?.name
 }
