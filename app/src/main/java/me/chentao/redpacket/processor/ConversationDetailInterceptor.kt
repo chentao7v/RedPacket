@@ -29,8 +29,14 @@ class ConversationDetailInterceptor : Interceptor {
     private const val CHAT_GROUP_MSG_TARGET_ID = "com.tencent.mm:id/brc"
 
     /// 红包相关
-    private const val RED_PACKET_OPEN_ID = "com.tencent.mm:id/j6g"
+    private const val RED_PACKET_DIALOG_OPEN_ID = "com.tencent.mm:id/j6g"
+    private const val RED_PACKET_DIALOG_CLOSE_ID = "com.tencent.mm:id/j6f"
     private const val RED_PACKET_DETAIL_BACK_ID = "com.tencent.mm:id/nnc"
+    private const val RED_PACKET_DIALOG_HINT_ID = "com.tencent.mm:id/j6c"
+
+    /// 红包提示
+    private const val RED_PACKET_HINT_TOO_SLOW = "手慢了"
+    private const val RED_PACKET_HINT_OUT_OF_DATE = "过期"
   }
 
   override fun intercept(uiPage: UIPage, event: AccessibilityEvent, root: AccessibilityNodeInfo?): Boolean {
@@ -60,11 +66,27 @@ class ConversationDetailInterceptor : Interceptor {
   private fun finishRedPacketUI(uiPage: UIPage, event: AccessibilityEvent) {
     val currentUI = uiPage.currentUI()
     val detailBackNode = NodeParser.findNodeById(event, RED_PACKET_DETAIL_BACK_ID)
+    val dialogCloseNode = NodeParser.findNodeById(event, RED_PACKET_DIALOG_CLOSE_ID)
+    val dialogHintNode = NodeParser.findNodeById(event, RED_PACKET_DIALOG_HINT_ID)
 
     if (currentUI.contains(UIPage.PACKET_OPENED_DETAIL) && detailBackNode != null) {
-      Timber.d("当前页面是红包详情页，执行关闭操作")
+      Timber.d("红包详情页显示了，执行关闭操作")
       // 红包详情页
       detailBackNode.performClick()
+    } else if (currentUI.contains(UIPage.PACKET_SHOW_NOT_OPEN) && dialogCloseNode != null && dialogHintNode != null) {
+      // 红包未拆开页面，但是红包状态不正确。如红包已过期、红包已派完、红包已被领取等
+      // 注意：这里要避免错误关闭红包未拆开的页面
+      val dialogHint = dialogHintNode.text?.toString()
+      Timber.d("红包页面，当前红包状态文字：$dialogHint")
+      if (dialogHint == null) {
+        return
+      }
+
+      if (dialogHint.contains(RED_PACKET_HINT_TOO_SLOW) || dialogHint.contains(RED_PACKET_HINT_OUT_OF_DATE)) {
+        dialogCloseNode.performClick()
+        Timber.d("关闭无效红包页面")
+      }
+
     }
   }
 
@@ -78,7 +100,7 @@ class ConversationDetailInterceptor : Interceptor {
     }
 
     Timber.d("当前到了开红包页面啦")
-    val node = NodeParser.findNodeById(event, RED_PACKET_OPEN_ID) ?: return
+    val node = NodeParser.findNodeById(event, RED_PACKET_DIALOG_OPEN_ID) ?: return
 
     node.performClick()
     Timber.d("开开开、开红包咯~~~~")
@@ -154,70 +176,6 @@ class ConversationDetailInterceptor : Interceptor {
     }
 
     return redPacketMsgList
-  }
-
-  /**
-   * 打开红包
-   */
-  private fun openRedPackage(event: AccessibilityEvent) {
-    val openNodeList = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/j6g")
-    if (openNodeList.isNullOrEmpty()) {
-      return
-    }
-    // 开红包
-    openNodeList[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
-    Timber.d("打开红包，点击开按钮，开开开~~~~")
-  }
-
-
-  /**
-   * 关闭红包页面
-   */
-  private fun closeRedPackageUI(event: AccessibilityEvent) {
-    // 抢到红包后的关闭
-    val backListGet = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/nnc")
-    if (backListGet?.isNotEmpty() == true) {
-      backListGet[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
-      Timber.d("当前红包已经抢到了，关闭抢红包结果页面")
-    }
-
-    // 未抢到红包的关闭 --> 这里可能是红包未打开的，所以未打开的红包不能关闭
-    val backListNoGet = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/j6f")
-    // 要看是否有 看看大家的手气
-    val seeOthersNodes = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/j6d")
-    if (!seeOthersNodes.isNullOrEmpty() && backListNoGet?.isNotEmpty() == true) {
-      // 有开看大家的手气，就说明红包抢完了
-      backListNoGet[0].performAction(AccessibilityNodeInfo.ACTION_CLICK)
-      Timber.d("很遗憾，当前红包没抢到，关闭抢红包页面")
-    }
-  }
-
-  /**
-   * 找到未被领取的红包并点击
-   */
-  private fun findNonGetRedPacket(event: AccessibilityEvent) {
-    // 微信红包节点
-    val packetNodeList = event.source?.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/a3y")
-    if (packetNodeList.isNullOrEmpty()) {
-      return
-    }
-
-    // 消息列表可能有多个微信红包，多个已领取未领取的
-    packetNodeList.forEach { node ->
-      val redPackageRoot = node.parent
-      if (redPackageRoot == null) {
-        return
-      }
-
-      // 已领取/已被领完
-      val nodesOfGet = redPackageRoot.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/a3m")
-      // 不包含 已领取/已被领完 -> 未领取
-      if (nodesOfGet.isNullOrEmpty()) {
-        Timber.d("当前红包未领取，点开红包，准备领取")
-        redPackageRoot.performAction(AccessibilityNodeInfo.ACTION_CLICK)
-      }
-    }
-
   }
 
 }
