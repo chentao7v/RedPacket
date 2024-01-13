@@ -1,6 +1,9 @@
 package me.chentao.redpacket.service
 
 import android.accessibilityservice.AccessibilityService
+import android.graphics.PixelFormat
+import android.view.View
+import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.processor.ConversationDetailInterceptor
@@ -21,7 +24,14 @@ class RedPacketService : AccessibilityService() {
 
   private lateinit var chain: Interceptor.Chain
 
+  private val wm by lazy { getSystemService(WINDOW_SERVICE) as WindowManager }
+  private var aliveView: View? = null
+
   override fun onServiceConnected() {
+
+    createAccessibilityView()
+
+
     val uiPage = UIPageInterceptor()
 
     chain = RealChain(uiPage)
@@ -29,6 +39,28 @@ class RedPacketService : AccessibilityService() {
     chain.addInterceptor(NotificationInterceptor())
     chain.addInterceptor(ConversationListInterceptor())
     chain.addInterceptor(ConversationDetailInterceptor())
+  }
+
+  private fun createAccessibilityView() {
+    if (aliveView != null) {
+      wm.removeView(aliveView)
+    }
+
+    val tempView = View(this)
+    val lp = WindowManager.LayoutParams().apply {
+      type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
+      format = PixelFormat.TRANSLUCENT
+      flags =
+        flags or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+      width = 1
+      height = 1
+    }
+    try {
+      wm.addView(tempView, lp)
+      aliveView = tempView
+    } catch (e: Exception) {
+      Timber.d("创建无障碍悬浮框失败")
+    }
   }
 
   override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -47,6 +79,14 @@ class RedPacketService : AccessibilityService() {
 
   override fun onInterrupt() {
 
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+
+    if (aliveView != null) {
+      wm.removeView(aliveView)
+    }
   }
 
 }
