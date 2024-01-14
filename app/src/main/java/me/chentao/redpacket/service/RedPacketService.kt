@@ -28,9 +28,7 @@ class RedPacketService : AccessibilityService() {
   private var aliveView: View? = null
 
   override fun onServiceConnected() {
-
-    createAccessibilityView()
-
+    createTempView()
 
     val uiPage = UIPageInterceptor()
 
@@ -41,7 +39,10 @@ class RedPacketService : AccessibilityService() {
     chain.addInterceptor(ConversationDetailInterceptor())
   }
 
-  private fun createAccessibilityView() {
+  /**
+   * 兼容小米，无障碍服务无法在后台运行
+   */
+  private fun createTempView() {
     if (aliveView != null) {
       wm.removeView(aliveView)
     }
@@ -50,8 +51,11 @@ class RedPacketService : AccessibilityService() {
     val lp = WindowManager.LayoutParams().apply {
       type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
       format = PixelFormat.TRANSLUCENT
-      flags =
-        flags or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+      flags = flags or
+          WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+          WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
+          WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+          WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
       width = 1
       height = 1
     }
@@ -78,11 +82,12 @@ class RedPacketService : AccessibilityService() {
 
 
   override fun onInterrupt() {
-
+    Timber.e("service interrupted")
   }
 
   override fun onDestroy() {
     super.onDestroy()
+    Timber.e("service destroyed")
 
     if (aliveView != null) {
       wm.removeView(aliveView)

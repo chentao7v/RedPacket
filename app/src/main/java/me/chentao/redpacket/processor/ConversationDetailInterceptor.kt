@@ -6,6 +6,7 @@ import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.bean.ChatRedPacketMsg
 import me.chentao.redpacket.parser.NodeParser
 import me.chentao.redpacket.parser.performClick
+import me.chentao.redpacket.utils.CounterHandler
 import me.chentao.redpacket.utils.KVStore
 import timber.log.Timber
 import java.util.Collections
@@ -40,7 +41,7 @@ class ConversationDetailInterceptor : Interceptor {
   }
 
   override fun intercept(uiPage: UIPage, event: AccessibilityEvent, root: AccessibilityNodeInfo?): Boolean {
-    if (event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
+    if (event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED && event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
       return false
     }
 
@@ -57,7 +58,7 @@ class ConversationDetailInterceptor : Interceptor {
     // 2.点击红包
     clickRedPackets(redPackets)
     // 3.拆开红包
-    unboxRedPackets(uiPage, event)
+    unboxRedPackets(redPackets, uiPage, event, root)
     // 4.关闭拆红包页面
     finishRedPacketUI(uiPage, event)
     return true
@@ -93,17 +94,28 @@ class ConversationDetailInterceptor : Interceptor {
   /**
    * 拆开红包
    */
-  private fun unboxRedPackets(uiPage: UIPage, event: AccessibilityEvent) {
+  private fun unboxRedPackets(redPackets: List<ChatRedPacketMsg>, uiPage: UIPage, event: AccessibilityEvent, root: AccessibilityNodeInfo?) {
     Timber.d("准备拆红包，当前页面：${uiPage.currentUI()}")
     if (!uiPage.currentUI().contains(UIPage.PACKET_SHOW_NOT_OPEN)) {
       return
     }
 
     Timber.d("当前到了开红包页面啦")
-    val node = NodeParser.findNodeById(event, RED_PACKET_DIALOG_OPEN_ID) ?: return
-
-    node.performClick()
-    Timber.d("开开开、开红包咯~~~~")
+    val handler = CounterHandler {
+      var node = NodeParser.findNodeById(event, RED_PACKET_DIALOG_OPEN_ID)
+      if (root != null && node == null) {
+        node = NodeParser.findChildNodeById(root, RED_PACKET_DIALOG_OPEN_ID)
+      }
+      if (node != null) {
+        node.performClick()
+        Timber.d("开开开、开红包咯~~~~")
+        true
+      } else {
+        Timber.d("继续查找开红包节点")
+        false
+      }
+    }
+    handler.start(10, 50)
   }
 
   private fun getTargetName(root: AccessibilityNodeInfo?, event: AccessibilityEvent): String? {
