@@ -15,12 +15,22 @@ object KVStore {
 
   private const val OPEN_MYSELF = "open_myself"
 
+  private const val FOREGROUND = "foreground"
+
   var notification: Boolean
     set(value) {
       SP.put(NOTIFICATION, value)
     }
     get() {
       return SP.getBool(NOTIFICATION)
+    }
+
+  var foreground: Boolean
+    set(value) {
+      SP.put(FOREGROUND, value)
+    }
+    get() {
+      return SP.getBool(FOREGROUND)
     }
 
   var openMySelf: Boolean

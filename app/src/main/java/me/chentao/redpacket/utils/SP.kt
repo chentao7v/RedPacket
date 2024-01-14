@@ -12,7 +12,7 @@ object SP {
 
   private val core: SharedPreferences
     get() {
-      return appContext.getSharedPreferences(KEY_SP, Context.MODE_PRIVATE)
+      return app.getSharedPreferences(KEY_SP, Context.MODE_PRIVATE)
     }
 
   fun put(key: String, value: Boolean) {

@@ -8,7 +8,7 @@ import android.os.Looper
  * create by chentao on 2023-12-28.
  */
 
-lateinit var appContext: Context
+lateinit var app: Context
 private val handler = Handler(Looper.getMainLooper())
 
 fun postDelay(delay: Long, block: () -> Unit) {
@@ -20,11 +20,11 @@ fun postDelay(delay: Long, block: () -> Unit) {
 val Number.dp: Int
   get() {
     val dp = this.toInt()
-    return (dp * appContext.resources.displayMetrics.density).toInt()
+    return (dp * app.resources.displayMetrics.density).toInt()
   }
 
 val screenWidth: Int
-  get() = appContext.resources.displayMetrics.widthPixels
+  get() = app.resources.displayMetrics.widthPixels
 
 val screenHeight: Int
-  get() = appContext.resources.displayMetrics.heightPixels
+  get() = app.resources.displayMetrics.heightPixels

@@ -34,9 +34,20 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
     binding.conversations.setOnClickListener { switchConversationList() }
     binding.myself.setOnClickListener { switchMySelf() }
+    binding.foreground.setOnClickListener { switchForeground() }
 
     refreshNotificationUI()
   }
+
+  private fun switchForeground() {
+    val isChecked = binding.cbForeground.isChecked
+
+
+
+    KVStore.foreground = !isChecked
+  }
+
+
 
   private fun switchMySelf() {
     val isChecked = binding.cbMyself.isChecked

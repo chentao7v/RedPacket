@@ -2,7 +2,7 @@ package me.chentao.redpacket.processor
 
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
-import me.chentao.redpacket.utils.appContext
+import me.chentao.redpacket.utils.app
 import me.chentao.redpacket.utils.getCurrentActivityName
 import me.chentao.redpacket.utils.screenWidth
 import timber.log.Timber
@@ -21,7 +21,7 @@ class UIPageInterceptor : Interceptor, UIPage {
       return false
     }
 
-    val activityUI = event.getCurrentActivityName(appContext)
+    val activityUI = event.getCurrentActivityName(app)
     if (currentUI == null) {
       currentUI = activityUI
     } else if (activityUI != null) {

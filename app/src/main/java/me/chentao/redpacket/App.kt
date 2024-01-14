@@ -1,7 +1,7 @@
 package me.chentao.redpacket
 
 import android.app.Application
-import me.chentao.redpacket.utils.appContext
+import me.chentao.redpacket.utils.app
 import timber.log.Timber
 
 /**
@@ -11,7 +11,7 @@ class App : Application() {
 
   override fun onCreate() {
     super.onCreate()
-    appContext = this
+    app = this
 
     Timber.plant(Timber.DebugTree())
   }
