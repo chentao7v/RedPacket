@@ -9,6 +9,9 @@ import android.view.accessibility.AccessibilityNodeInfo
 object NodeParser {
 
   fun findNodesById(event: AccessibilityEvent, viewId: String): List<AccessibilityNodeInfo>? {
+    if (event.className == null) {
+      return null
+    }
     val nodeList = event.source?.findAccessibilityNodeInfosByViewId(viewId)
     if (nodeList.isNullOrEmpty()) {
       return null
@@ -25,6 +28,9 @@ object NodeParser {
   }
 
   fun findChildNodesById(node: AccessibilityNodeInfo, viewId: String): List<AccessibilityNodeInfo>? {
+    if (node.className == null) {
+      return null
+    }
     return node.findAccessibilityNodeInfosByViewId(viewId)
   }
 
