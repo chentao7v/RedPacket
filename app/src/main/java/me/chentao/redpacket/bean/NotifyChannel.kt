@@ -15,7 +15,7 @@ data class NotifyChannel(
 
 val foregroundChannel by lazy {
   NotifyChannel(
-    id = "foreground", name = "前台服务", desc = "前台服务"
+    id = "foreground", name = "前台服务", desc = "显示无障碍服务状态"
   )
 }
 

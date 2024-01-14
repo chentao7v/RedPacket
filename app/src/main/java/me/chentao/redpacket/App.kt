@@ -1,6 +1,7 @@
 package me.chentao.redpacket
 
 import android.app.Application
+import me.chentao.redpacket.bean.initChannelIfNecessary
 import me.chentao.redpacket.utils.app
 import timber.log.Timber
 
@@ -14,5 +15,7 @@ class App : Application() {
     app = this
 
     Timber.plant(Timber.DebugTree())
+
+    initChannelIfNecessary()
   }
 }

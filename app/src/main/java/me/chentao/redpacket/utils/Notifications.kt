@@ -12,10 +12,13 @@ import me.chentao.redpacket.bean.NotifyChannel
  * create by chentao on 2024-01-14.
  */
 @RequiresApi(Build.VERSION_CODES.O)
-fun createChannel(context: Context, notifChannel: NotifyChannel) {
+fun createChannel(context: Context, notifyChannel: NotifyChannel) {
   val importance = NotificationManager.IMPORTANCE_LOW
-  val channel = NotificationChannel(notifChannel.id, notifChannel.name, importance)
-  channel.description = notifChannel.desc
+  val channel = NotificationChannel(notifyChannel.id, notifyChannel.name, importance)
+  channel.description = notifyChannel.desc
   val notificationManager = NotificationManagerCompat.from(context)
   notificationManager.createNotificationChannel(channel)
 }
+
+
+
