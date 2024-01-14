@@ -29,7 +29,7 @@ class UIPageInterceptor : Interceptor, UIPage {
     }
     Timber.d("当前 UIPage -> $activityUI")
 
-    return true
+    return false
   }
 
   override fun currentUI(): String {
