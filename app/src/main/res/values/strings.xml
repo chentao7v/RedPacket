@@ -29,4 +29,6 @@
     <string name="setting_myself_description">在未过滤指定「群/好友」时，自动拆开我发出的红包</string>
     <string name="setting_normal">常规设置</string>
     <string name="setting_higher">高级功能</string>
+    <string name="setting_foreground_task_title">前台服务</string>
+    <string name="setting_foreground_task_detail">可一定程序延长小助手的后台运行时间</string>
 </resources>

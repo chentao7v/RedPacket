@@ -153,6 +153,33 @@
                 style="@style/SettingItem.Group"
                 android:text="@string/setting_higher" />
 
+            <LinearLayout
+                android:id="@+id/foreground"
+                style="@style/SettingItem">
+
+                <ImageView
+                    style="@style/SettingItem.Icon"
+                    app:srcCompat="@drawable/ic_task_24dp" />
+
+                <LinearLayout style="@style/SettingItem.TextLayout">
+
+                    <TextView
+                        style="@style/SettingItem.Title"
+                        android:text="@string/setting_foreground_task_title" />
+
+                    <TextView
+                        style="@style/SettingItem.Detail"
+                        android:text="@string/setting_foreground_task_detail" />
+
+                </LinearLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/cb_foreground"
+                    style="@style/SettingItem.CheckBox"
+                    tools:checked="true" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
