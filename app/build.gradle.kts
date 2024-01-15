@@ -42,6 +42,7 @@ android {
     release {
       signingConfig = config
       isMinifyEnabled = true
+      isShrinkResources = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
@@ -74,5 +75,15 @@ dependencies {
   implementation("com.google.android.flexbox:flexbox:3.0.0")
   implementation("com.squareup.retrofit2:retrofit:2.9.0")
   implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+  implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
+  // RxJava
+  implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+  implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+  implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+  implementation("com.jakewharton.rxrelay3:rxrelay:3.0.1")
+  implementation("com.jakewharton.rxrelay3:rxrelay:3.0.1")
+
+  implementation("com.uber.autodispose2:autodispose-android:2.1.1")
+  implementation("com.uber.autodispose2:autodispose-androidx-lifecycle:2.1.1")
 }
