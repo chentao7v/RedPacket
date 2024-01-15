@@ -28,3 +28,9 @@ val screenWidth: Int
 
 val screenHeight: Int
   get() = app.resources.displayMetrics.heightPixels
+
+
+val appVersionName: String by lazy {
+  val packageInfo = app.packageManager.getPackageInfo(app.packageName, 0)
+  packageInfo.versionName
+}
