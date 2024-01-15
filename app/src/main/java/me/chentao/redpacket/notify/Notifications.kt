@@ -45,7 +45,7 @@ fun createNotification(context: Context, channelId: String, notify: Notify): Not
   )
 
   val builder = NotificationCompat.Builder(context, channelId)
-    .setSmallIcon(R.drawable.ic_task_24dp)
+    .setSmallIcon(notify.icon)
     .setContentTitle(notify.title)
     .setContentText(notify.text)
     .setContentIntent(pendingIntent)
