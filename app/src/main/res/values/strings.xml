@@ -37,7 +37,7 @@
     <string name="setting_hide_task_title">从最近任务中隐藏「让红包飞」</string>
     <string name="setting_close_battery_title">关闭电池优化</string>
     <string name="setting_hide_task_detail">从最近任务栏中隐藏「让红包飞」</string>
-    <string name="higher_hint">为尽可能延长小助手的后台运行时间，您可逐一开启下面的选项</string>
+    <string name="higher_hint">为尽可能延长小助手的后台运行时间，您可以有选择性的开启下面的选项</string>
     <string name="lock_hint">按下「Home」键，长按「让红包飞」上锁</string>
     <string name="battey_hint"><![CDATA[在「设置」->「电池优化」中，选择「不优化」或者「无限制」]]></string>
 </resources>
