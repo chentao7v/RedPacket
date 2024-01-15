@@ -1,8 +1,11 @@
 package me.chentao.redpacket.ui
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
@@ -20,6 +23,8 @@ import me.chentao.redpacket.utils.KVStore
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
   companion object {
+
+    private const val REQUEST_POST_NOTIFICATIONS = 0X100
 
     fun launch(context: Context) {
       val intent = Intent(context, SettingsActivity::class.java)
@@ -57,7 +62,15 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
     if (!judgeNotificationPermission(foregroundChannel.id)) {
       showAlert(getString(R.string.open_notification_first, foregroundChannel.name)) {
-        gotoNotifySettings(this, foregroundChannel.id)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+          && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)
+        ) {
+          // 请求通知权限
+          ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_POST_NOTIFICATIONS)
+        } else {
+          // 直接去通知设置页面
+          gotoNotifySettings(this, foregroundChannel.id)
+        }
       }
       return
     }
