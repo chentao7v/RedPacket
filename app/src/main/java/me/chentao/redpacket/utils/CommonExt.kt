@@ -7,8 +7,9 @@ import android.os.Looper
 /**
  * create by chentao on 2023-12-28.
  */
-
+@SuppressWarnings("StaticFieldLeak")
 lateinit var app: Context
+
 private val handler = Handler(Looper.getMainLooper())
 
 fun postDelay(delay: Long, block: () -> Unit) {
@@ -16,6 +17,12 @@ fun postDelay(delay: Long, block: () -> Unit) {
     block()
   }, delay)
 }
+
+fun runOnUiThread(block: () -> Unit) {
+  handler.post(block)
+}
+
+fun isUiThread(): Boolean = Looper.myLooper() == Looper.getMainLooper()
 
 val Number.dp: Int
   get() {

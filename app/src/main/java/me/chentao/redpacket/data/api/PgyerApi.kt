@@ -1,5 +1,6 @@
 package me.chentao.redpacket.data.api
 
+import io.reactivex.rxjava3.core.Observable
 import me.chentao.redpacket.data.bean.PgyerUpdateInfo
 import me.chentao.redpacket.utils.appVersionName
 import retrofit2.Call
@@ -23,7 +24,7 @@ interface PgyerApi {
     @Field("_api_key") apiKey: String = API_KEY,
     @Field("appKey") appKey: String = APP_KEY,
     @Field("buildVersion") versionName: String = appVersionName
-  ): Call<PgyerUpdateInfo>
+  ): Observable<PgyerUpdateInfo>
 
 
 }

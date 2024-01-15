@@ -3,6 +3,7 @@ package me.chentao.redpacket.data
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -31,6 +32,7 @@ object ApiClient {
     Retrofit.Builder()
       .baseUrl("https://www.pgyer.com/apiv2/")
       .client(okhttp)
+      .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
       .addConverterFactory(GsonConverterFactory.create())
       .build()
   }

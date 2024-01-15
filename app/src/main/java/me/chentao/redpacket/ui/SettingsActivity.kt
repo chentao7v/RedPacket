@@ -15,15 +15,16 @@ import me.chentao.redpacket.databinding.ActivitySettingsBinding
 import me.chentao.redpacket.notify.foregroundChannel
 import me.chentao.redpacket.notify.gotoNotifySettings
 import me.chentao.redpacket.notify.judgeNotificationPermission
+import me.chentao.redpacket.rxjava.SimpleObserver
+import me.chentao.redpacket.rxjava.ioToUiThread
 import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.appVersionName
 import me.chentao.redpacket.utils.hideFromRecentTasks
+import me.chentao.redpacket.utils.showToast
 import me.chentao.redpacket.utils.toAppSettings
 import me.chentao.redpacket.utils.toLauncher
-import retrofit2.Call
-import retrofit2.Response
 
 
 /**
@@ -70,12 +71,14 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
   private fun checkUpdate() {
     pgyer.checkUpdate()
-      .enqueue(object : retrofit2.Callback<PgyerUpdateInfo> {
-        override fun onResponse(call: Call<PgyerUpdateInfo>, response: Response<PgyerUpdateInfo>) {
+      .ioToUiThread()
+      .safeSubscribe(object : SimpleObserver<PgyerUpdateInfo>() {
 
+        override fun onError(e: Throwable) {
+          showToast(getString(R.string.api_error))
         }
 
-        override fun onFailure(call: Call<PgyerUpdateInfo>, t: Throwable) {
+        override fun onNext(t: PgyerUpdateInfo) {
 
         }
       })
