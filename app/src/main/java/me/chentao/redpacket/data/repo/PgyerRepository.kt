@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Observable
 import me.chentao.redpacket.data.ApiClient
 import me.chentao.redpacket.data.api.PgyerApi
 import me.chentao.redpacket.data.bean.PgyerUpdateInfo
+import me.chentao.redpacket.rxjava.ioThread
 
 /**
  * create by chentao on 2024-01-15.
@@ -14,6 +15,8 @@ class PgyerRepository {
 
   fun checkUpdate(): Observable<PgyerUpdateInfo> {
     return api.checkUpdate()
+      .subscribeOn(ioThread)
+      .map { resp -> resp.data ?: PgyerUpdateInfo() }
   }
 
 }

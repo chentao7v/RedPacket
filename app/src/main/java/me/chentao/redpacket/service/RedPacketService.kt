@@ -39,6 +39,11 @@ class RedPacketService : AccessibilityService() {
       context.startService(intent)
     }
 
+    fun stop(context: Context) {
+      val intent = Intent(context, RedPacketService::class.java)
+      context.stopService(intent)
+    }
+
   }
 
   private lateinit var chain: Interceptor.Chain
@@ -112,6 +117,11 @@ class RedPacketService : AccessibilityService() {
     event ?: return
     val packageName = event.packageName ?: return
     if (packageName != WECHAT_PACKAGE) {
+      return
+    }
+
+    if (KVStore.requireNewVersion) {
+      Timber.d("APP 不是最新的，需要强制更新方可使用")
       return
     }
 

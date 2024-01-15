@@ -9,20 +9,16 @@ import androidx.core.app.ActivityCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
-import me.chentao.redpacket.data.bean.PgyerUpdateInfo
-import me.chentao.redpacket.data.repo.PgyerRepository
 import me.chentao.redpacket.databinding.ActivitySettingsBinding
 import me.chentao.redpacket.notify.foregroundChannel
 import me.chentao.redpacket.notify.gotoNotifySettings
 import me.chentao.redpacket.notify.judgeNotificationPermission
-import me.chentao.redpacket.rxjava.SimpleObserver
-import me.chentao.redpacket.rxjava.ioToUiThread
 import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
+import me.chentao.redpacket.utils.AppUpdater
 import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.appVersionName
 import me.chentao.redpacket.utils.hideFromRecentTasks
-import me.chentao.redpacket.utils.showToast
 import me.chentao.redpacket.utils.toAppSettings
 import me.chentao.redpacket.utils.toLauncher
 
@@ -43,7 +39,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
   }
 
-  private val pgyer by lazy { PgyerRepository() }
+  private val appUpdater = AppUpdater()
 
   override fun getViewBinding() = ActivitySettingsBinding.inflate(layoutInflater)
 
@@ -60,7 +56,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.hide.setOnClickListener { switchHide() }
     binding.lock.setOnClickListener { showAlert(getString(R.string.lock_hint)) }
     binding.battery.setOnClickListener { showAlert(getString(R.string.battery_hint)) { toAppSettings(this) } }
-    binding.update.setOnClickListener { checkUpdate() }
+    binding.update.setOnClickListener { appUpdater.check(this) }
 
 
     binding.tvVersion.text = getString(R.string.setting_update_title, appVersionName)
@@ -69,20 +65,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     refreshMyselfUI()
   }
 
-  private fun checkUpdate() {
-    pgyer.checkUpdate()
-      .ioToUiThread()
-      .safeSubscribe(object : SimpleObserver<PgyerUpdateInfo>() {
-
-        override fun onError(e: Throwable) {
-          showToast(getString(R.string.api_error))
-        }
-
-        override fun onNext(t: PgyerUpdateInfo) {
-
-        }
-      })
-  }
 
   private fun switchHide() {
     hideFromRecentTasks(this)

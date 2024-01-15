@@ -3,6 +3,7 @@ package me.chentao.redpacket.utils
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import androidx.annotation.StringRes
 
 /**
  * create by chentao on 2023-12-28.
@@ -40,4 +41,10 @@ val screenHeight: Int
 val appVersionName: String by lazy {
   val packageInfo = app.packageManager.getPackageInfo(app.packageName, 0)
   packageInfo.versionName
+}
+
+fun getStringRes(@StringRes id: Int): String = app.resources.getString(id)
+
+fun getStringRes(@StringRes id: Int, vararg formatArgs: Any?): String {
+  return app.resources.getString(id, *formatArgs)
 }

@@ -17,7 +17,7 @@ object KVStore {
 
   private const val FOREGROUND = "foreground"
 
-  private const val HIDE = "hide"
+  private const val REQUIRE_NEW_VERSION = "require_new_version"
 
   var notification: Boolean
     set(value) {
@@ -41,6 +41,14 @@ object KVStore {
     }
     get() {
       return SP.getBool(OPEN_MYSELF)
+    }
+
+  var requireNewVersion: Boolean
+    set(value) {
+      SP.put(REQUIRE_NEW_VERSION, value)
+    }
+    get() {
+      return SP.getBool(REQUIRE_NEW_VERSION)
     }
 
   var conversationList: Boolean

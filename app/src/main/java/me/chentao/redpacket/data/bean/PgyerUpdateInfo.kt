@@ -44,7 +44,8 @@ class PgyerUpdateInfo {
   var buildHaveNewVersion: Boolean = false
 
   /**
-   * 上传包的版本编号，默认为1 (即编译的版本号，一般来说，编译一次会变动一次这个版本号, 在 Android 上叫 Version Code。对于 iOS 来说，是字符串类型；对于 Android 来说是一个整数。例如：1001，28等。)
+   * 上传包的版本编号，默认为1 (即编译的版本号，一般来说，编译一次会变动一次这个版本号, 在 Android 上叫 Version Code。
+   * 对于 iOS 来说，是字符串类型；对于 Android 来说是一个整数。例如：1001，28等。)
    */
   @SerializedName("buildVersionNo")
   var buildVersionNo: String? = null
