@@ -16,6 +16,7 @@ import me.chentao.redpacket.notify.judgeNotificationPermission
 import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.KVStore
+import me.chentao.redpacket.utils.appVersionName
 import me.chentao.redpacket.utils.hideFromRecentTasks
 import me.chentao.redpacket.utils.toAppSettings
 import me.chentao.redpacket.utils.toLauncher
@@ -52,10 +53,17 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.hide.setOnClickListener { switchHide() }
     binding.lock.setOnClickListener { showAlert(getString(R.string.lock_hint)) }
     binding.battery.setOnClickListener { showAlert(getString(R.string.battery_hint)) { toAppSettings(this) } }
+    binding.update.setOnClickListener { checkUpdate() }
 
+
+    binding.tvVersion.text = getString(R.string.setting_update_title, appVersionName)
     refreshNotificationUI()
     refreshConversationListUI()
     refreshMyselfUI()
+  }
+
+  private fun checkUpdate() {
+
   }
 
   private fun switchHide() {

@@ -40,4 +40,7 @@
     <string name="higher_hint">为尽可能延长小助手的后台运行时间，您可以有选择性的开启下面的选项</string>
     <string name="lock_hint">按下「任务」键，长按「让红包飞」上锁</string>
     <string name="battery_hint"><![CDATA[在「设置」->「电池优化」中，选择「不优化」或者「无限制」]]></string>
+    <string name="setting_other">关于</string>
+    <string name="setting_update_detail">检查更新</string>
+    <string name="setting_update_title">当前版本：%s</string>
 </resources>
