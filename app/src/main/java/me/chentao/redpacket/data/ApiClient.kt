@@ -1,20 +1,29 @@
-package me.chentao.redpacket.network
+package me.chentao.redpacket.data
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 /**
  * create by chentao on 2024-01-15.
  */
-class ApiClient {
+object ApiClient {
 
   private val okhttp: OkHttpClient by lazy {
+
+    val httpLog = HttpLoggingInterceptor { msg ->
+      Timber.tag("http").d(msg)
+    }
+    httpLog.level = HttpLoggingInterceptor.Level.BODY
+
     OkHttpClient.Builder()
       .connectTimeout(30L, TimeUnit.SECONDS)
       .readTimeout(30L, TimeUnit.SECONDS)
       .writeTimeout(30L, TimeUnit.SECONDS)
+      .addInterceptor(httpLog)
       .build()
   }
 

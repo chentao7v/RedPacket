@@ -9,6 +9,8 @@ import androidx.core.app.ActivityCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
+import me.chentao.redpacket.data.bean.PgyerUpdateInfo
+import me.chentao.redpacket.data.repo.PgyerRepository
 import me.chentao.redpacket.databinding.ActivitySettingsBinding
 import me.chentao.redpacket.notify.foregroundChannel
 import me.chentao.redpacket.notify.gotoNotifySettings
@@ -20,6 +22,8 @@ import me.chentao.redpacket.utils.appVersionName
 import me.chentao.redpacket.utils.hideFromRecentTasks
 import me.chentao.redpacket.utils.toAppSettings
 import me.chentao.redpacket.utils.toLauncher
+import retrofit2.Call
+import retrofit2.Response
 
 
 /**
@@ -37,6 +41,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     }
 
   }
+
+  private val pgyer by lazy { PgyerRepository() }
 
   override fun getViewBinding() = ActivitySettingsBinding.inflate(layoutInflater)
 
@@ -63,7 +69,16 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
   }
 
   private fun checkUpdate() {
+    pgyer.checkUpdate()
+      .enqueue(object : retrofit2.Callback<PgyerUpdateInfo> {
+        override fun onResponse(call: Call<PgyerUpdateInfo>, response: Response<PgyerUpdateInfo>) {
 
+        }
+
+        override fun onFailure(call: Call<PgyerUpdateInfo>, t: Throwable) {
+
+        }
+      })
   }
 
   private fun switchHide() {

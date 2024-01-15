@@ -1,4 +1,4 @@
-package me.chentao.redpacket.bean
+package me.chentao.redpacket.parser
 
 import android.view.accessibility.AccessibilityNodeInfo
 

@@ -3,7 +3,7 @@ package me.chentao.redpacket.processor
 import android.graphics.Rect
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
-import me.chentao.redpacket.bean.ChatRedPacketMsg
+import me.chentao.redpacket.parser.ChatRedPacketMsg
 import me.chentao.redpacket.parser.NodeParser
 import me.chentao.redpacket.parser.performClick
 import me.chentao.redpacket.utils.CounterHandler
