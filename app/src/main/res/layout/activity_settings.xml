@@ -153,9 +153,18 @@
                 style="@style/SettingItem.Group"
                 android:text="@string/setting_higher" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/higer_hint"
+                android:textSize="12sp"
+                android:textColor="@color/black_2" />
+
             <LinearLayout
                 android:id="@+id/foreground"
-                style="@style/SettingItem">
+                style="@style/SettingItem.Mini">
 
                 <ImageView
                     style="@style/SettingItem.Icon"
@@ -167,14 +176,33 @@
                         style="@style/SettingItem.Title"
                         android:text="@string/setting_foreground_task_title" />
 
-                    <TextView
-                        style="@style/SettingItem.Detail"
-                        android:text="@string/setting_foreground_task_detail" />
-
                 </LinearLayout>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_foreground"
+                    style="@style/SettingItem.CheckBox"
+                    tools:checked="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hide"
+                style="@style/SettingItem.Mini">
+
+                <ImageView
+                    style="@style/SettingItem.Icon"
+                    app:srcCompat="@drawable/ic_hide_24dp" />
+
+                <LinearLayout style="@style/SettingItem.TextLayout">
+
+                    <TextView
+                        style="@style/SettingItem.Title"
+                        android:text="@string/setting_hide_task_title" />
+
+                </LinearLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/cb_hide"
                     style="@style/SettingItem.CheckBox"
                     tools:checked="true" />
 

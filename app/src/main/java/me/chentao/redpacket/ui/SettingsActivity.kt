@@ -16,6 +16,9 @@ import me.chentao.redpacket.notify.judgeNotificationPermission
 import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.KVStore
+import me.chentao.redpacket.utils.hideFromRecentTasks
+import me.chentao.redpacket.utils.toLauncher
+
 
 /**
  * create by chentao on 2023-12-29.
@@ -45,10 +48,29 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.conversations.setOnClickListener { switchConversationList() }
     binding.myself.setOnClickListener { switchMySelf() }
     binding.foreground.setOnClickListener { switchForeground() }
+    binding.hide.setOnClickListener { switchHide() }
 
     refreshNotificationUI()
     refreshConversationListUI()
     refreshMyselfUI()
+    refreshHideUI()
+  }
+
+  private fun switchHide() {
+    val isChecked = binding.cbHide.isChecked
+    val hide = !isChecked
+    hideFromRecentTasks(this, hide)
+    KVStore.hide = hide
+    refreshHideUI()
+
+    if (hide) {
+      // 跳转桌面
+      toLauncher(this)
+    }
+  }
+
+  private fun refreshHideUI() {
+    binding.cbHide.isChecked = KVStore.hide
   }
 
   private fun switchForeground() {

@@ -17,6 +17,8 @@ object KVStore {
 
   private const val FOREGROUND = "foreground"
 
+  private const val HIDE = "hide"
+
   var notification: Boolean
     set(value) {
       SP.put(NOTIFICATION, value)
@@ -31,6 +33,14 @@ object KVStore {
     }
     get() {
       return SP.getBool(FOREGROUND)
+    }
+
+  var hide: Boolean
+    set(value) {
+      SP.put(HIDE, value)
+    }
+    get() {
+      return SP.getBool(HIDE)
     }
 
   var openMySelf: Boolean
