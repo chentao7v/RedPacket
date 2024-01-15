@@ -39,6 +39,7 @@
     </style>
 
     <style name="SettingItem.Mini">
+        <item name="android:minHeight">46dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>

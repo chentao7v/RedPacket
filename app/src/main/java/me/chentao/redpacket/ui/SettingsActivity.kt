@@ -49,6 +49,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.myself.setOnClickListener { switchMySelf() }
     binding.foreground.setOnClickListener { switchForeground() }
     binding.hide.setOnClickListener { switchHide() }
+    binding.lock.setOnClickListener { showAlert(getString(R.string.lock_hint)) }
 
     refreshNotificationUI()
     refreshConversationListUI()
