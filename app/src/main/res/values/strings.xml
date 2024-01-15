@@ -33,7 +33,7 @@
     <string name="setting_foreground_task_detail">可一定程度延长小助手的后台运行时间</string>
     <string name="open_notification_first">请先打开%s通知权限</string>
     <string name="open_robot_first">请先开启小助手</string>
-    <string name="setting_lock_task_title">切换到最近任务中，给「让红包飞」加锁</string>
+    <string name="setting_lock_task_title">切换到最近任务中，给「让红包飞」加上锁</string>
     <string name="setting_hide_task_title">从最近任务中隐藏「让红包飞」</string>
     <string name="setting_close_battery_title">关闭电池优化</string>
     <string name="setting_hide_task_detail">从最近任务栏中隐藏「让红包飞」</string>
