@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <queries>
-        <package android:name="com.tencent.mm"/>
+        <package android:name="com.tencent.mm" />
     </queries>
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:theme="@style/Theme.RedPacket"
@@ -37,6 +40,8 @@
 
         <service
             android:exported="true"
+            android:foregroundServiceType="dataSync"
+            android:stopWithTask="false"
             android:name=".service.RedPacketService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:label="@string/accessibility_service_label">

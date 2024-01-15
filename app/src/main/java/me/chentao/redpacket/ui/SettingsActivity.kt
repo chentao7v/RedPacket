@@ -7,6 +7,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.databinding.ActivitySettingsBinding
+import me.chentao.redpacket.notify.foregroundChannel
+import me.chentao.redpacket.notify.gotoNotifySettings
+import me.chentao.redpacket.notify.judgeNotificationPermission
+import me.chentao.redpacket.service.RedPacketService
+import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.KVStore
 
 /**
@@ -37,21 +42,46 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.foreground.setOnClickListener { switchForeground() }
 
     refreshNotificationUI()
+    refreshConversationListUI()
+    refreshMyselfUI()
   }
 
   private fun switchForeground() {
+    if (!AccessibilityTools.isOpen(this, RedPacketService::class.java.name)) {
+      showAlert(getString(R.string.open_robot_first))
+      return
+    }
+
+    // 当前状态
     val isChecked = binding.cbForeground.isChecked
 
+    if (!judgeNotificationPermission(foregroundChannel.id)) {
+      showAlert(getString(R.string.open_notification_first, foregroundChannel.name)) {
+        gotoNotifySettings(this, foregroundChannel.id)
+      }
+      return
+    }
 
+    // 未开启 -> 开启前台服务
+    RedPacketService.startForeground(this, !isChecked)
 
+    // UI 刷新
     KVStore.foreground = !isChecked
+    refreshForegroundUI()
   }
 
+  private fun refreshForegroundUI() {
+    binding.cbForeground.isChecked = KVStore.foreground && judgeNotificationPermission(foregroundChannel.id)
+  }
 
 
   private fun switchMySelf() {
     val isChecked = binding.cbMyself.isChecked
     KVStore.openMySelf = !isChecked
+    refreshMyselfUI()
+  }
+
+  private fun refreshMyselfUI() {
     binding.cbMyself.isChecked = KVStore.openMySelf
   }
 
@@ -86,12 +116,14 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.cbNotification.isChecked = KVStore.notification
   }
 
-  private fun showAlert(msg: CharSequence) {
+  private fun showAlert(msg: CharSequence, clickBlock: (() -> Unit)? = null) {
     val dialog = MaterialAlertDialogBuilder(this)
       .setTitle(getString(R.string.alert_default_title))
       .setMessage(msg)
       .setCancelable(false)
-      .setPositiveButton(getString(R.string.i_know), null)
+      .setPositiveButton(getString(R.string.i_know)) { _, _ ->
+        clickBlock?.invoke()
+      }
       .create()
 
     dialog.setCanceledOnTouchOutside(false)

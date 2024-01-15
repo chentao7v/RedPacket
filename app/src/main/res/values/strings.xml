@@ -31,4 +31,6 @@
     <string name="setting_higher">高级功能</string>
     <string name="setting_foreground_task_title">前台服务</string>
     <string name="setting_foreground_task_detail">可一定程度延长小助手的后台运行时间</string>
+    <string name="open_notification_first">请先到设置中打开%s通知权限</string>
+    <string name="open_robot_first">请先开启小助手</string>
 </resources>

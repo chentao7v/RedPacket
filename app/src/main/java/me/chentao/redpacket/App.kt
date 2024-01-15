@@ -1,7 +1,7 @@
 package me.chentao.redpacket
 
 import android.app.Application
-import me.chentao.redpacket.bean.initChannelIfNecessary
+import me.chentao.redpacket.notify.initChannelIfNecessary
 import me.chentao.redpacket.utils.app
 import timber.log.Timber
 

@@ -1,8 +1,7 @@
-package me.chentao.redpacket.bean
+package me.chentao.redpacket.notify
 
 import android.os.Build
 import me.chentao.redpacket.utils.app
-import me.chentao.redpacket.utils.createChannel
 
 /**
  * create by chentao on 2024-01-14.
@@ -15,7 +14,7 @@ data class NotifyChannel(
 
 val foregroundChannel by lazy {
   NotifyChannel(
-    id = "foreground", name = "前台服务", desc = "显示无障碍服务状态"
+    id = "foreground", name = "前台服务", desc = "小助手为您保驾护航中"
   )
 }
 
