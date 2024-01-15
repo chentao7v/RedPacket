@@ -1,13 +1,13 @@
 package me.chentao.redpacket.utils
 
-import android.Manifest
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.rxjava3.core.Observable
 import me.chentao.redpacket.R
@@ -35,6 +35,7 @@ class AppUpdater {
       .filter { data -> data.buildHaveNewVersion }
       .safeSubscribe(object : SimpleObserver<PgyerUpdateInfo>() {
         override fun onError(e: Throwable) {
+          Timber.e(e)
           showToast(getStringRes(R.string.api_error))
         }
 
@@ -82,6 +83,7 @@ class AppUpdater {
   }
 
   private fun downloadNewApk(context: Activity, info: PgyerUpdateInfo) {
+    showToast(getStringRes(R.string.download_apk_running))
     Observable.just(info)
       .flatMap { _ -> fileRepo.download(info.downloadURL ?: "", "new_version.apk") }
       .ioToUiThread()
@@ -96,19 +98,39 @@ class AppUpdater {
             return
           }
 
-          requestInstall(context, t)
+          showInstallDialog(context, t)
         }
       })
+  }
 
+  private fun showInstallDialog(context: Activity, apkFile: File) {
+    val dialog = MaterialAlertDialogBuilder(context)
+      .setTitle(getStringRes(R.string.install_title))
+      .setCancelable(false)
+      .setMessage(getStringRes(R.string.click_to_install))
+      .setPositiveButton(getStringRes(R.string.install_now)) { _, _ ->
+        requestInstall(context, apkFile)
+      }
+      .create()
+
+    dialog.show()
+    dialog.setCanceledOnTouchOutside(false)
   }
 
   private fun requestInstall(context: Activity, apkFile: File) {
-    if (ContextCompat.checkSelfPermission(context, Manifest.permission.REQUEST_INSTALL_PACKAGES) == PackageManager.PERMISSION_GRANTED) {
-      installApk(context, apkFile)
-    } else if (ActivityCompat.shouldShowRequestPermissionRationale(context, Manifest.permission.REQUEST_INSTALL_PACKAGES)) {
-      ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.REQUEST_INSTALL_PACKAGES), 1002)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      val pm: PackageManager = app.packageManager
+      // 返回用户是否授予了安装apk的权限
+      if (pm.canRequestPackageInstalls()) {
+        installApk(context, apkFile)
+      } else {
+        //跳转到该应用的安装应用的权限页面
+        val packageURI = Uri.parse("package:" + app.packageName)
+        val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI)
+        context.startActivity(intent)
+      }
     } else {
-      toAppSettings(context)
+      installApk(context, apkFile)
     }
   }
 

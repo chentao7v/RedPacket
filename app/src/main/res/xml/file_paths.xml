@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- /storage/emulated/0/Android/data/com.test.dust/files/resources/map/tiles/1.0.8.rar   ===>     content://com.test.dust.provider/map_tiles/1.0.8.rar-->
+    <!--<external-files-path-->
+    <!--    name="map_tiles"-->
+    <!--    path="resources/map/tiles" />-->
+
+    <external-files-path
+        name="downloads"
+        path="downloads" />
+
+</paths>

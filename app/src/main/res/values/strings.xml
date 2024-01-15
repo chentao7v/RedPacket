@@ -49,4 +49,8 @@
     <string name="exit_app">退出APP</string>
     <string name="cancel_update_app">暂不更新</string>
     <string name="app_info_error">更新包解析失败，请重新下载</string>
+    <string name="download_apk_running">正在后台下载更新，请稍后...</string>
+    <string name="install_title">安装新版本</string>
+    <string name="install_now">立即安装</string>
+    <string name="click_to_install">点击「立即安装」即可安装新版本啦</string>
 </resources>

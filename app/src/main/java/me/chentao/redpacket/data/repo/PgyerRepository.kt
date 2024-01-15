@@ -15,7 +15,6 @@ class PgyerRepository {
 
   fun checkUpdate(): Observable<PgyerUpdateInfo> {
     return api.checkUpdate()
-      .subscribeOn(ioThread)
       .map { resp -> resp.data ?: PgyerUpdateInfo() }
   }
 
