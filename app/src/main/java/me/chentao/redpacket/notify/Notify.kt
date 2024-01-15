@@ -7,7 +7,7 @@ import me.chentao.redpacket.R
  */
 data class Notify(
   val id: Int,
-  val icon: Int = R.drawable.ic_task_24dp,
+  val icon: Int = R.drawable.ic_robot_24dp,
   val title: String,
   val text: String,
   val ongoing: Boolean,
