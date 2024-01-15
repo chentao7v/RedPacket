@@ -51,7 +51,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.foreground.setOnClickListener { switchForeground() }
     binding.hide.setOnClickListener { switchHide() }
     binding.lock.setOnClickListener { showAlert(getString(R.string.lock_hint)) }
-    binding.battery.setOnClickListener { showAlert(getString(R.string.battey_hint)) { toAppSettings(this) } }
+    binding.battery.setOnClickListener { showAlert(getString(R.string.battery_hint)) { toAppSettings(this) } }
 
     refreshNotificationUI()
     refreshConversationListUI()
