@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/higer_hint"
+                android:text="@string/higher_hint"
                 android:textSize="12sp"
                 android:textColor="@color/black_2" />
 
@@ -223,6 +223,24 @@
                     android:id="@+id/cb_hide"
                     style="@style/SettingItem.CheckBox"
                     tools:checked="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/battery"
+                style="@style/SettingItem.Mini">
+
+                <ImageView
+                    style="@style/SettingItem.Icon"
+                    app:srcCompat="@drawable/ic_battery_24dp" />
+
+                <LinearLayout style="@style/SettingItem.TextLayout">
+
+                    <TextView
+                        style="@style/SettingItem.Title"
+                        android:text="@string/setting_close_battery_title" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

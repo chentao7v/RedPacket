@@ -3,6 +3,8 @@ package me.chentao.redpacket.utils
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -26,4 +28,11 @@ fun toLauncher(context: Context) {
   context.startActivity(intent)
 }
 
+fun toAppSettings(context: Context) {
+  val intent = Intent()
+  intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+  val uri = Uri.fromParts("package", context.packageName, null)
+  intent.setData(uri)
+  context.startActivity(intent)
+}
 

@@ -17,6 +17,7 @@ import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.hideFromRecentTasks
+import me.chentao.redpacket.utils.toAppSettings
 import me.chentao.redpacket.utils.toLauncher
 
 
@@ -50,6 +51,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.foreground.setOnClickListener { switchForeground() }
     binding.hide.setOnClickListener { switchHide() }
     binding.lock.setOnClickListener { showAlert(getString(R.string.lock_hint)) }
+    binding.battery.setOnClickListener { showAlert(getString(R.string.battey_hint)) { toAppSettings(this) } }
 
     refreshNotificationUI()
     refreshConversationListUI()

@@ -20,6 +20,7 @@ import androidx.core.app.NotificationManagerCompat
 import me.chentao.redpacket.R
 import me.chentao.redpacket.ui.MainActivity
 import me.chentao.redpacket.utils.app
+import me.chentao.redpacket.utils.toAppSettings
 
 
 /**
@@ -100,11 +101,7 @@ fun gotoNotifySettings(context: Context, channelId: String) {
     intent.putExtra("app_uid", context.applicationInfo.uid)
     context.startActivity(intent)
   } catch (e: Exception) {
-    val intent = Intent()
-    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-    val uri = Uri.fromParts("package", context.packageName, null)
-    intent.setData(uri)
-    context.startActivity(intent)
+    toAppSettings(context)
   }
 }
 
