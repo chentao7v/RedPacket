@@ -56,24 +56,13 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     refreshNotificationUI()
     refreshConversationListUI()
     refreshMyselfUI()
-    refreshHideUI()
   }
 
   private fun switchHide() {
-    val isChecked = binding.cbHide.isChecked
-    val hide = !isChecked
-    hideFromRecentTasks(this, hide)
-    KVStore.hide = hide
-    refreshHideUI()
-
-    if (hide) {
-      // 跳转桌面
-      toLauncher(this)
-    }
-  }
-
-  private fun refreshHideUI() {
-    binding.cbHide.isChecked = KVStore.hide
+    hideFromRecentTasks(this)
+    // 跳转桌面
+    toLauncher(this)
+    finish()
   }
 
   private fun switchForeground() {

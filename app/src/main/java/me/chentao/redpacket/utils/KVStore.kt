@@ -35,14 +35,6 @@ object KVStore {
       return SP.getBool(FOREGROUND)
     }
 
-  var hide: Boolean
-    set(value) {
-      SP.put(HIDE, value)
-    }
-    get() {
-      return SP.getBool(HIDE)
-    }
-
   var openMySelf: Boolean
     set(value) {
       SP.put(OPEN_MYSELF, value)
