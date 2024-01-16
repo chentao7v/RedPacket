@@ -21,9 +21,9 @@
 #-renamesourcefileattribute SourceFile
 
 # 指定混淆字典
--obfuscationdictionary dic.txt
--classobfuscationdictionary dic.txt
--packageobfuscationdictionary dic.txt
+-obfuscationdictionary dictionary.txt
+-classobfuscationdictionary dictionary.txt
+-packageobfuscationdictionary dictionary.txt
 
 # okhttp/retrofit/okio
 -dontwarn org.codehaus.mojo.animal_sniffer.*
