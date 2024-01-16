@@ -3,6 +3,7 @@ package me.chentao.redpacket.utils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.annotation.StringRes
 import me.chentao.redpacket.databinding.ToastBinding
 
 /**
@@ -16,6 +17,10 @@ fun showToast(msg: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
   } else {
     runOnUiThread { show(msg, duration) }
   }
+}
+
+fun showToast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHORT) {
+  showToast(getStringRes(resId), duration)
 }
 
 private fun show(msg: CharSequence, duration: Int) {

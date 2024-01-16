@@ -11,6 +11,7 @@ import android.provider.Settings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.rxjava3.core.Observable
 import me.chentao.redpacket.R
+import me.chentao.redpacket.data.bean.BasePgyer
 import me.chentao.redpacket.data.bean.PgyerUpdateInfo
 import me.chentao.redpacket.data.repo.FileRepository
 import me.chentao.redpacket.data.repo.PgyerRepository
@@ -32,15 +33,20 @@ class AppUpdater {
 
   fun check(context: Activity) {
     pgyerRepo.checkUpdate()
-      .filter { data -> data.buildHaveNewVersion }
-      .safeSubscribe(object : SimpleObserver<PgyerUpdateInfo>() {
+      .safeSubscribe(object : SimpleObserver<BasePgyer<PgyerUpdateInfo>>() {
         override fun onError(e: Throwable) {
           Timber.e(e)
           showToast(getStringRes(R.string.api_error))
         }
 
-        override fun onNext(t: PgyerUpdateInfo) {
-          showUpdateInfoDialog(context, t)
+        override fun onNext(t: BasePgyer<PgyerUpdateInfo>) {
+          val info = t.data
+          if (info == null || !info.buildHaveNewVersion) {
+            showToast(getStringRes(R.string.already_new_version))
+            return
+          }
+
+          showUpdateInfoDialog(context, info)
         }
       })
   }
