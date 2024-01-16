@@ -14,10 +14,6 @@ import timber.log.Timber
  */
 
 /**
- * 日志 TAG
- */
-
-/**
  * 解析 Activity
  */
 fun AccessibilityEvent?.getCurrentActivityName(context: Context): String? {
