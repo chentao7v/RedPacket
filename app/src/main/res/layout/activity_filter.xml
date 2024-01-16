@@ -19,6 +19,12 @@
             style="@style/Title"
             android:text="@string/setting_filter_title" />
 
+        <ImageButton
+            android:id="@+id/iv_more"
+            style="@style/Back"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_more_24dp" />
+
     </RelativeLayout>
 
     <ScrollView
@@ -31,14 +37,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lineSpacingMultiplier="1.2"
-                android:layout_margin="10dp"
-                android:textColor="@color/black_2"
-                android:text="@string/filter_description" />
-
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/flex_box_layout"
                 android:layout_width="match_parent"
@@ -49,6 +47,32 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/ic_filter_empty_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:lineSpacingMultiplier="1.2"
+            android:gravity="center"
+            android:layout_marginHorizontal="15dp"
+            android:textSize="12sp"
+            android:text="@string/filter_empty"
+            android:textColor="@color/black_2" />
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add"

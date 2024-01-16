@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
@@ -45,6 +46,18 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
     binding.btnAdd.setOnClickListener {
       showAddDialog()
     }
+
+    binding.ivMore.setOnClickListener { showRules() }
+    binding.empty.setOnClickListener { showRules() }
+  }
+
+  private fun showRules() {
+    MaterialAlertDialogBuilder(this)
+      .setTitle(R.string.filter_rules)
+      .setMessage(R.string.filter_description)
+      .setPositiveButton(R.string.i_know, null)
+      .create()
+      .show()
   }
 
   private fun showAddDialog() {
@@ -66,6 +79,8 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
         addTag(keyword)
 
         KVStore.filterWords = realKeywords.joinToString(",")
+
+        refreshEmptyUI()
       }
       .setNegativeButton(getString(R.string.cancel), null)
       .create()
@@ -77,6 +92,11 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
     for (keyword in realKeywords) {
       addTag(keyword)
     }
+    refreshEmptyUI()
+  }
+
+  private fun refreshEmptyUI() {
+    binding.empty.isVisible = realKeywords.isEmpty()
   }
 
   private fun addTag(keyword: String) {
@@ -104,6 +124,8 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>() {
       realKeywords.remove(text)
       binding.flexBoxLayout.removeView(textView)
       KVStore.filterWords = realKeywords.joinToString(",")
+
+      refreshEmptyUI()
 
       true
     }
