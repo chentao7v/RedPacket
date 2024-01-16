@@ -20,6 +20,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# 指定混淆字典
+-obfuscationdictionary dic.txt
+-classobfuscationdictionary dic.txt
+-packageobfuscationdictionary dic.txt
+
 # okhttp/retrofit/okio
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 -dontwarn org.bouncycastle.jsse.*
