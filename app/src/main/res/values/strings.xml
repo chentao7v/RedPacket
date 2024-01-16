@@ -26,7 +26,7 @@
     <string name="setting_conversation_description">有新的微信未读消息时，自动点开聊天页面</string>
     <string name="conversation_list_hint">因微信限制，目前「聊天列表」只支持收到「新的消息」时，自动进入该「聊天详情页」，定位到最新消息位置，看是否有「微信红包」。同时，需要确保针对该「好友」或「群」已关闭「消息免打扰」的功能</string>
     <string name="setting_myself">拆开我发出的红包</string>
-    <string name="setting_myself_description">在未过滤指定「群/好友」时，自动拆开我发出的红包</string>
+    <string name="setting_myself_description">在未被过滤的「群或好友」聊天中，自动拆开我发出的红包</string>
     <string name="setting_normal">常规设置</string>
     <string name="setting_higher">高级功能</string>
     <string name="setting_foreground_task_title">开启前台服务</string>
