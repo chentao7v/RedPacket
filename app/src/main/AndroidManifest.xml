@@ -38,7 +38,7 @@
         <activity
             android:name=".ui.FilterActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing" />
 
         <service
             android:exported="true"
