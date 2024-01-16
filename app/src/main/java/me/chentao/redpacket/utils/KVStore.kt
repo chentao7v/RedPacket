@@ -66,8 +66,6 @@ object KVStore {
     get() {
       return SP.getString(FILTER_WORDS)
     }
-  var notificationHint: Boolean = false
-  var conversationHint: Boolean = false
 }
 
 fun KVStore.filterWordsList(): List<String> {

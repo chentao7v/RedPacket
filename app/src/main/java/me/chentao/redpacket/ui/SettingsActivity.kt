@@ -122,9 +122,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
   private fun switchConversationList() {
     val isChecked = binding.cbConversationList.isChecked
-    if (!isChecked && !KVStore.conversationHint) {
+    if (!isChecked) {
       showAlert(getString(R.string.conversation_list_hint))
-      KVStore.conversationHint = true
     }
 
     KVStore.conversationList = !isChecked
@@ -138,9 +137,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
   private fun switchNotification() {
     val isChecked = binding.cbNotification.isChecked
-    if (!isChecked && !KVStore.notificationHint) {
+    if (!isChecked) {
       showAlert(getString(R.string.notification_hint))
-      KVStore.notificationHint = true
     }
 
     KVStore.notification = !isChecked
