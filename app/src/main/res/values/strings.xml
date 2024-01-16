@@ -54,5 +54,5 @@
     <string name="install_now">立即安装</string>
     <string name="click_to_install">点击「立即安装」即可安装新版本啦</string>
     <string name="filter_rules">规则说明</string>
-    <string name="filter_empty">您还没有添加过滤器\n「点我」了解如何使用</string>
+    <string name="filter_empty">您还没有添加过滤器\n「点我」了解如何使用？</string>
 </resources>
