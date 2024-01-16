@@ -19,20 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
-# 指定混淆字典
--obfuscationdictionary dictionary.txt
--classobfuscationdictionary dictionary.txt
--packageobfuscationdictionary dictionary.txt
-
 # okhttp/retrofit/okio
 -dontwarn org.codehaus.mojo.animal_sniffer.*
--dontwarn org.bouncycastle.jsse.*
--dontwarn org.bouncycastle.jsse.provider.*
--dontwarn org.conscrypt.*
--dontwarn org.openjsse.javax.net.ssl.*
--dontwarn org.openjsse.net.ssl.*
-
 # 泛型反射
 -keepattributes Signature
 # Kotlin 反射
@@ -54,12 +42,19 @@
     *** get*();
     void set*(***);
     public <init>(android.content.Context);
+    public <init>(android.content.Context, java.lang.Boolean);
     public <init>(android.content.Context, android.util.AttributeSet);
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 
-# Keep generic signature of RxJava3 (R8 full mode strips signatures from non-kept items).
--keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Flowable
--keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Maybe
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn org.bouncycastle.jsse.*
+-dontwarn org.conscrypt.*
+-dontwarn org.openjsse.javax.net.ssl.*
+-dontwarn org.openjsse.net.ssl.*
+-dontwarn org.bouncycastle.jsse.provider.*
+
+# retroift bug
+# https://github.com/square/retrofit/pull/3596
 -keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Observable
--keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Single
