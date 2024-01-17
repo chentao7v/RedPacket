@@ -38,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   override fun onResume() {
     super.onResume()
-    statusAnimator.refreshStatus(AccessibilityTools.isOpen(this, RedPacketService::class.java.name))
+    statusAnimator.refreshStatus()
   }
 
   override fun onStop() {

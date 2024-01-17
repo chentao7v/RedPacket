@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.View
 import androidx.core.view.isVisible
+import me.chentao.redpacket.service.RedPacketService
 
 /**
  * create by chentao on 2024-01-17.
@@ -29,7 +30,8 @@ class StatusAlphaAnimator(private val ivStatus: View) {
     ivStatus.alpha = 1.0f
   }
 
-  fun refreshStatus(isOpen: Boolean) {
+  fun refreshStatus() {
+    val isOpen = AccessibilityTools.isOpen(app, RedPacketService::class.java.name)
     if (isOpen) {
       // 打开的
       ivStatus.isVisible = false
