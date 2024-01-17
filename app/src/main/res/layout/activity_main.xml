@@ -55,14 +55,16 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/service"
+                android:id="@+id/robot"
                 style="@style/HomeItem">
 
                 <ImageView
+                    android:id="@+id/iv_robot"
                     style="@style/HomeItem.Icon"
                     app:srcCompat="@drawable/ic_robot_24dp" />
 
                 <TextView
+                    android:id="@+id/tv_robot"
                     style="@style/HomeItem.Text"
                     android:text="@string/robot" />
 

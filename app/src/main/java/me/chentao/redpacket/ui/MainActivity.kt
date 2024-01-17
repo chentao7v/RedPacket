@@ -6,6 +6,7 @@ import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.databinding.ActivityMainBinding
 import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
+import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -14,7 +15,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    binding.service.setOnClickListener { AccessibilityTools.gotoSettingsUI(this) }
+    binding.robot.setOnClickListener { AccessibilityTools.gotoSettingsUI(this) }
     binding.settings.setOnClickListener { SettingsActivity.launch(this) }
   }
 
@@ -33,6 +34,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   override fun onResume() {
     super.onResume()
     refreshSwitchStatus()
+
+    binding.robot.post {
+      val drawable = binding.ivRobot.drawable
+      Timber.d("drawable -> $drawable")
+    }
   }
 
 }
