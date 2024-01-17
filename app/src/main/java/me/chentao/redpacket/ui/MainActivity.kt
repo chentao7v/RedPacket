@@ -1,44 +1,53 @@
 package me.chentao.redpacket.ui
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
-import me.chentao.redpacket.R
+import androidx.core.view.isVisible
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.databinding.ActivityMainBinding
 import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
-import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
+
+  private val statusAnimator: ObjectAnimator by lazy {
+    ObjectAnimator.ofFloat(binding.ivStatus, "alpha", 0f, 1f).apply {
+      duration = 1000
+      repeatCount = ValueAnimator.INFINITE
+      repeatMode = ValueAnimator.REVERSE
+    }
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
     binding.robot.setOnClickListener { AccessibilityTools.gotoSettingsUI(this) }
     binding.settings.setOnClickListener { SettingsActivity.launch(this) }
+    binding.ivStatus.setOnClickListener { }
   }
 
   private fun refreshSwitchStatus() {
     val isOpen = AccessibilityTools.isOpen(this, RedPacketService::class.java.name)
-    val status = if (isOpen) {
-      binding.tvStatus.setTextColor(getColor(R.color.red_1))
-      getString(R.string.robot_open)
+    if (isOpen) {
+      binding.ivStatus.isVisible = false
+      statusAnimator.cancel()
     } else {
-      binding.tvStatus.setTextColor(getColor(R.color.black_1))
-      getString(R.string.robot_close)
+      binding.ivStatus.isVisible = true
+      statusAnimator.start()
     }
-    binding.tvStatus.text = status
   }
 
   override fun onResume() {
     super.onResume()
     refreshSwitchStatus()
+  }
 
-    binding.robot.post {
-      val drawable = binding.ivRobot.drawable
-      Timber.d("drawable -> $drawable")
-    }
+  override fun onStop() {
+    super.onStop()
+    statusAnimator.cancel()
   }
 
 }
