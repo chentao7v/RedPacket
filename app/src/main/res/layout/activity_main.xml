@@ -1,105 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refresher"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/background"
+    <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:background="@color/red_1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_slogan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:drawablePadding="5dp"
-            android:layout_marginTop="35dp"
-            android:textSize="17sp"
-            android:textColor="@color/keep_white"
-            android:text="@string/app_slogan" />
+        <FrameLayout
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="@color/red_1">
 
-        <TextView
-            style="@style/Alive"
-            android:layout_gravity="bottom"
-            android:text="当前用户：1000万" />
+            <TextView
+                android:id="@+id/tv_slogan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:drawablePadding="5dp"
+                android:layout_marginTop="35dp"
+                android:textSize="17sp"
+                android:textColor="@color/keep_white"
+                android:text="@string/app_slogan" />
 
-        <TextView
-            style="@style/Alive"
-            android:drawablePadding="5dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/dot"
-            android:layout_gravity="end|bottom"
-            android:text="当前活跃：10" />
+            <TextView
+                style="@style/Alive"
+                android:layout_gravity="bottom"
+                android:text="当前用户：1000万" />
 
-    </FrameLayout>
+            <TextView
+                style="@style/Alive"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/dot"
+                android:layout_gravity="end|bottom"
+                android:text="当前活跃：10" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/main_panel"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="-20dp">
+        </FrameLayout>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:id="@+id/robot"
-                style="@style/HomeItem">
-
-                <ImageView
-                    android:id="@+id/iv_robot"
-                    style="@style/HomeItem.Icon"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@drawable/ic_robot_24dp" />
-
-                <TextView
-                    android:id="@+id/tv_robot"
-                    style="@style/HomeItem.Text"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/iv_robot"
-                    android:text="@string/robot" />
-
-                <ImageView
-                    android:id="@+id/iv_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_toRightOf="@id/tv_robot"
-                    app:srcCompat="@drawable/ic_error_24dp"
-                    android:padding="5dp" />
-
-            </RelativeLayout>
+            app:cardElevation="5dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="@color/main_panel"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="-20dp">
 
             <LinearLayout
-                android:id="@+id/settings"
-                style="@style/HomeItem"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <ImageView
-                    style="@style/HomeItem.Icon"
-                    app:srcCompat="@drawable/ic_settings_24dp" />
+                <RelativeLayout
+                    android:id="@+id/robot"
+                    style="@style/HomeItem">
 
-                <TextView
-                    style="@style/HomeItem.Text"
-                    android:text="@string/settings" />
+                    <ImageView
+                        android:id="@+id/iv_robot"
+                        style="@style/HomeItem.Icon"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_robot_24dp" />
+
+                    <TextView
+                        android:id="@+id/tv_robot"
+                        style="@style/HomeItem.Text"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/iv_robot"
+                        android:text="@string/robot" />
+
+                    <ImageView
+                        android:id="@+id/iv_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:layout_toRightOf="@id/tv_robot"
+                        app:srcCompat="@drawable/ic_error_24dp"
+                        android:padding="5dp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/settings"
+                    style="@style/HomeItem"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        style="@style/HomeItem.Icon"
+                        app:srcCompat="@drawable/ic_settings_24dp" />
+
+                    <TextView
+                        style="@style/HomeItem.Text"
+                        android:text="@string/settings" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
