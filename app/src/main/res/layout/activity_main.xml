@@ -23,7 +23,7 @@
             android:layout_marginTop="35dp"
             android:textSize="17sp"
             android:textColor="@color/keep_white"
-            android:text="@string/app_description" />
+            android:text="@string/app_slogan" />
 
         <TextView
             style="@style/Alive"
@@ -32,6 +32,9 @@
 
         <TextView
             style="@style/Alive"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/dot"
             android:layout_gravity="end|bottom"
             android:text="当前活跃：10" />
 
