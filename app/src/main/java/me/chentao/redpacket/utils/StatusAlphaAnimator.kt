@@ -13,7 +13,7 @@ class StatusAlphaAnimator(private val ivStatus: View) {
   private val statusAnimator: ObjectAnimator by lazy {
     ObjectAnimator.ofFloat(ivStatus, "alpha", 0f, 1f).apply {
       duration = 1000
-      repeatCount = 10
+      repeatCount = 5
       repeatMode = ValueAnimator.REVERSE
     }
   }
