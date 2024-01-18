@@ -30,7 +30,7 @@ class ADItemBinder : ItemViewBinder<ADItem, ADItemBinder.ViewHolder>() {
         .load(item.image)
         .into(binding.ivAvatar)
 
-      binding.tvTitle.text = "恰同学少年 -> ${item.position}"
+      binding.tvTitle.text = "恰同学少年 ${item.position}"
 
       val params = binding.ivAvatar.layoutParams as ViewGroup.LayoutParams
       params.height = item.height
