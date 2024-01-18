@@ -1,7 +1,10 @@
 package me.chentao.redpacket
 
 import android.app.Application
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import me.chentao.redpacket.notify.initChannelIfNecessary
+import me.chentao.redpacket.ui.widget.MaterialHeaderCompat
 import me.chentao.redpacket.utils.app
 import timber.log.Timber
 
@@ -9,6 +12,27 @@ import timber.log.Timber
  * create by chentao on 2023-12-27.
  */
 class App : Application() {
+
+  companion object {
+
+    init {
+      //设置全局的Header构建器
+
+      //设置全局的Header构建器
+      SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+        layout.setPrimaryColorsId(R.color.red_1)
+        MaterialHeaderCompat(context).apply {
+          setColorSchemeResources(R.color.red_1)
+        }
+      }
+      //设置全局的Footer构建器
+      SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+        layout.setPrimaryColorsId(R.color.red_1)
+        ClassicsFooter(context)
+      }
+    }
+
+  }
 
   override fun onCreate() {
     super.onCreate()

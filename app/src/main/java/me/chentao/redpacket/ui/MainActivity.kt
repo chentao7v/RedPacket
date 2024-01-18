@@ -1,7 +1,6 @@
 package me.chentao.redpacket.ui
 
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -14,6 +13,8 @@ import me.chentao.redpacket.ui.items.SpaceItemDecoration
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.StatusAlphaAnimator
 import me.chentao.redpacket.utils.dp
+import me.chentao.redpacket.utils.postDelay
+import me.chentao.redpacket.utils.safeFinishLoad
 import java.util.Random
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -35,8 +36,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     statusAnimator = StatusAlphaAnimator(binding.ivStatus)
 
     initRecyclerView()
+    initListener()
+  }
 
-    mockData()
+  private fun initListener() {
+    binding.refresher.setOnRefreshListener {
+      postDelay(1000) {
+        mockData(true)
+        binding.refresher.safeFinishLoad(true)
+      }
+    }
+
+    binding.refresher.setOnLoadMoreListener {
+      postDelay(1000) {
+        mockData(false)
+        binding.refresher.safeFinishLoad(false)
+      }
+    }
   }
 
   private fun initRecyclerView() {
@@ -46,15 +62,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     items = ArrayList()
 
     binding.recyclerView.adapter = adapter
+    binding.recyclerView.addItemDecoration(SpaceItemDecoration(6.dp))
+
     val layout = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     layout.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-//    binding.recyclerView.layoutManager = layout
-
-    binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
-    binding.recyclerView.addItemDecoration(SpaceItemDecoration(6.dp))
+    binding.recyclerView.layoutManager = layout
   }
 
-  private fun mockData() {
+  private fun mockData(isRefresh: Boolean) {
     val items = ArrayList<ADItem>()
     for (i in 0..100) {
       val adItem = ADItem()
@@ -63,11 +78,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
       items.add(adItem)
     }
 
-    addItems(true, items)
+    addItems(isRefresh, items)
   }
 
   private fun getRandomHeight(): Int {
-    return Random().nextInt(100) + 300
+    return Random().nextInt(300) + 300
   }
 
   private fun addItems(isRefresh: Boolean, items: List<ADItem>) {

@@ -26,11 +26,15 @@ class ADItemBinder : ItemViewBinder<ADItem, ADItemBinder.ViewHolder>() {
   class ViewHolder(private val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ADItem) {
-      Timber.d("onBind -> ${item.position}")
-
       Glide.with(binding.ivAvatar)
         .load(item.image)
         .into(binding.ivAvatar)
+
+      binding.tvTitle.text = "恰同学少年 -> ${item.position}"
+
+      val params = binding.ivAvatar.layoutParams as ViewGroup.LayoutParams
+      params.height = item.height
+      binding.ivAvatar.layoutParams = params
     }
 
   }

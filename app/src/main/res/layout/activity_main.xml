@@ -116,7 +116,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -128,7 +128,7 @@
             android:layout_height="match_parent"
             android:paddingHorizontal="6dp" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
