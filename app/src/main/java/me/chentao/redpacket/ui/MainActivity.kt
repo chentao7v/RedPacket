@@ -53,6 +53,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.refresher.safeFinish(false)
       }
     }
+
+    binding.refresher.autoRefresh()
   }
 
   private fun initRecyclerView() {
@@ -71,10 +73,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   private fun mockData(isRefresh: Boolean) {
     val items = ArrayList<ADItem>()
+    val offset = this.items.size
     for (i in 0..100) {
       val adItem = ADItem()
       adItem.height = getRandomHeight()
-      adItem.position = i
+      adItem.position = i + offset
       items.add(adItem)
     }
 
