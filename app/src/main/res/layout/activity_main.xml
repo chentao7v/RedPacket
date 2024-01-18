@@ -87,7 +87,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?android:attr/selectableItemBackgroundBorderless"
-                            android:layout_toRightOf="@id/tv_robot"
+                            android:layout_toRightOf="@id/iv_robot"
+                            android:layout_marginLeft="-5dp"
                             app:srcCompat="@drawable/ic_error_24dp"
                             android:padding="5dp" />
 
