@@ -131,5 +131,18 @@
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_contact_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_contact_24dp"
+        app:tint="@color/keep_white"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        android:backgroundTint="@color/red_1"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/contact_us" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

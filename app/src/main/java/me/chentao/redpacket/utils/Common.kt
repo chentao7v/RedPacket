@@ -1,9 +1,12 @@
 package me.chentao.redpacket.utils
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.StringRes
+import me.chentao.redpacket.R
 
 /**
  * create by chentao on 2023-12-28.
@@ -43,8 +46,18 @@ val appVersionName: String by lazy {
   packageInfo.versionName
 }
 
+val appName: String by lazy {
+  getStringRes(R.string.app_name)
+}
+
 fun getStringRes(@StringRes id: Int): String = app.resources.getString(id)
 
 fun getStringRes(@StringRes id: Int, vararg formatArgs: Any?): String {
   return app.resources.getString(id, *formatArgs)
+}
+
+fun CharSequence.copyToClipboard(label: String = appName) {
+  val manager = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+  val clipData = ClipData.newPlainText(label, this)
+  manager.setPrimaryClip(clipData)
 }

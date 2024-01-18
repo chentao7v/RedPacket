@@ -1,5 +1,7 @@
 package me.chentao.redpacket.ui
 
+import android.content.ComponentName
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -12,10 +14,12 @@ import me.chentao.redpacket.ui.items.ADItemBinder
 import me.chentao.redpacket.ui.items.SpaceItemDecoration
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.StatusAlphaAnimator
+import me.chentao.redpacket.utils.copyToClipboard
 import me.chentao.redpacket.utils.dp
 import me.chentao.redpacket.utils.postDelay
 import me.chentao.redpacket.utils.safeAutoRefresh
 import me.chentao.redpacket.utils.safeFinish
+import me.chentao.redpacket.utils.showToast
 import java.util.Random
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -33,14 +37,43 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     binding.robot.setOnClickListener { AccessibilityTools.gotoSettingsUI(this) }
     binding.settings.setOnClickListener { SettingsActivity.launch(this) }
     binding.ivStatus.setOnClickListener { showRobotDialog() }
+    binding.btnContactUs.setOnClickListener { contactUs() }
 
     statusAnimator = StatusAlphaAnimator(binding.ivStatus)
 
     initRecyclerView()
-    initListener()
+    initRefreshAndLoadMore()
   }
 
-  private fun initListener() {
+  private fun contactUs() {
+    MaterialAlertDialogBuilder(this)
+      .setTitle(R.string.contact_us)
+      .setMessage(getString(R.string.how_to_contact_us))
+      .setPositiveButton(R.string.get_contact) { _, _ ->
+        gotoWechat()
+      }
+      .create()
+      .show()
+  }
+
+  private fun gotoWechat() {
+    "kingshow321".copyToClipboard()
+    val intent = Intent()
+    intent.addCategory(Intent.CATEGORY_LAUNCHER)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    intent.component = ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI")
+
+    val resolved = intent.resolveActivity(packageManager)
+    if (resolved != null) {
+      showToast(getString(R.string.contact_us_with_wechat))
+      startActivity(intent)
+    } else {
+      showToast(getString(R.string.contact_us_without_wechat))
+    }
+  }
+
+
+  private fun initRefreshAndLoadMore() {
     binding.refresher.setOnRefreshListener {
       postDelay(1000) {
         mockData(true)

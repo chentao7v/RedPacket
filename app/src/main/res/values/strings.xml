@@ -56,4 +56,9 @@
     <string name="filter_rules">规则说明</string>
     <string name="filter_empty">您还没有添加过滤器\n「点我」了解如何使用？</string>
     <string name="already_new_version">当前版本已是最新版本~</string>
+    <string name="contact_us">联系我们</string>
+    <string name="how_to_contact_us">您也可以在我们的产品中投放广告，方便更多用户了解贵公司的产品。</string>
+    <string name="get_contact">获取联系方式</string>
+    <string name="contact_us_with_wechat">联系方式已复制到前切板，请到微信搜索后添加</string>
+    <string name="contact_us_without_wechat">联系方式已复制到剪切板，请下载微信后添加</string>
 </resources>
