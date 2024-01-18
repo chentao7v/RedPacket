@@ -14,7 +14,7 @@ import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.StatusAlphaAnimator
 import me.chentao.redpacket.utils.dp
 import me.chentao.redpacket.utils.postDelay
-import me.chentao.redpacket.utils.safeFinishLoad
+import me.chentao.redpacket.utils.safeFinish
 import java.util.Random
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -43,14 +43,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     binding.refresher.setOnRefreshListener {
       postDelay(1000) {
         mockData(true)
-        binding.refresher.safeFinishLoad(true)
+        binding.refresher.safeFinish(true)
       }
     }
 
     binding.refresher.setOnLoadMoreListener {
       postDelay(1000) {
         mockData(false)
-        binding.refresher.safeFinishLoad(false)
+        binding.refresher.safeFinish(false)
       }
     }
   }

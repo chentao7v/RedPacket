@@ -6,7 +6,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * create by chentao on 2024-01-18.
  */
 
-fun SmartRefreshLayout.safeFinishLoad(isRefresh: Boolean) {
+fun SmartRefreshLayout.safeFinish(isRefresh: Boolean) {
   post {
     if (isRefresh) {
       finishRefresh()
