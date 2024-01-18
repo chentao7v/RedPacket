@@ -15,3 +15,7 @@ fun SmartRefreshLayout.safeFinish(isRefresh: Boolean) {
     }
   }
 }
+
+fun SmartRefreshLayout.safeAutoRefresh() {
+  post { autoRefresh() }
+}

@@ -14,6 +14,7 @@ import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.StatusAlphaAnimator
 import me.chentao.redpacket.utils.dp
 import me.chentao.redpacket.utils.postDelay
+import me.chentao.redpacket.utils.safeAutoRefresh
 import me.chentao.redpacket.utils.safeFinish
 import java.util.Random
 
@@ -54,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
       }
     }
 
-    binding.refresher.autoRefresh()
+    binding.refresher.safeAutoRefresh()
   }
 
   private fun initRecyclerView() {
