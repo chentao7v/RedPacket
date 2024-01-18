@@ -13,6 +13,8 @@ android {
     targetSdk = 33
     versionCode = 100
     versionName = "1.0.0"
+
+    resourceConfigurations += listOf("zh-rCN")
   }
 
   signingConfigs {
@@ -89,4 +91,7 @@ dependencies {
 
   implementation("com.uber.autodispose2:autodispose-android:2.1.1")
   implementation("com.uber.autodispose2:autodispose-androidx-lifecycle:2.1.1")
+
+  implementation("com.github.bumptech.glide:glide:4.16.0")
+  implementation("com.drakeet.multitype:multitype:4.3.0")
 }
