@@ -24,6 +24,18 @@
 -classobfuscationdictionary dictionary.txt
 -packageobfuscationdictionary dictionary.txt
 
+# https://issuetracker.google.com/issues/150189783
+# kotlin bean r8.fullmode
+-if class *
+
+-keepclasseswithmembers class <1> {
+
+<init>(...);
+
+@com.google.gson.annotations.SerializedName <fields>;
+
+}
+
 # okhttp/retrofit/okio
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 # 泛型反射
