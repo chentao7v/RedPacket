@@ -1,19 +1,29 @@
 package me.chentao.redpacket.ui
 
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
+import me.chentao.redpacket.data.bean.ADItem
 import me.chentao.redpacket.databinding.ActivityMainBinding
-import me.chentao.redpacket.service.RedPacketService
+import me.chentao.redpacket.ui.items.ADItemBinder
+import me.chentao.redpacket.ui.items.SpaceItemDecoration
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.StatusAlphaAnimator
+import me.chentao.redpacket.utils.dp
+import java.util.Random
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
   private lateinit var statusAnimator: StatusAlphaAnimator
+
+  private lateinit var adapter: MultiTypeAdapter
+  private lateinit var items: MutableList<ADItem>
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -23,6 +33,56 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     binding.ivStatus.setOnClickListener { showRobotDialog() }
 
     statusAnimator = StatusAlphaAnimator(binding.ivStatus)
+
+    initRecyclerView()
+
+    mockData()
+  }
+
+  private fun initRecyclerView() {
+    adapter = MultiTypeAdapter()
+    adapter.register(ADItemBinder())
+
+    items = ArrayList()
+
+    binding.recyclerView.adapter = adapter
+    val layout = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    layout.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+//    binding.recyclerView.layoutManager = layout
+
+    binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+    binding.recyclerView.addItemDecoration(SpaceItemDecoration(6.dp))
+  }
+
+  private fun mockData() {
+    val items = ArrayList<ADItem>()
+    for (i in 0..100) {
+      val adItem = ADItem()
+      adItem.height = getRandomHeight()
+      adItem.position = i
+      items.add(adItem)
+    }
+
+    addItems(true, items)
+  }
+
+  private fun getRandomHeight(): Int {
+    return Random().nextInt(100) + 300
+  }
+
+  private fun addItems(isRefresh: Boolean, items: List<ADItem>) {
+    if (isRefresh) {
+      this.items.clear()
+      this.items.addAll(items)
+      adapter.items = this.items
+      adapter.notifyDataSetChanged()
+    } else {
+      val oldSize = this.items.size
+      val insertTotal = items.size
+      this.items.addAll(items)
+      adapter.items = this.items
+      adapter.notifyItemRangeInserted(oldSize, insertTotal)
+    }
   }
 
   private fun showRobotDialog() {
