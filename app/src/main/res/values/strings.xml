@@ -40,7 +40,7 @@
     <string name="higher_hint">为尽可能延长小助手的后台运行时间，您可以有选择性的开启下面的选项</string>
     <string name="lock_hint">按下「任务」键，长按「让红包飞」上锁</string>
     <string name="battery_hint"><![CDATA[在「设置」-「电池优化」中，选择「不优化」或者「无限制」]]></string>
-    <string name="setting_other">关于</string>
+    <string name="setting_other">更多</string>
     <string name="setting_update_detail">检查更新</string>
     <string name="setting_update_title">当前版本：%s</string>
     <string name="api_error">出错了，请检查网络后重试</string>
@@ -65,4 +65,8 @@
     <string name="setting_share_detail">让更多人解放双手</string>
     <string name="share_to_wechat_content">让红包飞一会儿~\n点击链接即可下载安装\n%s</string>
     <string name="link_was_copied">链接已复制到剪切板</string>
+    <string name="setting_privacy_title">隐私协议</string>
+    <string name="setting_privacy_detail">查看隐私政策</string>
+    <string name="privacy">「让红包飞」是一款自动化工具软件，致力于帮您解放双手，自动抢红包。\n
+    「让红包飞」不需要您登录任何账号即可使用</string>
 </resources>

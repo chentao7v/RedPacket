@@ -60,6 +60,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.battery.setOnClickListener { showAlert(getString(R.string.battery_hint)) { toAppSettings(this) } }
     binding.update.setOnClickListener { appUpdater.check(this) }
     binding.share.setOnClickListener { share() }
+    binding.privacy.setOnClickListener { showAlert(getString(R.string.privacy)) }
 
 
     binding.tvVersion.text = getString(R.string.setting_update_title, appVersionName)
