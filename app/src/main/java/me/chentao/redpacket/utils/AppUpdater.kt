@@ -46,7 +46,7 @@ class AppUpdater {
 
         override fun onNext(t: PgyerResponse<PgyerUpdateInfo>) {
           val info = t.data
-          if (info == null || !info.buildHaveNewVersion) {
+          if (info == null /*|| !info.buildHaveNewVersion*/) {
             showToast(getStringRes(R.string.already_new_version))
             return
           }
