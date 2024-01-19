@@ -18,7 +18,9 @@ import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.AppUpdater
 import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.appVersionName
+import me.chentao.redpacket.utils.copyToClipboard
 import me.chentao.redpacket.utils.hideFromRecentTasks
+import me.chentao.redpacket.utils.showToast
 import me.chentao.redpacket.utils.toAppSettings
 import me.chentao.redpacket.utils.toLauncher
 
@@ -57,12 +59,27 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.lock.setOnClickListener { showAlert(getString(R.string.lock_hint)) }
     binding.battery.setOnClickListener { showAlert(getString(R.string.battery_hint)) { toAppSettings(this) } }
     binding.update.setOnClickListener { appUpdater.check(this) }
+    binding.share.setOnClickListener { share() }
 
 
     binding.tvVersion.text = getString(R.string.setting_update_title, appVersionName)
     refreshNotificationUI()
     refreshConversationListUI()
     refreshMyselfUI()
+  }
+
+  private fun share() {
+    val shareUrl = "https://www.pgyer.com/qvFqP5"
+    val wechatIntent = Intent(Intent.ACTION_SEND);
+    wechatIntent.setPackage("com.tencent.mm");
+    wechatIntent.setType("text/plain");
+    wechatIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_to_wechat_content, shareUrl));
+    if (wechatIntent.resolveActivity(packageManager) != null) {
+      startActivity(wechatIntent);
+    } else {
+      shareUrl.copyToClipboard()
+      showToast(getString(R.string.link_was_copied))
+    }
   }
 
 

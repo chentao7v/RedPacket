@@ -107,7 +107,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   private fun mockData(isRefresh: Boolean) {
     val items = ArrayList<ADItem>()
-    val offset = this.items.size
+    val offset = if (isRefresh) {
+      0
+    } else {
+      this.items.size
+    }
     for (i in 0..100) {
       val adItem = ADItem()
       adItem.height = getRandomHeight()

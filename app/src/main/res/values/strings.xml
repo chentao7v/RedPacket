@@ -61,4 +61,8 @@
     <string name="get_contact">获取联系方式</string>
     <string name="contact_us_with_wechat">联系方式已复制到前切板，请到微信搜索后添加</string>
     <string name="contact_us_without_wechat">联系方式已复制到剪切板，请下载微信后添加</string>
+    <string name="setting_share_title">分享给他人</string>
+    <string name="setting_share_detail">让更多人解放双手</string>
+    <string name="share_to_wechat_content">让红包飞一会儿~\n点击链接即可下载安装\n%s</string>
+    <string name="link_was_copied">链接已复制到剪切板</string>
 </resources>
