@@ -3,7 +3,6 @@ package me.chentao.redpacket.data.repo
 import io.reactivex.rxjava3.core.Observable
 import me.chentao.redpacket.data.ApiClient
 import me.chentao.redpacket.data.api.FileApi
-import me.chentao.redpacket.utils.app
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -14,18 +13,15 @@ import java.io.InputStream
  */
 class FileRepository {
 
-  private val root = app.getExternalFilesDir("downloads")
-
   private val api: FileApi = ApiClient.createPgyerService(FileApi::class.java)
 
   /**
    * 下载文件
    */
-  fun download(url: String, fileName: String): Observable<File> {
+  fun download(url: String, file: File): Observable<File> {
     return api.download(url)
       .map { responseBody ->
         val inputStream: InputStream = responseBody.byteStream()
-        val file = File(root, fileName)
         if (file.exists()) {
           file.delete()
         }

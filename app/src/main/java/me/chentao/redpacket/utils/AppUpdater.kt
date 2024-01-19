@@ -28,6 +28,10 @@ import java.io.File
  */
 class AppUpdater {
 
+  companion object {
+    private const val NEW_APK_NAME = "new_version.apk"
+  }
+
   private val pgyerRepo = PgyerRepository()
   private val fileRepo = FileRepository()
 
@@ -89,9 +93,17 @@ class AppUpdater {
   }
 
   private fun downloadNewApk(context: Activity, info: PgyerUpdateInfo) {
+    // 判定 APK 是否已经下载过
+    val downloadDirectory = getDownloadDirectory()
+    val apkFile = File(downloadDirectory, NEW_APK_NAME)
+    if (isApkOk(apkFile)) {
+      showInstallDialog(context, apkFile)
+      return
+    }
+
     showToast(getStringRes(R.string.download_apk_running))
     Observable.just(info)
-      .flatMap { _ -> fileRepo.download(info.downloadURL ?: "", "new_version.apk") }
+      .flatMap { _ -> fileRepo.download(info.downloadURL ?: "", apkFile) }
       .ioToUiThread()
       .safeSubscribe(object : SimpleObserver<File>() {
         override fun onError(e: Throwable) {
@@ -107,6 +119,38 @@ class AppUpdater {
           showInstallDialog(context, t)
         }
       })
+  }
+
+  private fun isApkOk(file: File): Boolean {
+    if (!file.exists() || file.length() == 0L) {
+      return false
+    }
+
+    val pm = app.packageManager
+    val info = pm.getPackageArchiveInfo(file.toString(), PackageManager.GET_ACTIVITIES) ?: return false
+    // 服务器给的 apk 信息
+    // 包名
+    val targetPackageName = info.packageName
+    // 版本号
+    val targetVersionName = info.versionName
+    val targetVersionCode = info.versionCode
+    Timber.d("新的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
+
+    // 当前 apk 的信息
+    val myPackageName = app.packageName
+    val myVersionCode = appVersionCode
+
+    if (targetPackageName != myPackageName) {
+      Timber.d("package-name 校验不通过")
+      return false
+    }
+
+    if (myVersionCode >= targetVersionCode) {
+      Timber.d("当前版本号：$myVersionCode 大于等于目标版本号：${targetVersionCode}")
+      return false
+    }
+
+    return true
   }
 
   private fun showInstallDialog(context: Activity, apkFile: File) {

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.annotation.StringRes
 import me.chentao.redpacket.R
+import java.io.File
 
 /**
  * create by chentao on 2023-12-28.
@@ -41,10 +42,18 @@ val screenHeight: Int
   get() = app.resources.displayMetrics.heightPixels
 
 
+val packageInfo by lazy {
+  app.packageManager.getPackageInfo(app.packageName, 0)
+}
+
 val appVersionName: String by lazy {
-  val packageInfo = app.packageManager.getPackageInfo(app.packageName, 0)
   packageInfo.versionName
 }
+
+val appVersionCode: Int by lazy {
+  packageInfo.versionCode
+}
+
 
 val appName: String by lazy {
   getStringRes(R.string.app_name)
@@ -60,4 +69,12 @@ fun CharSequence.copyToClipboard(label: String = appName) {
   val manager = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
   val clipData = ClipData.newPlainText(label, this)
   manager.setPrimaryClip(clipData)
+}
+
+fun getDownloadDirectory(): File? {
+  val file = app.getExternalFilesDir("downloads")
+  if (file != null && !file.exists()) {
+    file.mkdirs()
+  }
+  return file
 }
