@@ -37,6 +37,7 @@ class AppUpdater {
 
   fun check(context: Activity) {
     pgyerRepo.checkUpdate()
+      .ioToUiThread()
       .safeSubscribe(object : SimpleObserver<PgyerResponse<PgyerUpdateInfo>>() {
         override fun onError(e: Throwable) {
           Timber.e(e, e.message)
@@ -97,9 +98,11 @@ class AppUpdater {
     val downloadDirectory = getDownloadDirectory()
     val apkFile = File(downloadDirectory, NEW_APK_NAME)
     if (isApkOk(apkFile)) {
+      Timber.d("无需下载...")
       showInstallDialog(context, apkFile)
       return
     }
+    Timber.d("分析已下载的 apk 后，决定从网络下载")
 
     showToast(getStringRes(R.string.download_apk_running))
     Observable.just(info)
@@ -123,6 +126,7 @@ class AppUpdater {
 
   private fun isApkOk(file: File): Boolean {
     if (!file.exists() || file.length() == 0L) {
+      Timber.w("文件不存在... --> ${file.absolutePath}")
       return false
     }
 
@@ -134,7 +138,7 @@ class AppUpdater {
     // 版本号
     val targetVersionName = info.versionName
     val targetVersionCode = info.versionCode
-    Timber.d("新的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
+    Timber.d("分析本地已下载的 apk， 新的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
 
     // 当前 apk 的信息
     val myPackageName = app.packageName
@@ -217,7 +221,7 @@ class AppUpdater {
     // 版本号
     val targetVersionName = info.versionName
     val targetVersionCode = info.versionCode
-    Timber.d("新的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
+    Timber.d("新下载的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
 
     // 当前 apk 的信息
     val myPackageName = app.packageName
