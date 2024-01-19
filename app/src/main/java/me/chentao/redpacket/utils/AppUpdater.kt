@@ -46,7 +46,7 @@ class AppUpdater {
 
         override fun onNext(t: PgyerResponse<PgyerUpdateInfo>) {
           val info = t.data
-          if (info == null /*|| !info.buildHaveNewVersion*/) {
+          if (info == null || !info.buildHaveNewVersion) {
             showToast(getStringRes(R.string.already_new_version))
             return
           }
@@ -114,7 +114,7 @@ class AppUpdater {
         }
 
         override fun onNext(t: File) {
-          if (!analysisApkOk(t)) {
+          if (!isApkOk(t)) {
             showToast(getStringRes(R.string.app_info_error))
             return
           }
@@ -138,7 +138,7 @@ class AppUpdater {
     // 版本号
     val targetVersionName = info.versionName
     val targetVersionCode = info.versionCode
-    Timber.d("分析本地已下载的 apk， 新的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
+    Timber.d("分析已下载的 apk， 新的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
 
     // 当前 apk 的信息
     val myPackageName = app.packageName
@@ -149,8 +149,8 @@ class AppUpdater {
       return false
     }
 
-    if (myVersionCode >= targetVersionCode) {
-      Timber.d("当前版本号：$myVersionCode 大于等于目标版本号：${targetVersionCode}")
+    if (myVersionCode > targetVersionCode) {
+      Timber.d("当前版本号：$myVersionCode 大于目标版本号：${targetVersionCode}")
       return false
     }
 
@@ -206,31 +206,6 @@ class AppUpdater {
 
     // 均标识为可以正常使用，下次还会检测更新
     KVStore.requireNewVersion = false
-  }
-
-
-  private fun analysisApkOk(file: File): Boolean {
-    if (!file.exists()) {
-      return false;
-    }
-    val pm = app.packageManager
-    val info = pm.getPackageArchiveInfo(file.toString(), PackageManager.GET_ACTIVITIES) ?: return false
-    // 服务器给的 apk 信息
-    // 包名
-    val targetPackageName = info.packageName
-    // 版本号
-    val targetVersionName = info.versionName
-    val targetVersionCode = info.versionCode
-    Timber.d("新下载的 apk 信息 packageName=$targetPackageName,versionName=$targetVersionName,versionCode:$targetVersionCode")
-
-    // 当前 apk 的信息
-    val myPackageName = app.packageName
-
-    if (targetPackageName != myPackageName) {
-      Timber.d("package-name 校验不通过")
-      return false
-    }
-    return true
   }
 
 }
