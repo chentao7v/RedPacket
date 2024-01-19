@@ -149,8 +149,8 @@ class AppUpdater {
       return false
     }
 
-    if (myVersionCode > targetVersionCode) {
-      Timber.d("当前版本号：$myVersionCode 大于目标版本号：${targetVersionCode}")
+    if (myVersionCode >= targetVersionCode) {
+      Timber.d("当前版本号：$myVersionCode 大于等于目标版本号：${targetVersionCode}")
       return false
     }
 
