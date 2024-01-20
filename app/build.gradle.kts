@@ -15,6 +15,10 @@ android {
     versionName = "1.0.0"
 
     resourceConfigurations += listOf("zh-rCN")
+
+    ndk {
+      abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+    }
   }
 
   signingConfigs {
@@ -94,6 +98,7 @@ dependencies {
 
   implementation("com.github.bumptech.glide:glide:4.16.0")
   implementation("com.drakeet.multitype:multitype:4.3.0")
+  implementation("com.tencent.bugly:crashreport:latest.release")
 
   implementation("io.github.scwang90:refresh-layout-kernel:2.1.0")
   implementation("io.github.scwang90:refresh-header-material:2.1.0")

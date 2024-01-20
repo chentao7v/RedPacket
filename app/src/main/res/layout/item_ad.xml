@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout_height="300dp"
-                android:background="#923"
+                tools:background="#923"
                 android:scaleType="centerCrop" />
 
             <TextView

@@ -3,6 +3,7 @@ package me.chentao.redpacket
 import android.app.Application
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.tencent.bugly.crashreport.CrashReport
 import me.chentao.redpacket.notify.initChannelIfNecessary
 import me.chentao.redpacket.ui.widget.MaterialHeaderCompat
 import me.chentao.redpacket.utils.app
@@ -39,6 +40,7 @@ class App : Application() {
     app = this
 
     Timber.plant(Timber.DebugTree())
+    CrashReport.initCrashReport(this, "38b219bf57", false);
 
     initChannelIfNecessary()
   }

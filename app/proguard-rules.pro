@@ -75,3 +75,7 @@
 # retroift bug
 # https://github.com/square/retrofit/pull/3596
 -keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Observable
+
+# https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=1.0.0
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

@@ -169,7 +169,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
   private fun showAlert(msg: CharSequence, clickBlock: (() -> Unit)? = null) {
     val dialog = MaterialAlertDialogBuilder(this)
-      .setTitle(getString(R.string.alert_default_title))
+      .setTitle(getString(R.string.setting_privacy_title))
       .setMessage(msg)
       .setCancelable(false)
       .setPositiveButton(getString(R.string.i_know)) { _, _ ->
