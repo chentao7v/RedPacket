@@ -274,28 +274,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/share"
-                style="@style/SettingItem">
-
-                <ImageView
-                    style="@style/SettingItem.Icon"
-                    app:srcCompat="@drawable/ic_update_24dp" />
-
-                <LinearLayout style="@style/SettingItem.TextLayout">
-
-                    <TextView
-                        style="@style/SettingItem.Title"
-                        android:text="@string/setting_share_title" />
-
-                    <TextView
-                        style="@style/SettingItem.Detail"
-                        android:text="@string/setting_share_detail" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/privacy"
                 style="@style/SettingItem">
 
@@ -312,6 +290,28 @@
                     <TextView
                         style="@style/SettingItem.Detail"
                         android:text="@string/setting_privacy_detail" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/share"
+                style="@style/SettingItem">
+
+                <ImageView
+                    style="@style/SettingItem.Icon"
+                    app:srcCompat="@drawable/ic_update_24dp" />
+
+                <LinearLayout style="@style/SettingItem.TextLayout">
+
+                    <TextView
+                        style="@style/SettingItem.Title"
+                        android:text="@string/setting_share_title" />
+
+                    <TextView
+                        style="@style/SettingItem.Detail"
+                        android:text="@string/setting_share_detail" />
 
                 </LinearLayout>
 

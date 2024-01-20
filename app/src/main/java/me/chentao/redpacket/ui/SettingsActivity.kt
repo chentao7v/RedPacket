@@ -17,6 +17,7 @@ import me.chentao.redpacket.service.RedPacketService
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.AppUpdater
 import me.chentao.redpacket.utils.KVStore
+import me.chentao.redpacket.utils.Privacy
 import me.chentao.redpacket.utils.appVersionName
 import me.chentao.redpacket.utils.copyToClipboard
 import me.chentao.redpacket.utils.setRecentTaskUIAbility
@@ -60,7 +61,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.battery.setOnClickListener { showAlert(getString(R.string.battery_hint)) { toAppSettings(this) } }
     binding.update.setOnClickListener { appUpdater.check(this) }
     binding.share.setOnClickListener { share() }
-    binding.privacy.setOnClickListener { showPrivacy() }
+    binding.privacy.setOnClickListener { Privacy.show(this) }
 
 
     binding.tvVersion.text = getString(R.string.setting_update_title, appVersionName)
@@ -70,9 +71,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     refreshHide()
   }
 
-  private fun showPrivacy() {
-
-  }
 
   private fun share() {
     val shareUrl = "https://www.pgyer.com/qvFqP5"
@@ -185,13 +183,9 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.cbNotification.isChecked = KVStore.notification
   }
 
-  private fun showAlert(
-    msg: CharSequence,
-    title: String = getString(R.string.alert_default_title),
-    clickBlock: (() -> Unit)? = null
-  ) {
+  private fun showAlert(msg: CharSequence, clickBlock: (() -> Unit)? = null) {
     val dialog = MaterialAlertDialogBuilder(this)
-      .setTitle(title)
+      .setTitle(getString(R.string.alert_default_title))
       .setMessage(msg)
       .setCancelable(false)
       .setPositiveButton(getString(R.string.i_know)) { _, _ ->
