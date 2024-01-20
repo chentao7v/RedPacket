@@ -67,7 +67,5 @@
     <string name="link_was_copied">链接已复制到剪切板</string>
     <string name="setting_privacy_title">隐私协议</string>
     <string name="setting_privacy_detail">查看隐私政策</string>
-    <string name="privacy">「让红包飞」是一款自动化工具软件，致力于帮您解放双手，自动抢红包。\n
-    「让红包飞」不需要您登录任何账号即可使用</string>
     <string name="copy_to_clipboard">已复制到剪切板</string>
 </resources>

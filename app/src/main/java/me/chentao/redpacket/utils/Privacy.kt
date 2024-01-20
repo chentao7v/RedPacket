@@ -25,7 +25,7 @@ object Privacy {
     val msg = Spans.pipeline()
       .add("让红包飞", bold)
       .add("是一款自动化工具软件，致力于帮您解放双手，自动抢红包。\n\n", default)
-      .add("让红包飞不需要您登录任何账号使用，因此不会收集您的个人隐私信息。\n\n", default)
+      .add("让红包飞不需要您登录任何账号即可使用，因此不会收集您的个人隐私信息。\n\n", default)
       .add("使用到的权限：\n", bold)
       .add(" - 无障碍：", bold)
       .add("用于处理与红包相关的交互。我们不会用它来窃取您的任何私人信息，请放心使用。\n", default)
