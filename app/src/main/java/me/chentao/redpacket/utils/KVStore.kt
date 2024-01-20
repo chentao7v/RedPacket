@@ -17,6 +17,8 @@ object KVStore {
 
   private const val FOREGROUND = "foreground"
 
+  private const val HIDE = "hide"
+
   private const val REQUIRE_NEW_VERSION = "require_new_version"
 
   var notification: Boolean
@@ -33,6 +35,14 @@ object KVStore {
     }
     get() {
       return SP.getBool(FOREGROUND)
+    }
+
+  var hide: Boolean
+    set(value) {
+      SP.put(HIDE, value)
+    }
+    get() {
+      return SP.getBool(HIDE)
     }
 
   var openMySelf: Boolean

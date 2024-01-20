@@ -10,14 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * create by chentao on 2024-01-15.
  */
-fun hideFromRecentTasks(context: Context) {
+fun setRecentTaskUIAbility(context: Context, visible: Boolean) {
   val systemService = context.getSystemService(AppCompatActivity.ACTIVITY_SERVICE) as ActivityManager
   val appTasks = systemService.appTasks
   val size = appTasks.size
 
   if (size > 0) {
     // 设置activity是否隐藏
-    appTasks[0].setExcludeFromRecents(true)
+    appTasks[0].setExcludeFromRecents(!visible)
   }
 }
 

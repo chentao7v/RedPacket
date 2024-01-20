@@ -219,6 +219,11 @@
 
                 </LinearLayout>
 
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/cb_hide"
+                    style="@style/SettingItem.CheckBox"
+                    tools:checked="true" />
+
             </LinearLayout>
 
             <LinearLayout

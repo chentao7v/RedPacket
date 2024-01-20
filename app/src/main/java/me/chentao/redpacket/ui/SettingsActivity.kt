@@ -19,7 +19,7 @@ import me.chentao.redpacket.utils.AppUpdater
 import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.appVersionName
 import me.chentao.redpacket.utils.copyToClipboard
-import me.chentao.redpacket.utils.hideFromRecentTasks
+import me.chentao.redpacket.utils.setRecentTaskUIAbility
 import me.chentao.redpacket.utils.showToast
 import me.chentao.redpacket.utils.toAppSettings
 import me.chentao.redpacket.utils.toLauncher
@@ -67,6 +67,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     refreshNotificationUI()
     refreshConversationListUI()
     refreshMyselfUI()
+    refreshHide()
   }
 
   private fun share() {
@@ -83,12 +84,25 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     }
   }
 
+  private fun refreshHide() {
+    binding.cbHide.isChecked = KVStore.hide
+  }
+
 
   private fun switchHide() {
-    hideFromRecentTasks(this)
-    // 跳转桌面
-    toLauncher(this)
-    finish()
+    val isChecked = binding.cbHide.isChecked
+    if (!isChecked) {
+      // 开关未开启，最近任务栏中显示 -> 隐藏
+      setRecentTaskUIAbility(this, false)
+      // 跳转桌面
+      toLauncher(this)
+      finish()
+    } else {
+      setRecentTaskUIAbility(this, true)
+    }
+
+    binding.cbHide.isChecked = !isChecked
+    KVStore.hide = !isChecked
   }
 
   private fun switchForeground() {
