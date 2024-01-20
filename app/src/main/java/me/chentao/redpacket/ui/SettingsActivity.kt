@@ -60,7 +60,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.battery.setOnClickListener { showAlert(getString(R.string.battery_hint)) { toAppSettings(this) } }
     binding.update.setOnClickListener { appUpdater.check(this) }
     binding.share.setOnClickListener { share() }
-    binding.privacy.setOnClickListener { showAlert(getString(R.string.privacy)) }
+    binding.privacy.setOnClickListener { showPrivacy() }
 
 
     binding.tvVersion.text = getString(R.string.setting_update_title, appVersionName)
@@ -68,6 +68,10 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     refreshConversationListUI()
     refreshMyselfUI()
     refreshHide()
+  }
+
+  private fun showPrivacy() {
+
   }
 
   private fun share() {
@@ -181,9 +185,13 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.cbNotification.isChecked = KVStore.notification
   }
 
-  private fun showAlert(msg: CharSequence, clickBlock: (() -> Unit)? = null) {
+  private fun showAlert(
+    msg: CharSequence,
+    title: String = getString(R.string.alert_default_title),
+    clickBlock: (() -> Unit)? = null
+  ) {
     val dialog = MaterialAlertDialogBuilder(this)
-      .setTitle(getString(R.string.setting_privacy_title))
+      .setTitle(title)
       .setMessage(msg)
       .setCancelable(false)
       .setPositiveButton(getString(R.string.i_know)) { _, _ ->

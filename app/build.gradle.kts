@@ -98,7 +98,9 @@ dependencies {
 
   implementation("com.github.bumptech.glide:glide:4.16.0")
   implementation("com.drakeet.multitype:multitype:4.3.0")
+
   implementation("com.tencent.bugly:crashreport:latest.release")
+  implementation("io.github.chentao7v:spans:1.0.2")
 
   implementation("io.github.scwang90:refresh-layout-kernel:2.1.0")
   implementation("io.github.scwang90:refresh-header-material:2.1.0")
