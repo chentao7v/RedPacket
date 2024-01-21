@@ -28,6 +28,15 @@ object ApiClient {
       .build()
   }
 
+  private val default: Retrofit by lazy {
+    Retrofit.Builder()
+      .baseUrl("http://zybkkf.natappfree.cc/")
+      .client(okhttp)
+      .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+      .addConverterFactory(GsonConverterFactory.create())
+      .build()
+  }
+
   private val pgy: Retrofit by lazy {
     Retrofit.Builder()
       .baseUrl("https://www.pgyer.com/apiv2/")
@@ -40,6 +49,11 @@ object ApiClient {
   fun <T : Any> createPgyerService(clazz: Class<T>): T {
     return pgy.create(clazz)
   }
+
+  fun <T : Any> createDefaultService(clazz: Class<T>): T {
+    return default.create(clazz)
+  }
+
 
 
 }

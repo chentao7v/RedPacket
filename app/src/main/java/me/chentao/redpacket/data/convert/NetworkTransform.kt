@@ -3,6 +3,9 @@ package me.chentao.redpacket.data.convert
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableSource
 import io.reactivex.rxjava3.core.ObservableTransformer
+import me.chentao.redpacket.data.bean.BaseResponse
+import me.chentao.redpacket.data.bean.DataListResponse
+import me.chentao.redpacket.data.bean.DataResponse
 import okhttp3.ResponseBody
 import java.lang.reflect.Type
 
@@ -21,4 +24,21 @@ internal class NetworkTransform<R : Any>(
       .flatMap(ToStringFunction())
       .flatMap(ToBeanFunction(type))
   }
+
+  companion object {
+
+    fun ofMini(): NetworkTransform<BaseResponse> {
+      return NetworkTransform(Types.ofDefault())
+    }
+
+    fun <T : Any> ofData(clazz: Class<T>): NetworkTransform<DataResponse<T>> {
+      return NetworkTransform(Types.ofDefaultData(clazz))
+    }
+
+    fun <T : Any> ofDataList(clazz: Class<T>): NetworkTransform<DataListResponse<T>> {
+      return NetworkTransform(Types.ofDefaultDataList(clazz));
+    }
+
+  }
+
 }

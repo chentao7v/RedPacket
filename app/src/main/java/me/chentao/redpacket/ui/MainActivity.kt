@@ -9,14 +9,17 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.data.bean.ADItem
+import me.chentao.redpacket.data.bean.DataListResponse
+import me.chentao.redpacket.data.repo.ADRepository
 import me.chentao.redpacket.databinding.ActivityMainBinding
+import me.chentao.redpacket.rxjava.SimpleObserver
 import me.chentao.redpacket.ui.items.ADItemBinder
 import me.chentao.redpacket.ui.items.SpaceItemDecoration
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.StatusAlphaAnimator
 import me.chentao.redpacket.utils.copyToClipboard
 import me.chentao.redpacket.utils.dp
-import me.chentao.redpacket.utils.postDelay
+import me.chentao.redpacket.utils.getStringRes
 import me.chentao.redpacket.utils.safeAutoRefresh
 import me.chentao.redpacket.utils.safeFinish
 import me.chentao.redpacket.utils.showToast
@@ -30,6 +33,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   private lateinit var adapter: MultiTypeAdapter
   private lateinit var items: MutableList<ADItem>
+
+  private var repo = ADRepository()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -72,20 +77,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
   }
 
+  private fun loadData(isRefresh: Boolean) {
+    repo.getADList(isRefresh)
+      .safeSubscribe(object : SimpleObserver<DataListResponse<ADItem>>() {
+
+        override fun onError(e: Throwable) {
+          showToast(e.message ?: getStringRes(R.string.net_error))
+        }
+
+        override fun onNext(t: DataListResponse<ADItem>) {
+          val items = t.data ?: ArrayList()
+          binding.refresher.safeFinish(isRefresh)
+          addItems(isRefresh, items)
+        }
+      })
+  }
 
   private fun initRefreshAndLoadMore() {
     binding.refresher.setOnRefreshListener {
-      postDelay(1000) {
-        mockData(true)
-        binding.refresher.safeFinish(true)
-      }
+      loadData(true)
     }
 
     binding.refresher.setOnLoadMoreListener {
-      postDelay(1000) {
-        mockData(false)
-        binding.refresher.safeFinish(false)
-      }
+      loadData(false)
     }
 
     binding.refresher.safeAutoRefresh()
