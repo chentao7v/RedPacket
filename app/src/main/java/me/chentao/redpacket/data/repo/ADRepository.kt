@@ -37,7 +37,7 @@ class ADRepository {
       }
   }
 
-  fun updateADViewCount(id: Int): Observable<BaseResponse> {
+  fun updateADViewCount(id: String): Observable<BaseResponse> {
     return api.updateViewCount(id)
       .compose(NetworkTransform.ofMini())
       .flatMap(DefaultApiFunction())

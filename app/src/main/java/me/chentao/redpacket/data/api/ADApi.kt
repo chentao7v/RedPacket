@@ -2,10 +2,7 @@ package me.chentao.redpacket.data.api
 
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -24,7 +21,7 @@ interface ADApi {
 
   @PUT("openApi/updateViewCount/{id}")
   fun updateViewCount(
-    @Path("id") id: Int
+    @Path("id") id: String
   ): Observable<ResponseBody>
 
 }

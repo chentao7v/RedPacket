@@ -34,12 +34,13 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:padding="10dp"
-                android:text="大数据防静电酸辣粉久等啦手机结束啦附件独立思考觉得萨芬空当接龙大数据防静电酸辣粉久等啦手机结束啦附件独立思考觉得萨芬空当接龙"
+                tools:text="大数据防静电酸辣粉久等啦手机结束啦附件独立思考觉得萨芬空当接龙大数据防静电酸辣粉久等啦手机结束啦附件独立思考觉得萨芬空当接龙"
                 android:textColor="@color/black_1" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_view_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|top"

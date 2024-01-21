@@ -76,6 +76,6 @@ class ADItem {
   var sourceUrl: String? = null
 
   @SerializedName("id")
-  var id: Int = 0
+  var id: String = ""
 
 }
