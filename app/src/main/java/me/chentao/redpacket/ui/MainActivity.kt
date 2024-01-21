@@ -10,12 +10,17 @@ import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.data.bean.ADItem
 import me.chentao.redpacket.data.bean.DataListResponse
+import me.chentao.redpacket.data.bean.DataResponse
+import me.chentao.redpacket.data.bean.User
 import me.chentao.redpacket.data.repo.ADRepository
+import me.chentao.redpacket.data.repo.UserRepository
 import me.chentao.redpacket.databinding.ActivityMainBinding
 import me.chentao.redpacket.rxjava.SimpleObserver
 import me.chentao.redpacket.ui.items.ADItemBinder
 import me.chentao.redpacket.ui.items.SpaceItemDecoration
 import me.chentao.redpacket.utils.AccessibilityTools
+import me.chentao.redpacket.utils.Devices
+import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.PAGER_SIZE
 import me.chentao.redpacket.utils.StatusAlphaAnimator
 import me.chentao.redpacket.utils.copyToClipboard
@@ -35,7 +40,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   private lateinit var adapter: MultiTypeAdapter
   private lateinit var items: MutableList<ADItem>
 
-  private var repo = ADRepository()
+  private val ad = ADRepository()
+  private val user = UserRepository()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -49,6 +55,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     initRecyclerView()
     initRefreshAndLoadMore()
+    initUser()
+  }
+
+  private fun initUser() {
+    if (KVStore.userId.isEmpty()) {
+      val deviceId = Devices.deviceId()
+      user.saveAppUser(deviceId)
+        .safeSubscribe(object : SimpleObserver<DataResponse<User>>() {
+          override fun onNext(t: DataResponse<User>) {
+            KVStore.userId = deviceId
+            user.saveDAU(KVStore.userId)
+              .safeSubscribe(SimpleObserver())
+          }
+        })
+    } else {
+      user.saveDAU(KVStore.userId)
+        .safeSubscribe(SimpleObserver())
+    }
   }
 
   private fun contactUs() {
@@ -79,7 +103,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   }
 
   private fun loadData(isRefresh: Boolean) {
-    repo.getADList(isRefresh)
+    ad.getADList(isRefresh)
       .safeSubscribe(object : SimpleObserver<DataListResponse<ADItem>>() {
 
         override fun onError(e: Throwable) {

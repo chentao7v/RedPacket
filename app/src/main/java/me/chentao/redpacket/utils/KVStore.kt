@@ -21,12 +21,22 @@ object KVStore {
 
   private const val REQUIRE_NEW_VERSION = "require_new_version"
 
+  private const val USER_ID = "user_id"
+
   var notification: Boolean
     set(value) {
       SP.put(NOTIFICATION, value)
     }
     get() {
       return SP.getBool(NOTIFICATION)
+    }
+
+  var userId: String
+    set(value) {
+      SP.put(USER_ID, value)
+    }
+    get() {
+      return SP.getString(USER_ID)
     }
 
   var foreground: Boolean
