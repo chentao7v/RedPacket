@@ -93,3 +93,5 @@ fun String.toHttps(): String {
     return url
   }
 }
+
+const val PAGER_SIZE = 10

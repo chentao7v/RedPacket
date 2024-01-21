@@ -16,6 +16,7 @@ import me.chentao.redpacket.rxjava.SimpleObserver
 import me.chentao.redpacket.ui.items.ADItemBinder
 import me.chentao.redpacket.ui.items.SpaceItemDecoration
 import me.chentao.redpacket.utils.AccessibilityTools
+import me.chentao.redpacket.utils.PAGER_SIZE
 import me.chentao.redpacket.utils.StatusAlphaAnimator
 import me.chentao.redpacket.utils.copyToClipboard
 import me.chentao.redpacket.utils.dp
@@ -90,6 +91,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
           val items = t.data ?: ArrayList()
           binding.refresher.safeFinish(isRefresh)
           addItems(isRefresh, items)
+
+          // 没有更多数据
+          binding.refresher.setNoMoreData(items.size < PAGER_SIZE)
         }
       })
   }

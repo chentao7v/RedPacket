@@ -9,6 +9,7 @@ import me.chentao.redpacket.data.bean.DataListResponse
 import me.chentao.redpacket.data.convert.DefaultApiFunction
 import me.chentao.redpacket.data.convert.NetworkTransform
 import me.chentao.redpacket.rxjava.ioToUiThread
+import me.chentao.redpacket.utils.PAGER_SIZE
 
 /**
  * create by chentao on 2024-01-21.
@@ -26,7 +27,7 @@ class ADRepository {
       currentPager = 1
     }
 
-    return api.getADList(currentPager, 10, ADItem.STATUS_OK)
+    return api.getADList(currentPager, PAGER_SIZE, ADItem.STATUS_OK)
       .compose(NetworkTransform.ofDataList(ADItem::class.java))
       .flatMap(DefaultApiFunction())
       .ioToUiThread()
