@@ -70,10 +70,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             user.saveDAU(KVStore.userId)
               .safeSubscribe(SimpleObserver())
           }
-
-          override fun onError(e: Throwable) {
-            Timber.e(e)
-          }
         })
     } else {
       user.saveDAU(KVStore.userId)
