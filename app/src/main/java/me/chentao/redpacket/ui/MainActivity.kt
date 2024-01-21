@@ -9,6 +9,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.chentao.redpacket.R
 import me.chentao.redpacket.base.BaseActivity
 import me.chentao.redpacket.data.bean.ADItem
+import me.chentao.redpacket.data.bean.BaseResponse
 import me.chentao.redpacket.data.bean.DataListResponse
 import me.chentao.redpacket.data.bean.DataResponse
 import me.chentao.redpacket.data.bean.User
@@ -29,6 +30,7 @@ import me.chentao.redpacket.utils.getStringRes
 import me.chentao.redpacket.utils.safeAutoRefresh
 import me.chentao.redpacket.utils.safeFinish
 import me.chentao.redpacket.utils.showToast
+import timber.log.Timber
 import java.util.Random
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -62,11 +64,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     if (KVStore.userId.isEmpty()) {
       val deviceId = Devices.deviceId()
       user.saveAppUser(deviceId)
-        .safeSubscribe(object : SimpleObserver<DataResponse<User>>() {
-          override fun onNext(t: DataResponse<User>) {
+        .safeSubscribe(object : SimpleObserver<BaseResponse>() {
+          override fun onNext(t: BaseResponse) {
             KVStore.userId = deviceId
             user.saveDAU(KVStore.userId)
               .safeSubscribe(SimpleObserver())
+          }
+
+          override fun onError(e: Throwable) {
+            Timber.e(e)
           }
         })
     } else {

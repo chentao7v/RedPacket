@@ -19,11 +19,11 @@ class UserRepository {
     ApiClient.createDefaultService(UserApi::class.java)
   }
 
-  fun saveAppUser(id: String): Observable<DataResponse<User>> {
+  fun saveAppUser(id: String): Observable<BaseResponse> {
     val user = User()
     user.id = id
     return api.saveAppUser(user)
-      .compose(NetworkTransform.ofData(User::class.java))
+      .compose(NetworkTransform.ofMini())
       .flatMap(DefaultApiFunction())
       .ioToUiThread()
   }
