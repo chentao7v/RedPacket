@@ -9,16 +9,19 @@ import me.chentao.redpacket.data.bean.ADItem
 import me.chentao.redpacket.data.repo.ADRepository
 import me.chentao.redpacket.databinding.ItemAdBinding
 import me.chentao.redpacket.rxjava.SimpleObserver
+import me.chentao.redpacket.utils.ADJumper
 
 /**
  * create by chentao on 2024-01-18.
  */
-class ADItemBinder : ItemViewBinder<ADItem, ADItemBinder.ViewHolder>() {
+class ADItemBinder(
+  private val click: (Int) -> Unit
+) : ItemViewBinder<ADItem, ADItemBinder.ViewHolder>() {
 
   private val repo = ADRepository()
 
   override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
-    return ViewHolder(ItemAdBinding.inflate(inflater, parent, false), repo)
+    return ViewHolder(ItemAdBinding.inflate(inflater, parent, false), repo, click)
   }
 
   override fun onBindViewHolder(holder: ViewHolder, item: ADItem) {
@@ -26,7 +29,10 @@ class ADItemBinder : ItemViewBinder<ADItem, ADItemBinder.ViewHolder>() {
   }
 
 
-  class ViewHolder(private val binding: ItemAdBinding, repo: ADRepository) : RecyclerView.ViewHolder(binding.root) {
+  class ViewHolder(
+    private val binding: ItemAdBinding,
+    repo: ADRepository, click: (Int) -> Unit
+  ) : RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var item: ADItem
 
@@ -36,6 +42,13 @@ class ADItemBinder : ItemViewBinder<ADItem, ADItemBinder.ViewHolder>() {
         // 更新广告数量
         repo.updateADViewCount(item.id)
           .safeSubscribe(SimpleObserver())
+
+        // 跳转广告
+        ADJumper.launch(binding.root.context, item)
+
+        // 广告次数增加
+        item.viewCount++
+        click.invoke(bindingAdapterPosition)
       }
     }
 

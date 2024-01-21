@@ -108,7 +108,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   private fun initRecyclerView() {
     adapter = MultiTypeAdapter()
-    adapter.register(ADItemBinder())
+    adapter.register(ADItemBinder { pos ->
+      adapter.notifyItemChanged(pos)
+    })
 
     items = ArrayList()
 
