@@ -40,7 +40,7 @@ class AppUpdater {
       .ioToUiThread()
       .safeSubscribe(object : SimpleObserver<PgyerResponse<PgyerUpdateInfo>>() {
         override fun onError(e: Throwable) {
-          Timber.e(e, e.message)
+          super.onError(e)
           showToast(getStringRes(R.string.api_error))
         }
 
@@ -110,6 +110,7 @@ class AppUpdater {
       .ioToUiThread()
       .safeSubscribe(object : SimpleObserver<File>() {
         override fun onError(e: Throwable) {
+          super.onError(e)
           showToast(getStringRes(R.string.api_error))
         }
 

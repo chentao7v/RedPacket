@@ -109,6 +109,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
       .safeSubscribe(object : SimpleObserver<DataListResponse<ADItem>>() {
 
         override fun onError(e: Throwable) {
+          super.onError(e)
           binding.refresher.safeFinish(isRefresh)
           showToast(e.message ?: getStringRes(R.string.net_error))
         }
