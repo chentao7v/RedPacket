@@ -51,6 +51,8 @@ class RichTextActivity : BaseActivity<ActivityRichTextBinding>() {
 
     binding.tvTitle.text = title
 
+    binding.ivBack.setOnClickListener { finish() }
+
     Observable
       .fromCallable { parseToSpannable(richText) }
       .ioToUiThread()
