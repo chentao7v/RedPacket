@@ -31,9 +31,7 @@ class ADRepository {
       .flatMap(DefaultApiFunction())
       .ioToUiThread()
       .doOnNext {
-        if (!isRefresh) {
-          currentPager++
-        }
+        currentPager++
       }
   }
 
