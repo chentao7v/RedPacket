@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Observable
 import me.chentao.redpacket.data.ApiClient
 import me.chentao.redpacket.data.api.ADApi
 import me.chentao.redpacket.data.bean.ADItem
+import me.chentao.redpacket.data.bean.BaseResponse
 import me.chentao.redpacket.data.bean.DataListResponse
 import me.chentao.redpacket.data.convert.DefaultApiFunction
 import me.chentao.redpacket.data.convert.NetworkTransform
@@ -34,6 +35,13 @@ class ADRepository {
           currentPager++
         }
       }
+  }
+
+  fun updateADViewCount(id: Int): Observable<BaseResponse> {
+    return api.updateViewCount(id)
+      .compose(NetworkTransform.ofMini())
+      .flatMap(DefaultApiFunction())
+      .ioToUiThread()
   }
 
 }
