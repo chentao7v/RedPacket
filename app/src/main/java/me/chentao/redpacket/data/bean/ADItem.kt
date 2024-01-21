@@ -23,11 +23,11 @@ class ADItem {
     /**  APP 内部  */
     const val NAV_APP_INTERNAL = 0
 
-    /** 第三方网页 */
+    /** 第三方 APP */
     const val NAV_THIRD_APP = 1
 
     /** 外部网页 */
-    const val NAV_WEB = 2
+    const val NAV_WEB = 3
 
   }
 
@@ -61,13 +61,19 @@ class ADItem {
    * 跳转类型：0-APP内部详情,1-第三方APP，3-外部网页
    */
   @SerializedName("navType")
-  var navType: String? = null
+  var navType: Int = 0
 
   /**
    * 跳转地址
    */
   @SerializedName("navUrl")
   var navUrl: String? = null
+
+  /**
+   * 广告详情，富文本
+   */
+  @SerializedName("content")
+  var content: String? = null
 
   /**
    * 广告图片地址

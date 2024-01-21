@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.annotation.StringRes
 import me.chentao.redpacket.R
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.io.File
 
 /**
@@ -77,4 +78,18 @@ fun getDownloadDirectory(): File? {
     file.mkdirs()
   }
   return file
+}
+
+fun String.toHttps(): String {
+  val url = this
+  val httpUrl = url.toHttpUrlOrNull()
+  if (httpUrl != null) {
+    // 确保使用 https 访问图片
+    return httpUrl.newBuilder()
+      .scheme("https")
+      .build()
+      .toString()
+  } else {
+    return url
+  }
 }

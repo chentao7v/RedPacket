@@ -69,4 +69,6 @@
     <string name="setting_privacy_detail">查看隐私政策</string>
     <string name="copy_to_clipboard">已复制到剪切板</string>
     <string name="net_error">服务异常，请稍后重试</string>
+    <string name="input_chrome_first">请先安装浏览器</string>
+    <string name="contact_us_when_ad_error">无法打开对应广告，请联系工作人员</string>
 </resources>
