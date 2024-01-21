@@ -56,7 +56,7 @@ class ADItemBinder(
       this.item = item
 
       Glide.with(binding.ivAvatar)
-        .load(item.image)
+        .load(item.sourceUrl ?: "")
         .into(binding.ivAvatar)
 
       binding.tvTitle.text = item.title
