@@ -40,10 +40,10 @@ object ADJumper {
     }
   }
 
-   fun launchUri(context: Context, url: String) {
+  fun launchUri(context: Context, url: String) {
     // https://github.com/Oct1a/TikTok-Scheme
     var newUri = Uri.parse(url)
-    val appName: String = when (val schema = newUri.scheme) {
+    val appName: String = when (newUri.scheme) {
       // 抖音
       "snssdk1128" -> {
         // snssdk1128://user/profile/93127612069?refer=web 抖音个人主页
@@ -77,7 +77,7 @@ object ADJumper {
       }
 
       else -> {
-        "与${schema}对应App"
+        "：${url}"
       }
     }
 
