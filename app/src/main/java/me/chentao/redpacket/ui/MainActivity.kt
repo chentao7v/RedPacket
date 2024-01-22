@@ -20,6 +20,7 @@ import me.chentao.redpacket.rxjava.SimpleObserver
 import me.chentao.redpacket.ui.items.ADItemBinder
 import me.chentao.redpacket.ui.items.SpaceItemDecoration
 import me.chentao.redpacket.utils.AccessibilityTools
+import me.chentao.redpacket.utils.AppUpdater
 import me.chentao.redpacket.utils.Devices
 import me.chentao.redpacket.utils.KVStore
 import me.chentao.redpacket.utils.PAGER_SIZE
@@ -58,6 +59,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     initRefreshAndLoadMore()
     initUser()
     initStat()
+    initUpdate()
+  }
+
+  private fun initUpdate() {
+    AppUpdater().check(this, false)
   }
 
   private fun initStat() {

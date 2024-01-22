@@ -35,19 +35,23 @@ class AppUpdater {
   private val pgyerRepo = PgyerRepository()
   private val fileRepo = FileRepository()
 
-  fun check(context: Activity) {
+  fun check(context: Activity, showToast: Boolean = true) {
     pgyerRepo.checkUpdate()
       .ioToUiThread()
       .safeSubscribe(object : SimpleObserver<PgyerResponse<PgyerUpdateInfo>>() {
         override fun onError(e: Throwable) {
           super.onError(e)
-          showToast(getStringRes(R.string.api_error))
+          if (showToast) {
+            showToast(getStringRes(R.string.api_error))
+          }
         }
 
         override fun onNext(t: PgyerResponse<PgyerUpdateInfo>) {
           val info = t.data
           if (info == null || !info.buildHaveNewVersion) {
-            showToast(getStringRes(R.string.already_new_version))
+            if (showToast) {
+              showToast(getStringRes(R.string.already_new_version))
+            }
             return
           }
 
