@@ -30,7 +30,7 @@ object ApiClient {
 
   private val default: Retrofit by lazy {
     Retrofit.Builder()
-      .baseUrl("http://zybkkf.natappfree.cc/")
+      .baseUrl("http://39.100.64.231/api/")
       .client(okhttp)
       .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
       .addConverterFactory(GsonConverterFactory.create())

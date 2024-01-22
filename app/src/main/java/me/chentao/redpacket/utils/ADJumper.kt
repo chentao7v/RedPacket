@@ -26,10 +26,10 @@ object ADJumper {
       }
 
       ADItem.NAV_WEB -> {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        if (intent.resolveActivity(app.packageManager) != null) {
+        try {
+          val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
           context.startActivity(intent)
-        } else {
+        } catch (e: Exception) {
           showToast(getStringRes(R.string.input_chrome_first))
         }
       }
