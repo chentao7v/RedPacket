@@ -56,7 +56,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     binding.ivStatus.setOnClickListener { showRobotDialog() }
     binding.btnContactUs.setOnClickListener { contactUs() }
 
-    binding.tvSlogan.isSelected = true
     statusAnimator = StatusAlphaAnimator(binding.ivStatus)
 
     initRecyclerView()
@@ -223,6 +222,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   override fun onResume() {
     super.onResume()
+    binding.tvSlogan.isSelected = true
     statusAnimator.refreshStatus()
   }
 

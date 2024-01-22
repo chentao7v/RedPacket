@@ -73,4 +73,5 @@
     <string name="contact_us_when_ad_error">无法打开%1s，请联系工作人员</string>
     <string name="current_user_total_count">当前用户：%s</string>
     <string name="current_user_dau_count">当前活跃：%s</string>
+    <string name="ad">广告</string>
 </resources>
