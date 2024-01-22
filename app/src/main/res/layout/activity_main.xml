@@ -27,10 +27,11 @@
 
                 <TextView
                     android:id="@+id/tv_slogan"
+                    android:singleLine="true"
+                    android:layout_marginHorizontal="30dp"
+                    android:ellipsize="marquee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:drawablePadding="5dp"
                     android:layout_marginTop="35dp"
                     android:textSize="17sp"
                     android:textColor="@color/keep_white"

@@ -56,6 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     binding.ivStatus.setOnClickListener { showRobotDialog() }
     binding.btnContactUs.setOnClickListener { contactUs() }
 
+    binding.tvSlogan.isSelected = true
     statusAnimator = StatusAlphaAnimator(binding.ivStatus)
 
     initRecyclerView()
