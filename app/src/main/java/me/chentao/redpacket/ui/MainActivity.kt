@@ -12,7 +12,7 @@ import me.chentao.redpacket.data.bean.ADItem
 import me.chentao.redpacket.data.bean.BaseResponse
 import me.chentao.redpacket.data.bean.DataListResponse
 import me.chentao.redpacket.data.bean.DataResponse
-import me.chentao.redpacket.data.bean.User
+import me.chentao.redpacket.data.bean.HomeStat
 import me.chentao.redpacket.data.repo.ADRepository
 import me.chentao.redpacket.data.repo.UserRepository
 import me.chentao.redpacket.databinding.ActivityMainBinding
@@ -30,7 +30,6 @@ import me.chentao.redpacket.utils.getStringRes
 import me.chentao.redpacket.utils.safeAutoRefresh
 import me.chentao.redpacket.utils.safeFinish
 import me.chentao.redpacket.utils.showToast
-import timber.log.Timber
 import java.util.Random
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -58,6 +57,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     initRecyclerView()
     initRefreshAndLoadMore()
     initUser()
+    initStat()
+  }
+
+  private fun initStat() {
+    user.getHomeStat()
+      .safeSubscribe(object : SimpleObserver<DataResponse<HomeStat>>() {
+        override fun onNext(t: DataResponse<HomeStat>) {
+          val stat = t.data ?: HomeStat()
+          binding.tvUserTotal.text = getString(R.string.current_user_total_count, stat.userCount)
+          binding.tvUserDau.text = getString(R.string.current_user_dau_count, stat.dauCount)
+        }
+      })
   }
 
   private fun initUser() {

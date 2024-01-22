@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -36,17 +37,19 @@
                     android:text="@string/app_slogan" />
 
                 <TextView
+                    android:id="@+id/tv_user_total"
                     style="@style/Alive"
                     android:layout_gravity="bottom"
-                    android:text="当前用户：1000万" />
+                    tools:text="@string/current_user_total_count" />
 
                 <TextView
+                    android:id="@+id/tv_user_dau"
                     style="@style/Alive"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:drawableLeft="@drawable/dot"
                     android:layout_gravity="end|bottom"
-                    android:text="当前活跃：10" />
+                    tools:text="@string/current_user_dau_count" />
 
             </FrameLayout>
 

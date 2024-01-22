@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Observable
 import me.chentao.redpacket.data.bean.User
 import okhttp3.ResponseBody
 import retrofit2.http.Body
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -30,5 +30,8 @@ interface UserApi {
     @Path("userId") userId: String
   ): Observable<ResponseBody>
 
+
+  @GET("openApi/appHomeStat")
+  fun getAppHomeStat():Observable<ResponseBody>
 
 }

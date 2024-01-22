@@ -5,6 +5,7 @@ import me.chentao.redpacket.data.ApiClient
 import me.chentao.redpacket.data.api.UserApi
 import me.chentao.redpacket.data.bean.BaseResponse
 import me.chentao.redpacket.data.bean.DataResponse
+import me.chentao.redpacket.data.bean.HomeStat
 import me.chentao.redpacket.data.bean.User
 import me.chentao.redpacket.data.convert.DefaultApiFunction
 import me.chentao.redpacket.data.convert.NetworkTransform
@@ -31,6 +32,13 @@ class UserRepository {
   fun saveDAU(id: String): Observable<BaseResponse> {
     return api.saveDAU(id)
       .compose(NetworkTransform.ofMini())
+      .flatMap(DefaultApiFunction())
+      .ioToUiThread()
+  }
+
+  fun getHomeStat(): Observable<DataResponse<HomeStat>> {
+    return api.getAppHomeStat()
+      .compose(NetworkTransform.ofData(HomeStat::class.java))
       .flatMap(DefaultApiFunction())
       .ioToUiThread()
   }
