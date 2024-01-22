@@ -14,7 +14,7 @@ object Devices {
   }
 
   private fun setupDeviceId(): String {
-   /* return try {
+    return try {
       val androidId = Settings.Secure.getString(
         app.contentResolver,
         Settings.Secure.ANDROID_ID
@@ -27,8 +27,7 @@ object Devices {
       }
     } catch (e: Exception) {
       fakeDeviceId()
-    }*/
-    return fakeDeviceId()
+    }
   }
 
   private fun fakeDeviceId(): String {
