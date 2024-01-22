@@ -81,10 +81,10 @@ object ADJumper {
       }
     }
 
-    val intent = Intent(Intent.ACTION_VIEW, newUri)
-    if (intent.resolveActivity(app.packageManager) != null) {
+    try {
+      val intent = Intent(Intent.ACTION_VIEW, newUri)
       context.startActivity(intent)
-    } else {
+    } catch (e: Exception) {
       showToast(getStringRes(R.string.contact_us_when_ad_error, appName))
     }
   }

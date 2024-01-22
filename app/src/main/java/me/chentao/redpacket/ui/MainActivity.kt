@@ -2,7 +2,9 @@ package me.chentao.redpacket.ui
 
 import android.content.ComponentName
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,6 +21,7 @@ import me.chentao.redpacket.databinding.ActivityMainBinding
 import me.chentao.redpacket.rxjava.SimpleObserver
 import me.chentao.redpacket.ui.items.ADItemBinder
 import me.chentao.redpacket.ui.items.SpaceItemDecoration
+import me.chentao.redpacket.utils.ADJumper
 import me.chentao.redpacket.utils.AccessibilityTools
 import me.chentao.redpacket.utils.AppUpdater
 import me.chentao.redpacket.utils.Devices
