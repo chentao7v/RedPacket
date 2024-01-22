@@ -34,6 +34,7 @@ import me.chentao.redpacket.utils.getStringRes
 import me.chentao.redpacket.utils.safeAutoRefresh
 import me.chentao.redpacket.utils.safeFinish
 import me.chentao.redpacket.utils.showToast
+import timber.log.Timber
 import java.util.Random
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -81,6 +82,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   private fun initUser() {
     if (KVStore.userId.isEmpty()) {
       val deviceId = Devices.deviceId()
+      Timber.d("deviceid -> $deviceId")
       user.saveAppUser(deviceId)
         .safeSubscribe(object : SimpleObserver<BaseResponse>() {
           override fun onNext(t: BaseResponse) {
