@@ -61,8 +61,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     initRecyclerView()
     initRefreshAndLoadMore()
     initUser()
-    initStat()
-    initUpdate()
   }
 
   private fun initUpdate() {
@@ -148,6 +146,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   private fun initRefreshAndLoadMore() {
     binding.refresher.setOnRefreshListener {
       loadData(true)
+      initStat()
+      initUpdate()
     }
 
     binding.refresher.setOnLoadMoreListener {
