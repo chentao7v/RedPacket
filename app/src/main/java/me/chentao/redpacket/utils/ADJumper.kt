@@ -40,12 +40,13 @@ object ADJumper {
     }
   }
 
-  private fun launchUri(context: Context, url: String) {
+   fun launchUri(context: Context, url: String) {
     // https://github.com/Oct1a/TikTok-Scheme
     var newUri = Uri.parse(url)
     val appName: String = when (val schema = newUri.scheme) {
       // 抖音
       "snssdk1128" -> {
+        // snssdk1128://user/profile/93127612069?refer=web 抖音个人主页
         if (!resolveUri(newUri)) {
           // 抖音极速版
           val dyJS = url.replace("snssdk1128://", "snssdk2329://").toUri()
@@ -63,6 +64,7 @@ object ADJumper {
 
       // 快手
       "kwai" -> {
+        // kwai://profile/3311499607 用户主页
         "快手"
       }
 
