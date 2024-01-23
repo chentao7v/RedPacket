@@ -27,6 +27,8 @@ android {
       keyPassword = "leochan"
       storeFile = file("../red.jks")
       storePassword = "leochan"
+      enableV1Signing = true
+      enableV2Signing = true
     }
   }
 
