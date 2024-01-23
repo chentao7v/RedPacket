@@ -73,11 +73,11 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
 
   private fun share() {
-    val shareUrl = "https://www.pgyer.com/qvFqP5"
-    val wechatIntent = Intent(Intent.ACTION_SEND);
-    wechatIntent.setPackage("com.tencent.mm");
-    wechatIntent.setType("text/plain");
-    wechatIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_to_wechat_content, shareUrl));
+    val shareUrl = "https://leo7chan.lanzouo.com/b05euj6gb    密码:6tpf"
+    val wechatIntent = Intent(Intent.ACTION_SEND)
+    wechatIntent.setPackage("com.tencent.mm")
+    wechatIntent.setType("text/plain")
+    wechatIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_to_wechat_content, shareUrl))
     if (wechatIntent.resolveActivity(packageManager) != null) {
       startActivity(wechatIntent);
     } else {
