@@ -92,6 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
           }
         })
     } else {
+      Timber.d("deviceid 2 -> ${KVStore.userId}")
       user.saveDAU(KVStore.userId)
         .safeSubscribe(SimpleObserver())
     }
