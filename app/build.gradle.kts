@@ -11,8 +11,8 @@ android {
     applicationId = "me.chentao.redpacket"
     minSdk = 24
     targetSdk = 33
-    versionCode = 100
-    versionName = "1.0.0"
+    versionCode = 101
+    versionName = "1.0.1"
 
     resourceConfigurations += listOf("zh-rCN")
 
