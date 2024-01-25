@@ -5,6 +5,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import me.chentao.redpacket.processor.Interceptor.Companion.PLACEHOLDER
 import me.chentao.redpacket.utils.KVStore
+import me.chentao.redpacket.utils.WakeLocker
 import timber.log.Timber
 
 /**
@@ -44,8 +45,18 @@ class NotificationInterceptor : Interceptor {
       return true
     }
 
-    // 模拟点击通知
-    notification.contentIntent?.send()
+    val keyguardLocked = WakeLocker.isKeyguardLocked()
+    Timber.d("isKeyguardLocked:$keyguardLocked")
+    if (keyguardLocked) {
+      val newWakeLock = WakeLocker.newWakeLockAcquire()
+      WakeLocker.disableKeyguard()
+      newWakeLock.release()
+      notification.contentIntent?.send()
+    } else {
+      // 模拟点击通知
+      notification.contentIntent?.send()
+    }
+
     return true
   }
 

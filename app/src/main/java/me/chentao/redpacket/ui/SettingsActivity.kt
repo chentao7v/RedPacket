@@ -75,6 +75,10 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     val isChecked = binding.cbScreenOff.isChecked
     KVStore.screenOff = !isChecked
     binding.cbScreenOff.isChecked = !isChecked
+
+    if (!isChecked) {
+
+    }
   }
 
   private fun share() {

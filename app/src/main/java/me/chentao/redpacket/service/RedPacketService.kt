@@ -32,10 +32,17 @@ class RedPacketService : AccessibilityService() {
   companion object {
 
     private const val EXTRA_FOREGROUND = "extra_foreground"
+    private const val EXTRA_WAKE_LOCK = "extra_wake_lock"
 
     fun startForeground(context: Context, open: Boolean) {
       val intent = Intent(context, RedPacketService::class.java)
       intent.putExtra(EXTRA_FOREGROUND, open)
+      context.startService(intent)
+    }
+
+    fun startWakeLock(context: Context, open: Boolean) {
+      val intent = Intent(context, RedPacketService::class.java)
+      intent.putExtra(EXTRA_WAKE_LOCK, open)
       context.startService(intent)
     }
 
@@ -57,10 +64,11 @@ class RedPacketService : AccessibilityService() {
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    Timber.e("onStartCommand --> service --> ${intent?.getBooleanExtra(EXTRA_FOREGROUND, false)}")
 
-    val openFlag = intent?.getBooleanExtra(EXTRA_FOREGROUND, false) ?: false
-    if (openFlag) {
+    val openForegroundFlag = intent?.getBooleanExtra(EXTRA_FOREGROUND, false) ?: false
+//    val openWakeLockFlag = intent?.getBooleanExtra(EXTRA_WAKE_LOCK, false) ?: false
+
+    if (openForegroundFlag) {
       val judgeNotificationPermission = judgeNotificationPermission(foregroundChannel.id)
       // 判断权限，并且用户勾选了前台服务
       if (judgeNotificationPermission && KVStore.foreground) {
@@ -69,6 +77,13 @@ class RedPacketService : AccessibilityService() {
     } else {
       stopForeground(STOP_FOREGROUND_REMOVE)
     }
+
+//    // 唤醒锁
+//    if (openWakeLockFlag) {
+//      WakeLocker.newWakeLock()
+//    } else {
+//      WakeLocker.releaseWakeLock()
+//    }
 
     return super.onStartCommand(intent, flags, startId)
   }
