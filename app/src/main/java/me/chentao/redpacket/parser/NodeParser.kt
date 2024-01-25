@@ -53,6 +53,10 @@ fun AccessibilityNodeInfo.performClick() {
   this.performAction(AccessibilityNodeInfo.ACTION_CLICK)
 }
 
+fun AccessibilityNodeInfo.performScrollUp(){
+  this.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
+}
+
 fun AccessibilityNodeInfo.performLongClick() {
   this.performAction(AccessibilityNodeInfo.ACTION_LONG_CLICK)
 }

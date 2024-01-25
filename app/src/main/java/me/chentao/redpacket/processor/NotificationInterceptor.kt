@@ -44,6 +44,7 @@ class NotificationInterceptor : Interceptor {
       return true
     }
 
+    // 模拟点击通知
     notification.contentIntent?.send()
     return true
   }

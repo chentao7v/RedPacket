@@ -74,4 +74,6 @@
     <string name="current_user_total_count">当前用户：%s</string>
     <string name="current_user_dau_count">当前活跃：%s</string>
     <string name="ad">广告</string>
+    <string name="setting_screen_off">息屏抢红包</string>
+    <string name="setting_screen_off_description">息屏时，自动抢红包</string>
 </resources>

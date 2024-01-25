@@ -23,12 +23,22 @@ object KVStore {
 
   private const val USER_ID = "user_id"
 
+  private const val SCREEN_OFF = "screen_off"
+
   var notification: Boolean
     set(value) {
       SP.put(NOTIFICATION, value)
     }
     get() {
       return SP.getBool(NOTIFICATION)
+    }
+
+  var screenOff: Boolean
+    set(value) {
+      SP.put(SCREEN_OFF, value)
+    }
+    get() {
+      return SP.getBool(SCREEN_OFF)
     }
 
   var userId: String

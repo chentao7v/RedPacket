@@ -62,7 +62,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     binding.update.setOnClickListener { appUpdater.check(this) }
     binding.share.setOnClickListener { share() }
     binding.privacy.setOnClickListener { Privacy.show(this) }
-
+    binding.screenOff.setOnClickListener { screenOff() }
 
     binding.tvVersion.text = getString(R.string.setting_update_title, appVersionName)
     refreshNotificationUI()
@@ -71,6 +71,11 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     refreshHide()
   }
 
+  private fun screenOff() {
+    val isChecked = binding.cbScreenOff.isChecked
+    KVStore.screenOff = !isChecked
+    binding.cbScreenOff.isChecked = !isChecked
+  }
 
   private fun share() {
     val shareUrl = "https://leo7chan.lanzouo.com/b05euj6gb    密码:6tpf"
