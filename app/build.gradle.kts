@@ -81,7 +81,7 @@ dependencies {
   implementation("androidx.constraintlayout:constraintlayout:2.1.4")
   implementation("com.jakewharton.timber:timber:5.0.1")
   implementation("com.google.android.flexbox:flexbox:3.0.0")
-  implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+//  implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
   implementation("com.squareup.retrofit2:retrofit:2.9.0")
   implementation("com.google.code.gson:gson:2.10.1")
@@ -98,14 +98,14 @@ dependencies {
   implementation("com.uber.autodispose2:autodispose-android:2.1.1")
   implementation("com.uber.autodispose2:autodispose-androidx-lifecycle:2.1.1")
 
-  implementation("com.github.bumptech.glide:glide:4.16.0")
-  implementation("com.drakeet.multitype:multitype:4.3.0")
+//  implementation("com.github.bumptech.glide:glide:4.16.0")
+//  implementation("com.drakeet.multitype:multitype:4.3.0")
 
   implementation("com.tencent.bugly:crashreport:latest.release")
   implementation("io.github.chentao7v:spans:1.0.2")
 
-  implementation("io.github.scwang90:refresh-layout-kernel:2.1.0")
-  implementation("io.github.scwang90:refresh-header-material:2.1.0")
-  implementation("io.github.scwang90:refresh-footer-classics:2.1.0")
+//  implementation("io.github.scwang90:refresh-layout-kernel:2.1.0")
+//  implementation("io.github.scwang90:refresh-header-material:2.1.0")
+//  implementation("io.github.scwang90:refresh-footer-classics:2.1.0")
 
 }

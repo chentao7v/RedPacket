@@ -1,152 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="@color/red_1">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="70dp"
+            android:src="@mipmap/icon_logo" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:text="@string/app_name" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:textSize="15sp"
+            android:textColor="@color/keep_white"
+            android:text="@string/app_slogan" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:cardElevation="5dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@color/main_panel"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="-35dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <FrameLayout
-                android:id="@+id/background"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:background="@color/red_1">
+            <LinearLayout
+                android:id="@+id/service"
+                style="@style/HomeItem">
 
-                <TextView
-                    android:id="@+id/tv_slogan"
-                    android:singleLine="true"
-                    android:layout_marginHorizontal="30dp"
-                    android:ellipsize="marquee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
-                    android:textSize="17sp"
-                    android:textColor="@color/keep_white"
-                    android:text="@string/app_slogan" />
+                <ImageView
+                    style="@style/HomeItem.Icon"
+                    app:srcCompat="@drawable/ic_robot_24dp" />
 
                 <TextView
-                    android:id="@+id/tv_user_total"
-                    style="@style/Alive"
-                    android:layout_gravity="bottom"
-                    tools:text="@string/current_user_total_count" />
+                    style="@style/HomeItem.Text"
+                    android:text="@string/robot" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/Line.Vertical"
+                android:layout_height="70dp"
+                android:layout_gravity="center_vertical" />
+
+            <LinearLayout
+                android:id="@+id/settings"
+                style="@style/HomeItem">
+
+                <ImageView
+                    style="@style/HomeItem.Icon"
+                    app:srcCompat="@drawable/ic_settings_24dp" />
 
                 <TextView
-                    android:id="@+id/tv_user_dau"
-                    style="@style/Alive"
-                    android:drawablePadding="5dp"
-                    android:gravity="center_vertical"
-                    android:drawableLeft="@drawable/dot"
-                    android:layout_gravity="end|bottom"
-                    tools:text="@string/current_user_dau_count" />
+                    style="@style/HomeItem.Text"
+                    android:text="@string/settings" />
 
-            </FrameLayout>
+            </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="8dp"
-                app:cardBackgroundColor="@color/main_panel"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="6dp"
-                android:layout_marginTop="-20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:id="@+id/robot"
-                        style="@style/HomeItem">
-
-                        <ImageView
-                            android:id="@+id/iv_robot"
-                            style="@style/HomeItem.Icon"
-                            android:layout_centerHorizontal="true"
-                            app:srcCompat="@drawable/ic_robot_24dp" />
-
-                        <TextView
-                            android:id="@+id/tv_robot"
-                            style="@style/HomeItem.Text"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@id/iv_robot"
-                            android:text="@string/robot" />
-
-                        <ImageView
-                            android:id="@+id/iv_status"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="?android:attr/selectableItemBackgroundBorderless"
-                            android:layout_toRightOf="@id/iv_robot"
-                            android:layout_marginLeft="-5dp"
-                            app:srcCompat="@drawable/ic_error_24dp"
-                            android:padding="5dp" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/settings"
-                        style="@style/HomeItem"
-                        android:orientation="vertical"
-                        android:gravity="center_horizontal">
-
-                        <ImageView
-                            style="@style/HomeItem.Icon"
-                            app:srcCompat="@drawable/ic_settings_24dp" />
-
-                        <TextView
-                            style="@style/HomeItem.Text"
-                            android:text="@string/settings" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </androidx.cardview.widget.CardView>
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/refresher"
+    <TextView
+        android:id="@+id/tv_status"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="6dp" />
-
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_contact_us"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_contact_24dp"
-        app:tint="@color/keep_white"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        android:backgroundTint="@color/red_1"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="15dp"
-        android:contentDescription="@string/contact_us" />
+        android:gravity="center"
+        android:layout_marginHorizontal="15dp"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/black_1"
+        android:layout_marginTop="35dp"
+        tools:text="助手还未开启，助手还未开启，助手还未开启，助手还未开启，助手还未开启" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+</LinearLayout>

@@ -2,7 +2,7 @@
     <string name="app_name">让红包飞</string>
     <string name="accessibility_service_label">让红包飞</string>
     <string name="accessibility_service_description">开启该助手后，可以在有新的红包消息时，解放双手，自动抢红包</string>
-    <string name="app_slogan">让红包飞，助您一臂之力！&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;广告内容与本APP无关，投放广告请点击右下角图标</string>
+    <string name="app_slogan">让红包飞，助您一臂之力！</string>
     <string name="robot">打开小助手</string>
     <string name="settings">设置</string>
     <string name="robot_open">小助手「已开启」。万事俱备，只等收红包🧧</string>
