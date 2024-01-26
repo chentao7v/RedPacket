@@ -25,6 +25,10 @@ object WakeLocker {
     app.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
   }
 
+  private val keyguard by lazy {
+    keyguardManager.newKeyguardLock(KEYGUARD_TAG)
+  }
+
   /**
    * 唤醒锁
    */
@@ -67,7 +71,11 @@ object WakeLocker {
   }
 
   fun disableKeyguard() {
-    keyguardManager.newKeyguardLock(KEYGUARD_TAG).disableKeyguard()
+    keyguard.disableKeyguard()
+  }
+
+  fun reenableKeyguard() {
+    keyguard.reenableKeyguard()
   }
 
 

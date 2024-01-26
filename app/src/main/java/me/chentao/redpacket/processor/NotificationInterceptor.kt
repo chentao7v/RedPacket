@@ -49,6 +49,7 @@ class NotificationInterceptor : Interceptor {
     Timber.d("isKeyguardLocked:$keyguardLocked")
     if (keyguardLocked) {
       val newWakeLock = WakeLocker.newWakeLockAcquire()
+      WakeLocker.reenableKeyguard()
       WakeLocker.disableKeyguard()
       newWakeLock.release()
       notification.contentIntent?.send()
